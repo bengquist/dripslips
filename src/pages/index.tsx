@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import Head from "next/head";
 import React from "react";
+import Header from "../app/Header";
 
 const IndexPage = () => {
   const { data } = useQuery(gql`
@@ -13,7 +14,7 @@ const IndexPage = () => {
         type
         gender
         price
-        image
+        images
       }
     }
   `);
@@ -27,7 +28,7 @@ const IndexPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <p>Hello</p>
+      <Header />
     </div>
   );
 };

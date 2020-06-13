@@ -1,7 +1,7 @@
 import { Request } from "express";
 import { NextContext } from "next";
 import { AppProps } from "next/app";
-import Document from "next/document";
+import Document, { Head, Html, Main, NextScript } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
 export default class MyDocument extends Document {
@@ -30,5 +30,24 @@ export default class MyDocument extends Document {
     } finally {
       sheet.seal();
     }
+  }
+
+  render() {
+    return (
+      <Html lang="en">
+        <Head>
+          <link
+            rel="preload"
+            href="/fonts/Karla-Bold.woff2"
+            as="font"
+            crossOrigin=""
+          />
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
   }
 }
