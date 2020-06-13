@@ -19,5 +19,6 @@ export default createGlobalStyle`
   html {
     font-family: "Karla", sans-serif;
     font-weight: bold;
+    color: "#19110B";
   }
 `;
