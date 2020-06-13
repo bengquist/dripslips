@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { flexAlignCenter } from "../style/helpers";
@@ -10,8 +11,12 @@ const Header = () => {
       <div css={flexAlignCenter}>
         <Logo>dripslips</Logo>
         <OptionContainer>
-          <Option>Men</Option>
-          <Option>Women</Option>
+          <Link href="/men">
+            <Option>Men</Option>
+          </Link>
+          <Link href="/women">
+            <Option>Women</Option>
+          </Link>
         </OptionContainer>
       </div>
 

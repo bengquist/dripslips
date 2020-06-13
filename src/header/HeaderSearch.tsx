@@ -6,7 +6,7 @@ import styled from "styled-components";
 const HeaderSearch = () => {
   return (
     <Container>
-      <FontAwesomeIcon icon={faSearch} />
+      <Icon icon={faSearch} />
       <Input placeholder="Search here" />
     </Container>
   );
@@ -16,15 +16,19 @@ export default HeaderSearch;
 
 const Container = styled.div`
   background: ${(props) => props.theme.colors.shadedWhite};
-  padding: 0.5rem;
+  padding: 0 0.75rem;
+`;
+
+const Icon = styled(FontAwesomeIcon)`
+  margin-right: 0.75rem;
 `;
 
 const Input = styled.input`
   width: 20rem;
   font-weight: normal;
-  font-size: 1rem;
   border: none;
   background: none;
+  padding: 0.75rem 0;
 
   :focus {
     outline: none;

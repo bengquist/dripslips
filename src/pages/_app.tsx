@@ -15,13 +15,12 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      <GlobalStyle />
       <ApolloProvider client={apolloClient}>
         <ThemeProvider theme={theme}>
           <Component {...pageProps} />
         </ThemeProvider>
       </ApolloProvider>
-
-      <GlobalStyle />
     </>
   );
 }

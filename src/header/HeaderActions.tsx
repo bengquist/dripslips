@@ -4,21 +4,28 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 
 const HeaderActions = () => {
   return (
     <Container>
-      <Action>
-        <FontAwesomeIcon icon={faHeart} size="lg" />
-      </Action>
-      <Action>
-        <FontAwesomeIcon icon={faUser} size="lg" />
-      </Action>
-      <Action>
-        <FontAwesomeIcon icon={faShoppingBag} size="lg" />
-      </Action>
+      <Link href="/wishlist">
+        <Action>
+          <FontAwesomeIcon icon={faHeart} size="lg" />
+        </Action>
+      </Link>
+      <Link href="/profile">
+        <Action>
+          <FontAwesomeIcon icon={faUser} size="lg" />
+        </Action>
+      </Link>
+      <Link href="/cart">
+        <Action>
+          <FontAwesomeIcon icon={faShoppingBag} size="lg" />
+        </Action>
+      </Link>
     </Container>
   );
 };
@@ -26,7 +33,7 @@ const HeaderActions = () => {
 export default HeaderActions;
 
 const Container = styled.div`
-  margin-left: 2rem;
+  margin-left: 1rem;
 `;
 
 const Action = styled.button`
