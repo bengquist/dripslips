@@ -17,13 +17,13 @@ const schema: GraphQLSchema = makeExecutableSchema({
 });
 
 const app = express();
+app.use("*", cors());
+app.use(compression());
+
 const server = new ApolloServer({
   schema,
   validationRules: [depthLimit(7)],
 });
-
-app.use("*", cors());
-app.use(compression());
 server.applyMiddleware({ app, path: "/graphql" });
 
 app.listen({ port }, (): void =>

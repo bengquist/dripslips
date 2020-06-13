@@ -6,7 +6,15 @@ import React from "react";
 const IndexPage = () => {
   const { data } = useQuery(gql`
     {
-      helloWorld
+      item(id: "2") {
+        id
+        title
+        description
+        type
+        gender
+        price
+        image
+      }
     }
   `);
 
