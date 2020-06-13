@@ -1,8 +1,8 @@
-import React from 'react'
-import Head from 'next/head'
-import Nav from '../components/nav'
+import Head from "next/head";
+import React from "react";
+import Nav from "../components/nav";
 
-const Home = () => (
+const IndexPage = () => (
   <div>
     <Head>
       <title>Home</title>
@@ -83,6 +83,6 @@ const Home = () => (
       }
     `}</style>
   </div>
-)
+);
 
-export default Home
+export default IndexPage;
