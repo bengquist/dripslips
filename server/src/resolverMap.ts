@@ -1,5 +1,6 @@
 import { IResolvers } from "graphql-tools";
 import items from "./data/items";
+import users from "./data/users";
 
 const resolverMap: IResolvers = {
   Query: {
@@ -12,6 +13,10 @@ const resolverMap: IResolvers = {
     item: (_, { id }) => {
       const item = items.find((item) => item.id === id);
       return item;
+    },
+    user: (_, { id }) => {
+      const user = users.find((user) => user.id === id);
+      return user;
     },
   },
 };

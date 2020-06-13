@@ -1,3 +1,17 @@
+type Address {
+  title: String!
+  firstName: String!
+  lastName: String!
+  companyName: String
+  addressPrimary: String!
+  addressSecondary: String
+  postalCode: Int!
+  city: String!
+  state: String!
+  country: String!
+  phoneNumber: Int!
+}
+
 type Item {
   id: ID!
   title: String!
@@ -9,8 +23,18 @@ type Item {
   image: String!
 }
 
+type User {
+  id: ID!
+  email: String!
+  wishlistItems: [Item]
+  cartItems: [Item]
+  deliveryAddress: Address
+  billingAddress: Address
+}
+
 type Query {
   helloWorld: String!
   items(type: String): [Item]
   item(id: ID!): Item
+  user(id: ID!): User
 }
