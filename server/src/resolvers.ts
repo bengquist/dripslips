@@ -2,9 +2,9 @@ import { IResolvers } from "graphql-tools";
 import items from "./data/items";
 import users from "./data/users";
 
-const resolverMap: IResolvers = {
+const resolvers: IResolvers = {
   Query: {
-    helloWorld(_: void, __: void): string {
+    helloWorld(): string {
       return `👋 Hello world! 👋`;
     },
     items: () => {
@@ -21,4 +21,4 @@ const resolverMap: IResolvers = {
   },
 };
 
-export default resolverMap;
+export default resolvers;

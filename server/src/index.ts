@@ -6,7 +6,7 @@ import { GraphQLSchema } from "graphql";
 import depthLimit from "graphql-depth-limit";
 import "graphql-import-node";
 import { makeExecutableSchema } from "graphql-tools";
-import resolvers from "./resolverMap";
+import resolvers from "./resolvers";
 import * as typeDefs from "./schema/schema.graphql";
 
 const port = process.env.PORT || 4000;
