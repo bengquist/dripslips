@@ -2,6 +2,7 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import { NextPage } from "next";
 import { ThemeProvider } from "styled-components";
 import { useApollo } from "../apollo/apolloClient";
+import Layout from "../app/Layout";
 import GlobalStyle from "../style/GlobalStyle";
 import theme from "../style/theme";
 
@@ -18,7 +19,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <GlobalStyle />
       <ApolloProvider client={apolloClient}>
         <ThemeProvider theme={theme}>
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </ThemeProvider>
       </ApolloProvider>
     </>

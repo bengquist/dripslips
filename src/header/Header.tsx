@@ -9,7 +9,9 @@ const Header = () => {
   return (
     <Container>
       <div css={flexAlignCenter}>
-        <Logo>dripslips</Logo>
+        <Link href="/">
+          <Logo>dripslips</Logo>
+        </Link>
         <OptionContainer>
           <Link href="/men">
             <Option>Men</Option>
@@ -30,9 +32,10 @@ const Header = () => {
 
 export default Header;
 
-const Logo = styled.span`
+const Logo = styled.button`
   font-size: 2rem;
   margin-right: 2rem;
+  height: 100%;
 `;
 
 const Container = styled.header`
