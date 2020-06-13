@@ -20,5 +20,16 @@ export default createGlobalStyle`
     font-family: "Karla", sans-serif;
     font-weight: bold;
     color: "#19110B";
+    min-height: 100vh;
+  }
+
+  body {
+    margin: 0;
+  }
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
   }
 `;
