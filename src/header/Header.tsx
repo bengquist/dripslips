@@ -1,23 +1,24 @@
 import React from "react";
 import styled from "styled-components";
+import { flexAlignCenter } from "../style/helpers";
+import HeaderActions from "./HeaderActions";
+import HeaderSearch from "./HeaderSearch";
 
 const Header = () => {
   return (
     <Container>
-      <HeaderSection>
+      <div css={flexAlignCenter}>
         <Logo>dripslips</Logo>
         <OptionContainer>
           <Option>Men</Option>
           <Option>Women</Option>
         </OptionContainer>
-      </HeaderSection>
+      </div>
 
-      <HeaderSection>
-        <OptionContainer>
-          <Option>Men</Option>
-          <Option>Women</Option>
-        </OptionContainer>
-      </HeaderSection>
+      <div css={flexAlignCenter}>
+        <HeaderSearch />
+        <HeaderActions />
+      </div>
     </Container>
   );
 };
@@ -36,12 +37,10 @@ const Container = styled.header`
   outline: 1px solid ${(props) => props.theme.colors.lightGray};
 `;
 
-const HeaderSection = styled.div`
-  display: flex;
-`;
-
 const OptionContainer = styled.div`
   display: flex;
 `;
 
-const Option = styled.button``;
+const Option = styled.button`
+  padding: 1.5rem;
+`;

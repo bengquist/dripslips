@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import Head from "next/head";
 import React from "react";
-import Header from "../app/Header";
+import Header from "../header/Header";
 
 const IndexPage = () => {
   const { data } = useQuery(gql`
