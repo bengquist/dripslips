@@ -2,11 +2,12 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import Head from "next/head";
 import React from "react";
+import ItemCard from "../item/ItemCard";
 
 const IndexPage = () => {
-  const { data } = useQuery(gql`
+  const { loading, data } = useQuery(gql`
     {
-      item(id: "2") {
+      items {
         id
         title
         description
@@ -20,6 +21,10 @@ const IndexPage = () => {
 
   console.log(data);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <Head>
@@ -27,7 +32,9 @@ const IndexPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <p>Home</p>
+      {data.items.map((item) => (
+        <ItemCard title={item.title} price={item.price} images={item.images} />
+      ))}
     </div>
   );
 };

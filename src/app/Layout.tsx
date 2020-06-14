@@ -5,7 +5,7 @@ const Layout: React.FC = ({ children }) => {
   return (
     <div>
       <Header />
-      {children}
+      <main>{children}</main>
     </div>
   );
 };
