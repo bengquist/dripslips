@@ -1,22 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { headerHeight } from "../header/Header";
-import ItemListNavButton from "./ItemListNavButton";
+import ItemListNavFilter from "./ItemListNavFilter";
 
 const ItemListNav = () => {
-  const [showFilter, setShowFilter] = useState(false);
-
   return (
     <Container>
       <p>
         The Essentials <ItemCount>(79 looks)</ItemCount>
       </p>
 
-      <ItemListNavButton onClick={() => setShowFilter(!showFilter)}>
-        Filter
-      </ItemListNavButton>
-
-      {showFilter && <FilterContainer>yo</FilterContainer>}
+      <ItemListNavFilter />
     </Container>
   );
 };
@@ -28,6 +22,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-between;
 
+  height: ${headerHeight};
   background: white;
   padding-left: 3rem;
   border-top: 1px solid ${(props) => props.theme.colors.lightGray};
@@ -40,5 +35,3 @@ const Container = styled.div`
 const ItemCount = styled.span`
   font-weight: normal;
 `;
-
-const FilterContainer = styled.div``;
