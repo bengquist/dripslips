@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-import Head from "next/head";
 import React from "react";
+import SEO from "../app/SEO";
 import ItemCard from "../item/ItemCard";
 import ItemListNav from "../item/ItemListNav";
 import { fluidGrid } from "../style/helpers";
@@ -29,10 +29,7 @@ const IndexPage = () => {
 
   return (
     <div>
-      <Head>
-        <title>Home</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <SEO title="Home" />
 
       <ItemListNav />
 
