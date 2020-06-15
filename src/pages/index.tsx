@@ -3,6 +3,7 @@ import { gql } from "apollo-boost";
 import Head from "next/head";
 import React from "react";
 import ItemCard from "../item/ItemCard";
+import { fluidGrid } from "../style/helpers";
 
 const IndexPage = () => {
   const { loading, data } = useQuery(gql`
@@ -32,9 +33,15 @@ const IndexPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {data.items.map((item) => (
-        <ItemCard title={item.title} price={item.price} images={item.images} />
-      ))}
+      <div css={fluidGrid}>
+        {data.items.map((item) => (
+          <ItemCard
+            title={item.title}
+            price={item.price}
+            images={item.images}
+          />
+        ))}
+      </div>
     </div>
   );
 };
