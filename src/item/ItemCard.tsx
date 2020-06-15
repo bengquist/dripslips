@@ -11,8 +11,11 @@ const ItemCard: React.FC<Props> = ({ title, price, images }) => {
   return (
     <Container>
       <Image src={images[0]} alt="" />
-      <h1>{title}</h1>
-      <p>{price}</p>
+
+      <div>
+        <h3>{title}</h3>
+        <Price>{price}</Price>
+      </div>
     </Container>
   );
 };
@@ -20,9 +23,14 @@ const ItemCard: React.FC<Props> = ({ title, price, images }) => {
 export default ItemCard;
 
 const Container = styled.button`
-  outline: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
   border: 5px solid transparent;
   transition: 0.2s ease-out;
+  text-align: start;
+  outline: 1px solid ${({ theme }) => theme.colors.lightGray};
 
   :hover,
   :focus {
@@ -34,4 +42,10 @@ const Image = styled.img`
   width: 100%;
   max-height: 500px;
   object-fit: contain;
+  margin-bottom: 2rem;
+`;
+
+const Price = styled.p`
+  font-weight: normal;
+  margin-top: 0.25rem;
 `;
