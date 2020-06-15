@@ -3,7 +3,7 @@ import { gql } from "apollo-boost";
 import Head from "next/head";
 import React from "react";
 import ItemCard from "../item/ItemCard";
-import ItemListHeader from "../item/ItemListHeader";
+import ItemListNav from "../item/ItemListNav";
 import { fluidGrid } from "../style/helpers";
 
 const IndexPage = () => {
@@ -34,7 +34,7 @@ const IndexPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <ItemListHeader />
+      <ItemListNav />
 
       <div css={fluidGrid}>
         {data.items.map((item: any) => (

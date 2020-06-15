@@ -5,6 +5,8 @@ import { flexAlignCenter } from "../style/helpers";
 import HeaderActions from "./HeaderActions";
 import HeaderSearch from "./HeaderSearch";
 
+export const headerHeight = "65px";
+
 const Header = () => {
   return (
     <Container>
@@ -41,6 +43,12 @@ const Logo = styled.button`
 const Container = styled.header`
   display: flex;
   justify-content: space-between;
+
+  position: sticky;
+  top: 0;
+
+  background: white;
+  height: ${headerHeight};
   padding: 0 3rem;
   outline: 1px solid ${(props) => props.theme.colors.lightGray};
 `;
