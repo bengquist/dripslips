@@ -30,10 +30,20 @@ const Button = styled.button`
 
 type FilterListProps = {
   isVisible?: boolean;
+  onClose: () => void;
 };
 
-const FilterList: React.FC<FilterListProps> = ({ isVisible = false }) => {
-  return <FiltersContainer isVisible={isVisible}>a</FiltersContainer>;
+const FilterList: React.FC<FilterListProps> = ({
+  isVisible = false,
+  onClose,
+}) => {
+  return (
+    <FiltersContainer isVisible={isVisible}>
+      <div>
+        <p>a</p>
+      </div>
+    </FiltersContainer>
+  );
 };
 
 const FiltersContainer = styled.div<{ isVisible: boolean }>`
@@ -41,8 +51,12 @@ const FiltersContainer = styled.div<{ isVisible: boolean }>`
   top: ${headerHeight};
   right: 0;
 
+  display: flex;
+  flex-direction: column;
+
   width: 100%;
   height: ${(props) => (props.isVisible ? 500 : 0)}px;
+  border-top: 1px solid ${({ theme }) => theme.colors.lightGray};
   overflow: hidden;
   background: white;
 
