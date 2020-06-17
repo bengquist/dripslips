@@ -10,7 +10,7 @@ type Props = {
 
 const ItemCard: React.FC<Props> = ({ product }) => {
   return (
-    <Link href={`/product/${product.id}`}>
+    <Link href="product/[id]" as={`/product/${product.id}`}>
       <Container>
         <Image src={product.images[0]} alt="" />
 

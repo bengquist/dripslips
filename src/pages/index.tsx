@@ -9,8 +9,7 @@ import { Product } from "../product/types";
 import { fluidGrid } from "../style/helpers";
 import Loader from "../ui/Loader";
 
-const IndexPage = (props) => {
-  console.log(props);
+const IndexPage = () => {
   const { loading, data } = useQuery(gql`
     {
       products {
