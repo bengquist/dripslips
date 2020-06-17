@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { headerHeight } from "../header/Header";
-import ItemListFilter from "./ItemListFilter";
+import ProductListFilter from "./productListFilter";
 
 const ItemListNav = () => {
   return (
@@ -10,7 +10,7 @@ const ItemListNav = () => {
         The Essentials <ItemCount>(79 looks)</ItemCount>
       </p>
 
-      <ItemListFilter />
+      <ProductListFilter />
     </Container>
   );
 };

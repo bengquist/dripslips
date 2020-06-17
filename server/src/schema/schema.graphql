@@ -17,7 +17,7 @@ type Address {
   phoneNumber: Int!
 }
 
-type Item {
+type Product {
   id: ID!
   modelId: ID!
   title: String!
@@ -34,15 +34,15 @@ type Item {
 type User {
   id: ID!
   email: String!
-  wishlistItems: [Item]
-  cartItems: [Item]
+  wishlistProducts: [Product]
+  cartProducts: [Product]
   deliveryAddress: Address
   billingAddress: Address
 }
 
 type Query {
   helloWorld: String!
-  items(type: String): [Item]
-  item(id: ID!): Item
+  products(type: String): [Product]
+  product(id: ID!): Product
   user(id: ID!): User
 }

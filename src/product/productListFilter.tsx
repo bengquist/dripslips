@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { headerHeight } from "../header/Header";
-import ItemListFilterSection from "./ItemListFilterSection";
+import ProductListFilterSection from "./productListFilterSection";
 
 const typeFilters = [
   { text: "Moccasins", active: true },
@@ -76,9 +76,9 @@ const FilterList: React.FC<FilterListProps> = ({
   return (
     <FiltersContainer isVisible={isVisible}>
       <SectionContainer>
-        <ItemListFilterSection title="Type" listItems={typeFilters} />
-        <ItemListFilterSection title="Size" boxItems={sizeFilters} />
-        <ItemListFilterSection title="Color" boxItems={colorFilters} />
+        <ProductListFilterSection title="Type" listItems={typeFilters} />
+        <ProductListFilterSection title="Size" boxItems={sizeFilters} />
+        <ProductListFilterSection title="Color" boxItems={colorFilters} />
       </SectionContainer>
       <HideButton onClick={onClose}> Hide Filters</HideButton>
     </FiltersContainer>

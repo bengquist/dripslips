@@ -1,5 +1,5 @@
 import { IResolvers } from "graphql-tools";
-import items from "./data/items";
+import products from "./data/products";
 import users from "./data/users";
 
 const resolvers: IResolvers = {
@@ -7,11 +7,11 @@ const resolvers: IResolvers = {
     helloWorld(): string {
       return `👋 Hello world! 👋`;
     },
-    items: () => {
-      return items;
+    products: () => {
+      return products;
     },
-    item: (_, { id }) => {
-      const item = items.find((item) => item.id === id);
+    product: (_, { id }) => {
+      const item = products.find((item) => item.id === id);
       return item;
     },
     user: (_, { id }) => {

@@ -13,7 +13,7 @@ const ProductPage = () => {
   const { loading, data } = useQuery(
     gql`
       query getProduct($id: ID!) {
-        item(id: $id) {
+        product(id: $id) {
           id
           title
           description

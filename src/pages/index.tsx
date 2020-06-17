@@ -2,14 +2,14 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import React from "react";
 import SEO from "../app/SEO";
-import ItemCard from "../item/ItemCard";
-import ItemListNav from "../item/ItemListNav";
+import ProductCard from "../product/productCard";
+import ProductListNav from "../product/productListNav";
 import { fluidGrid } from "../style/helpers";
 
 const IndexPage = () => {
   const { loading, data } = useQuery(gql`
     {
-      items {
+      products {
         id
         title
         description
@@ -30,11 +30,11 @@ const IndexPage = () => {
     <div>
       <SEO title="Home" />
 
-      <ItemListNav />
+      <ProductListNav />
 
       <div css={fluidGrid({ maxWidth: 500 })}>
-        {data.items.map((item: any) => (
-          <ItemCard
+        {data.products.map((item: any) => (
+          <ProductCard
             key={item.id}
             id={item.id}
             title={item.title}

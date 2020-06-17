@@ -1,5 +1,5 @@
 import address from "./address";
-import items from "./items";
+import items from "./products";
 
 export default [
   {
