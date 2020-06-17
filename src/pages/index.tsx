@@ -36,6 +36,7 @@ const IndexPage = () => {
         {data.items.map((item: any) => (
           <ItemCard
             key={item.id}
+            id={item.id}
             title={item.title}
             price={item.price}
             images={item.images}

@@ -1,6 +1,7 @@
 export default [
   {
     id: "1",
+    modelId: "M41530",
     title: "Sexy Moccasins",
     description:
       "These sexy pair of moccasins will for sure get the ladies chirpin",
@@ -16,6 +17,7 @@ export default [
   },
   {
     id: "2",
+    modelId: "M51530",
     title: "Ugly Moccasins",
     description: "These ugly pair of moccasins should be free",
     price: 100,
@@ -30,6 +32,7 @@ export default [
   },
   {
     id: "3",
+    modelId: "M42530",
     title: "Sexy Sandal",
     description: "Sandals should be banned",
     price: 5.55,
@@ -44,6 +47,7 @@ export default [
   {
     id: "1",
     title: "Sexy Moccasins",
+    modelId: "M41530",
     description:
       "These sexy pair of moccasins will for sure get the ladies chirpin",
     price: 9.99,
@@ -58,6 +62,7 @@ export default [
   },
   {
     id: "2",
+    modelId: "M51530",
     title: "Ugly Moccasins",
     description: "These ugly pair of moccasins should be free",
     price: 9.99,
@@ -72,6 +77,7 @@ export default [
   },
   {
     id: "3",
+    modelId: "M42530",
     title: "Sexy Sandal",
     description: "Sandals should be banned",
     price: 5.55,
@@ -86,6 +92,7 @@ export default [
   {
     id: "1",
     title: "Sexy Moccasins",
+    modelId: "M41530",
     description:
       "These sexy pair of moccasins will for sure get the ladies chirpin",
     price: 9.99,
@@ -100,6 +107,7 @@ export default [
   },
   {
     id: "2",
+    modelId: "M51530",
     title: "Ugly Moccasins",
     description: "These ugly pair of moccasins should be free",
     price: 9.99,
@@ -114,6 +122,7 @@ export default [
   },
   {
     id: "3",
+    modelId: "M42530",
     title: "Sexy Sandal",
     description: "Sandals should be banned",
     price: 5.55,
