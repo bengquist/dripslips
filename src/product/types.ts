@@ -5,8 +5,9 @@ export type Product = {
   description: string;
   price: number;
   type: string;
-  colors: string[];
   gender: string;
+  colorGroup: string;
+  availableColors: string[];
   availableSizes: number[];
   images: string[];
 };

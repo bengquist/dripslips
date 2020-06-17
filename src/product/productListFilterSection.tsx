@@ -8,17 +8,21 @@ type Props = {
   boxItems?: { text?: string; color?: string; active?: boolean }[];
 };
 
-const ItemListFilterSection: React.FC<Props> = ({
+const ProductListFilterSection: React.FC<Props> = ({
   title,
   listItems = [],
   boxItems = [],
 }) => {
   const renderListItems = listItems.map((item) => (
-    <ListItem active={item.active}>{item.text}</ListItem>
+    <ListItem key={item.text} active={item.active}>
+      {item.text}
+    </ListItem>
   ));
 
   const renderBoxItems = boxItems.map((item) => (
-    <BoxItem backgroundColor={item.color}>{item.text}</BoxItem>
+    <BoxItem key={`${item.color}${item.text}`} backgroundColor={item.color}>
+      {item.text}
+    </BoxItem>
   ));
 
   return (
@@ -30,7 +34,7 @@ const ItemListFilterSection: React.FC<Props> = ({
   );
 };
 
-export default ItemListFilterSection;
+export default ProductListFilterSection;
 
 const Container = styled.div`
   ${lightGrayOutline};

@@ -13,7 +13,7 @@ const ProductPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  const { loading, data } = useQuery(
+  const { loading, error, data } = useQuery(
     gql`
       query getProduct($id: ID!) {
         product(id: $id) {
@@ -22,7 +22,9 @@ const ProductPage = () => {
           title
           description
           type
-          colors
+          colorGroup
+          availableColors
+          availableSizes
           gender
           price
           images
@@ -32,10 +34,8 @@ const ProductPage = () => {
     { variables: { id } }
   );
 
-  console.log(data);
-
   return (
-    <Loader isLoading={loading}>
+    <Loader isLoading={loading} error={error}>
       <Container>
         <SEO title={data?.product.title} />
         <BackButton />

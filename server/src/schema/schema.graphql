@@ -24,9 +24,10 @@ type Product {
   description: String!
   price: Float!
   size: Float!
-  colors: [String]!
   type: String!
   gender: Gender
+  colorGroup: String
+  availableColors: [String]!
   availableSizes: [String]!
   images: [String]!
 }
