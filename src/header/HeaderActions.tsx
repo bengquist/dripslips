@@ -1,8 +1,5 @@
-import {
-  faHeart,
-  faShoppingBag,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
+import { faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import React from "react";
@@ -23,7 +20,7 @@ const HeaderActions = () => {
       </Link>
       <Link href="/cart">
         <Action>
-          <FontAwesomeIcon icon={faShoppingBag} size="lg" />
+          <FontAwesomeIcon icon={faShoppingBasket} size="lg" />
         </Action>
       </Link>
     </Container>
