@@ -35,10 +35,12 @@ const ProductPage = () => {
 
   return (
     <Loader isLoading={loading}>
-      <SEO title={data?.product.title} />
-      <BackButton />
-      <ProductImages images={data?.product.images} />
-      <ProductInfo product={data?.product} />
+      <Container>
+        <SEO title={data?.product.title} />
+        <BackButton />
+        <ProductImages images={data?.product.images} />
+        <ProductInfo product={data?.product} />
+      </Container>
     </Loader>
   );
 };

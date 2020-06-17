@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-import { flexAlignCenter } from "../style/helpers";
+import { flexAlignCenter, lightGrayOutline } from "../style/helpers";
 import HeaderActions from "./HeaderActions";
 import HeaderSearch from "./HeaderSearch";
 
@@ -45,7 +45,7 @@ const Container = styled.header`
   background: white;
   height: ${headerHeight};
   padding: 0 3rem;
-  outline: 1px solid ${(props) => props.theme.colors.lightGray};
+  ${lightGrayOutline}
 `;
 
 const Logo = styled.button`

@@ -16,3 +16,7 @@ export const fluidGrid = ({ maxWidth = 200, gap = 0 }) => css`
   grid-template-columns: repeat(auto-fill, minmax(${maxWidth}px, 1fr));
   grid-gap: ${gap};
 `;
+
+export const lightGrayOutline = css`
+  outline: 1px solid ${({ theme }) => theme.colors.lightGray};
+`;

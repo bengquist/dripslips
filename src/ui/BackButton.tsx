@@ -1,6 +1,7 @@
 import { useRouter } from "next/dist/client/router";
 import React from "react";
 import styled from "styled-components";
+import { lightGrayOutline } from "../style/helpers";
 
 const BackButton = () => {
   const router = useRouter();
@@ -15,9 +16,9 @@ const Container = styled.button`
   top: 0;
   left: 0;
 
+  ${lightGrayOutline};
   font-size: 1.5rem;
   padding: 1rem 2rem;
-  outline: 1px solid ${({ theme }) => theme.colors.lightGray};
   transition: 0.3s;
 
   :hover {

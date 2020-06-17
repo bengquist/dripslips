@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { lightGrayOutline } from "../style/helpers";
 
 type Props = {
   title: string;
@@ -32,7 +33,7 @@ const ItemListFilterSection: React.FC<Props> = ({
 export default ItemListFilterSection;
 
 const Container = styled.div`
-  outline: 1px solid ${(props) => props.theme.colors.lightGray};
+  ${lightGrayOutline};
   padding: 1.5rem 3rem;
 `;
 

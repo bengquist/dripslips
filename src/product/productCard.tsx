@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
+import { lightGrayOutline } from "../style/helpers";
 import { Product } from "./types";
 
 type Props = {
@@ -25,13 +26,13 @@ const ItemCard: React.FC<Props> = ({ product }) => {
 export default ItemCard;
 
 const Container = styled.button`
+  ${lightGrayOutline};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 2rem;
   text-align: start;
   border: 5px solid transparent;
-  outline: 1px solid ${({ theme }) => theme.colors.lightGray};
   transition: 0.2s ease-out;
 
   :hover,

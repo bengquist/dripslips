@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { headerHeight } from "../header/Header";
+import { lightGrayOutline } from "../style/helpers";
 import ProductListFilter from "./ProductListFilter";
 
 const ItemListNav = () => {
@@ -25,7 +26,7 @@ const Container = styled.div`
   height: ${headerHeight};
   background: white;
   padding-left: 3rem;
-  outline: 1px solid ${(props) => props.theme.colors.lightGray};
+  ${lightGrayOutline};
 
   position: sticky;
   top: ${headerHeight};

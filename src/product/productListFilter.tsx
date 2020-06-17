@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { headerHeight } from "../header/Header";
+import { lightGrayOutline } from "../style/helpers";
 import ProductListFilterSection from "./productListFilterSection";
 
 const typeFilters = [
@@ -93,7 +94,7 @@ const FiltersContainer = styled.div<{ isVisible: boolean }>`
   display: flex;
   flex-direction: column;
 
-  outline: 1px solid ${(props) => props.theme.colors.lightGray};
+  ${lightGrayOutline};
   margin-top: 1px;
   width: 100%;
   max-height: ${(props) => (props.isVisible ? 500 : 0)}px;
