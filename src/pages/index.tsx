@@ -4,7 +4,9 @@ import React from "react";
 import SEO from "../app/SEO";
 import ProductCard from "../product/ProductCard";
 import ProductListNav from "../product/ProductListNav";
+import { Product } from "../product/types";
 import { fluidGrid } from "../style/helpers";
+import Loader from "../ui/Loader";
 
 const IndexPage = () => {
   const { loading, data } = useQuery(gql`
@@ -22,28 +24,17 @@ const IndexPage = () => {
     }
   `);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <div>
+    <Loader isLoading={loading}>
       <SEO title="Home" />
-
       <ProductListNav />
 
       <div css={fluidGrid({ maxWidth: 500 })}>
-        {data.products.map((item: any) => (
-          <ProductCard
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            price={item.price}
-            images={item.images}
-          />
+        {data?.products.map((product: Product, index) => (
+          <ProductCard key={product.id + index} product={product} />
         ))}
       </div>
-    </div>
+    </Loader>
   );
 };
 

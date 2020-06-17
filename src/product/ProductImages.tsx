@@ -6,7 +6,9 @@ type Props = {
 };
 
 const ProductImages: React.FC<Props> = ({ images }) => {
-  const productImages = images.map((image) => <Image src={image} />);
+  const productImages = images.map((image) => (
+    <Image key={image} src={image} />
+  ));
 
   return <Container>{productImages}</Container>;
 };

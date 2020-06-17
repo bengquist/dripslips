@@ -1,23 +1,21 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
+import { Product } from "./types";
 
 type Props = {
-  id: string;
-  title: string;
-  price: number;
-  images: string[];
+  product: Product;
 };
 
-const ItemCard: React.FC<Props> = ({ id, title, price, images }) => {
+const ItemCard: React.FC<Props> = ({ product }) => {
   return (
-    <Link href={`/product/${id}`}>
+    <Link href={`/product/${product.id}`}>
       <Container>
-        <Image src={images[0]} alt="" />
+        <Image src={product.images[0]} alt="" />
 
         <div>
-          <h3>{title}</h3>
-          <Price>${price}</Price>
+          <h3>{product.title}</h3>
+          <Price>${product.price}</Price>
         </div>
       </Container>
     </Link>

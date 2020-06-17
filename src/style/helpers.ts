@@ -5,6 +5,12 @@ export const flexAlignCenter = css`
   align-items: center;
 `;
 
+export const flexCenter = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const fluidGrid = ({ maxWidth = 200, gap = 0 }) => css`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(${maxWidth}px, 1fr));

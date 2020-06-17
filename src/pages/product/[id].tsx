@@ -7,6 +7,7 @@ import SEO from "../../app/SEO";
 import ProductImages from "../../product/ProductImages";
 import ProductInfo from "../../product/ProductInfo";
 import BackButton from "../../ui/BackButton";
+import Loader from "../../ui/Loader";
 
 const ProductPage = () => {
   const router = useRouter();
@@ -30,19 +31,15 @@ const ProductPage = () => {
     { variables: { id } }
   );
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   console.log(data);
 
   return (
-    <Container>
-      <SEO title={data.product.title} />
+    <Loader isLoading={loading}>
+      <SEO title={data?.product.title} />
       <BackButton />
-      <ProductImages images={data.product.images} />
-      <ProductInfo product={data.product} />
-    </Container>
+      <ProductImages images={data?.product.images} />
+      <ProductInfo product={data?.product} />
+    </Loader>
   );
 };
 
