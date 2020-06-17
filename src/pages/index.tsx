@@ -14,6 +14,7 @@ const IndexPage = () => {
         title
         description
         type
+        colors
         gender
         price
         images
@@ -24,7 +25,6 @@ const IndexPage = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
-  console.log(data);
 
   return (
     <div>
@@ -32,7 +32,7 @@ const IndexPage = () => {
 
       <ItemListNav />
 
-      <div css={fluidGrid}>
+      <div css={fluidGrid({ maxWidth: 500 })}>
         {data.items.map((item: any) => (
           <ItemCard
             key={item.id}

@@ -23,7 +23,7 @@ type Item {
   description: String!
   price: Float!
   size: Float!
-  color: String!
+  colors: [String]!
   type: String!
   gender: Gender
   availableSizes: [String]!

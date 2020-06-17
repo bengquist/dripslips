@@ -5,7 +5,8 @@ export const flexAlignCenter = css`
   align-items: center;
 `;
 
-export const fluidGrid = css`
+export const fluidGrid = ({ maxWidth = 200, gap = 0 }) => css`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(${maxWidth}px, 1fr));
+  grid-gap: ${gap};
 `;

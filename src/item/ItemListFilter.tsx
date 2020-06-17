@@ -3,7 +3,38 @@ import styled from "styled-components";
 import { headerHeight } from "../header/Header";
 import ItemListFilterSection from "./ItemListFilterSection";
 
-const ItemListNavFilter: React.FC = ({ children }) => {
+const typeFilters = [
+  { text: "Moccasins", active: true },
+  { text: "Scuff" },
+  { text: "Bootie" },
+  { text: "Clog" },
+  { text: "Slipper" },
+];
+
+const sizeFilters = [
+  { text: "7", active: true },
+  { text: "7.5", active: true },
+  { text: "8", active: true, disabled: true },
+  { text: "8.5", active: true },
+  { text: "9", active: true },
+  { text: "9.5", active: true, disabled: true },
+  { text: "10", active: true },
+  { text: "10.5", active: true },
+  { text: "11", active: true },
+];
+
+const colorFilters = [
+  { color: "black", active: true },
+  { color: "white", active: true },
+  { color: "red", active: true },
+  { color: "blue", active: true },
+  { color: "orange", active: true },
+  { color: "yellow" },
+  { color: "green" },
+  { color: "purple" },
+];
+
+const ItemListFilter: React.FC = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   return (
@@ -17,7 +48,7 @@ const ItemListNavFilter: React.FC = ({ children }) => {
   );
 };
 
-export default ItemListNavFilter;
+export default ItemListFilter;
 
 const Button = styled.button`
   z-index: 1;
@@ -45,9 +76,9 @@ const FilterList: React.FC<FilterListProps> = ({
   return (
     <FiltersContainer isVisible={isVisible}>
       <SectionContainer>
-        <ItemListFilterSection />
-        <ItemListFilterSection />
-        <ItemListFilterSection />
+        <ItemListFilterSection title="Type" listItems={typeFilters} />
+        <ItemListFilterSection title="Size" boxItems={sizeFilters} />
+        <ItemListFilterSection title="Color" boxItems={colorFilters} />
       </SectionContainer>
       <HideButton onClick={onClose}> Hide Filters</HideButton>
     </FiltersContainer>
@@ -65,7 +96,7 @@ const FiltersContainer = styled.div<{ isVisible: boolean }>`
   outline: 1px solid ${(props) => props.theme.colors.lightGray};
   margin-top: 1px;
   width: 100%;
-  height: ${(props) => (props.isVisible ? 500 : 0)}px;
+  max-height: ${(props) => (props.isVisible ? 500 : 0)}px;
   overflow: hidden;
   background: white;
 
@@ -83,7 +114,8 @@ const HideButton = styled.button`
   padding: 1rem 0;
   font-weight: normal;
 
-  :hover {
+  :hover,
+  :focus {
     text-decoration: underline;
   }
 `;

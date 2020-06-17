@@ -6,7 +6,7 @@ export default [
       "These sexy pair of moccasins will for sure get the ladies chirpin",
     price: 9.99,
     type: "Moccasin",
-    color: "white",
+    colors: ["white"],
     gender: "Male",
     availableSizes: [9, 9.5, 10],
     images: [
@@ -20,7 +20,7 @@ export default [
     description: "These ugly pair of moccasins should be free",
     price: 100,
     type: "Moccasin",
-    color: "red",
+    colors: ["red"],
     gender: "Male",
     availableSizes: [9, 9.5, 10],
     images: [
@@ -34,7 +34,7 @@ export default [
     description: "Sandals should be banned",
     price: 5.55,
     type: "Sandal",
-    color: "yellow",
+    colors: ["yellow"],
     gender: "Female",
     availableSizes: [9, 9.5, 10],
     images: [
@@ -48,7 +48,7 @@ export default [
       "These sexy pair of moccasins will for sure get the ladies chirpin",
     price: 9.99,
     type: "Moccasin",
-    color: "blue",
+    colors: ["blue"],
     gender: "Male",
     availableSizes: [9, 9.5, 10],
     images: [
@@ -62,7 +62,7 @@ export default [
     description: "These ugly pair of moccasins should be free",
     price: 9.99,
     type: "Moccasin",
-    color: "green",
+    colors: ["green"],
     gender: "Male",
     availableSizes: [9, 9.5, 10],
     images: [
@@ -76,7 +76,7 @@ export default [
     description: "Sandals should be banned",
     price: 5.55,
     type: "Sandal",
-    color: "purple",
+    colors: ["purple"],
     gender: "Female",
     availableSizes: [9, 9.5, 10],
     images: [
@@ -90,7 +90,7 @@ export default [
       "These sexy pair of moccasins will for sure get the ladies chirpin",
     price: 9.99,
     type: "Moccasin",
-    color: "black",
+    colors: ["black"],
     gender: "Male",
     availableSizes: [9, 9.5, 10],
     images: [
@@ -104,7 +104,7 @@ export default [
     description: "These ugly pair of moccasins should be free",
     price: 9.99,
     type: "Moccasin",
-    color: "gray",
+    colors: ["gray"],
     gender: "Male",
     availableSizes: [9, 9.5, 10],
     images: [
@@ -118,7 +118,7 @@ export default [
     description: "Sandals should be banned",
     price: 5.55,
     type: "Sandal",
-    color: "orange",
+    colors: ["orange"],
     gender: "Female",
     availableSizes: [9, 9.5, 10],
     images: [
