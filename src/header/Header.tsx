@@ -49,7 +49,7 @@ const Container = styled.header`
 `;
 
 const Logo = styled.button`
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-right: 2rem;
   height: 100%;
 `;
@@ -60,4 +60,5 @@ const OptionContainer = styled.div`
 
 const Option = styled.button`
   padding: 1.5rem;
+  font-weight: normal;
 `;

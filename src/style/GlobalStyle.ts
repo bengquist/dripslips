@@ -24,6 +24,7 @@ export default createGlobalStyle`
     * > * {
       font-family: "Karla", sans-serif;
       font-weight: bold;
+      box-sizing: border-box;
     }
   }
 

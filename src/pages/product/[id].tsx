@@ -18,6 +18,7 @@ const ProductPage = () => {
       query getProduct($id: ID!) {
         product(id: $id) {
           id
+          modelId
           title
           description
           type
