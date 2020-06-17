@@ -1,5 +1,8 @@
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styled from "styled-components";
+import { gap } from "../style/helpers";
 import SquareButton from "../ui/SquareButton";
 import { Product } from "./types";
 
@@ -9,15 +12,22 @@ type Props = {
 
 const ProductInfo: React.FC<Props> = ({ product }) => {
   return (
-    <Container>
-      <ModelId>{product.modelId}</ModelId>
-      <h1>{product.title}</h1>
+    <Container css={gap({ bottom: 1.5 })}>
+      <div>
+        <ModelId>{product.modelId}</ModelId>
+        <h1>{product.title}</h1>
+      </div>
       <Button>
         <p>Size</p>
         <p>48</p>
       </Button>
-      <h3>${product.price}</h3>
-      <SquareButton>Place in Cart</SquareButton>
+      <div css={gap({ bottom: 0.75 })}>
+        <h3>${product.price}</h3>
+        <SquareButton>Place in Cart</SquareButton>
+        <SquareButton variant="secondary">
+          <FontAwesomeIcon icon={faHeart} /> Add to Wishlist
+        </SquareButton>
+      </div>
     </Container>
   );
 };

@@ -17,6 +17,17 @@ export const fluidGrid = ({ maxWidth = 200, gap = 0 }) => css`
   grid-gap: ${gap};
 `;
 
+export const gap = ({ bottom = 0, right = 0 }) => css`
+  > * {
+    margin-bottom: ${bottom}rem;
+    margin-right: ${right}rem;
+  }
+
+  :nth-last-child() {
+    margin: 0;
+  }
+`;
+
 export const lightGrayOutline = css`
   outline: 1px solid ${({ theme }) => theme.colors.lightGray};
 `;

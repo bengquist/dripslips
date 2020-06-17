@@ -14,5 +14,5 @@ const Loader: React.FC<Props> = ({ children, isLoading }) => {
 export default Loader;
 
 const Container = styled.div`
-  animation: 1s ${fadeIn};
+  animation: 0.5s ${fadeIn};
 `;
