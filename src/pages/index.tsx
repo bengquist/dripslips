@@ -2,8 +2,8 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import React from "react";
 import SEO from "../app/SEO";
-import ProductCard from "../product/productCard";
-import ProductListNav from "../product/productListNav";
+import ProductCard from "../product/ProductCard";
+import ProductListNav from "../product/ProductListNav";
 import { fluidGrid } from "../style/helpers";
 
 const IndexPage = () => {

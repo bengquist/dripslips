@@ -2,13 +2,14 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import { useRouter } from "next/dist/client/router";
 import React from "react";
+import styled from "styled-components";
 import SEO from "../../app/SEO";
+import ProductImages from "../../product/ProductImages";
+import ProductInfo from "../../product/ProductInfo";
 
 const ProductPage = () => {
   const router = useRouter();
   const { id } = router.query;
-
-  console.log(id);
 
   const { loading, data } = useQuery(
     gql`
@@ -35,11 +36,14 @@ const ProductPage = () => {
   console.log(data);
 
   return (
-    <div>
-      <SEO title="Home" />
-      Yo
-    </div>
+    <Container>
+      <SEO title={data.product.title} />
+      <ProductImages images={data.product.images} />
+      <ProductInfo product={data.product} />
+    </Container>
   );
 };
 
 export default ProductPage;
+
+const Container = styled.div``;

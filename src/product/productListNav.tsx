@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { headerHeight } from "../header/Header";
-import ProductListFilter from "./productListFilter";
+import ProductListFilter from "./ProductListFilter";
 
 const ItemListNav = () => {
   return (
