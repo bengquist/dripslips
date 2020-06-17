@@ -14,7 +14,7 @@ const ItemCard: React.FC<Props> = ({ title, price, images }) => {
 
       <div>
         <h3>{title}</h3>
-        <Price>{price}</Price>
+        <Price>${price}</Price>
       </div>
     </Container>
   );

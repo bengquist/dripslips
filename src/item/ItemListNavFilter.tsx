@@ -16,27 +16,24 @@ const ItemListNavFilter: React.FC = ({ children }) => {
 export default ItemListNavFilter;
 
 const Button = styled.button`
+  z-index: 1;
   outline: none;
-  padding: 1.5rem 4rem;
+  height: 100%;
+  padding: 0 4rem;
   border-left: 1px solid ${({ theme }) => theme.colors.lightGray};
   border-right: 1px solid ${({ theme }) => theme.colors.lightGray};
-  border-bottom: 2px solid transparent;
   transition: 0.2s ease-out;
 
   :focus {
-    border-bottom: 2px solid ${({ theme }) => theme.colors.black};
+    box-shadow: 0px 2px 0px ${({ theme }) => theme.colors.black};
   }
 `;
 
 type FilterListProps = {
   isVisible?: boolean;
-  onClose: () => void;
 };
 
-const FilterList: React.FC<FilterListProps> = ({
-  isVisible = false,
-  onClose,
-}) => {
+const FilterList: React.FC<FilterListProps> = ({ isVisible = false }) => {
   return (
     <FiltersContainer isVisible={isVisible}>
       <div>
@@ -54,9 +51,9 @@ const FiltersContainer = styled.div<{ isVisible: boolean }>`
   display: flex;
   flex-direction: column;
 
+  margin-top: 1px;
   width: 100%;
   height: ${(props) => (props.isVisible ? 500 : 0)}px;
-  border-top: 1px solid ${({ theme }) => theme.colors.lightGray};
   overflow: hidden;
   background: white;
 

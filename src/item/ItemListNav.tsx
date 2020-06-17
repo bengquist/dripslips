@@ -25,8 +25,7 @@ const Container = styled.div`
   height: ${headerHeight};
   background: white;
   padding-left: 3rem;
-  border-top: 1px solid ${(props) => props.theme.colors.lightGray};
-  border-bottom: 1px solid ${(props) => props.theme.colors.lightGray};
+  outline: 1px solid ${(props) => props.theme.colors.lightGray};
 
   position: sticky;
   top: ${headerHeight};
