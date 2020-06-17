@@ -42,4 +42,8 @@ export default createGlobalStyle`
     margin: 0;
     color: "#19110B";
   }
+
+  img {
+    width: 100%;
+  }
 `;

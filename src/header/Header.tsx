@@ -34,13 +34,8 @@ const Header = () => {
 
 export default Header;
 
-const Logo = styled.button`
-  font-size: 2rem;
-  margin-right: 2rem;
-  height: 100%;
-`;
-
 const Container = styled.header`
+  z-index: 1;
   display: flex;
   justify-content: space-between;
 
@@ -51,6 +46,12 @@ const Container = styled.header`
   height: ${headerHeight};
   padding: 0 3rem;
   outline: 1px solid ${(props) => props.theme.colors.lightGray};
+`;
+
+const Logo = styled.button`
+  font-size: 2rem;
+  margin-right: 2rem;
+  height: 100%;
 `;
 
 const OptionContainer = styled.div`

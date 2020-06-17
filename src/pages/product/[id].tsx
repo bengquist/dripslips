@@ -6,6 +6,7 @@ import styled from "styled-components";
 import SEO from "../../app/SEO";
 import ProductImages from "../../product/ProductImages";
 import ProductInfo from "../../product/ProductInfo";
+import BackButton from "../../ui/BackButton";
 
 const ProductPage = () => {
   const router = useRouter();
@@ -38,6 +39,7 @@ const ProductPage = () => {
   return (
     <Container>
       <SEO title={data.product.title} />
+      <BackButton />
       <ProductImages images={data.product.images} />
       <ProductInfo product={data.product} />
     </Container>
@@ -46,4 +48,7 @@ const ProductPage = () => {
 
 export default ProductPage;
 
-const Container = styled.div``;
+const Container = styled.div`
+  position: relative;
+  display: flex;
+`;

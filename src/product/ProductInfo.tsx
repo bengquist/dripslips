@@ -1,4 +1,5 @@
 import React from "react";
+import styled from "styled-components";
 import { Product } from "./types";
 
 type Props = {
@@ -6,7 +7,11 @@ type Props = {
 };
 
 const ProductInfo: React.FC<Props> = ({ product }) => {
-  return <div>Info</div>;
+  return <Container>Info</Container>;
 };
 
 export default ProductInfo;
+
+const Container = styled.div`
+  flex: 1;
+`;
