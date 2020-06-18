@@ -1,7 +1,8 @@
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import SideModal from "../modal.tsx/SideModal";
 import { gap } from "../style/helpers";
 import SquareButton from "../ui/SquareButton";
 import { Product } from "./types";
@@ -11,16 +12,20 @@ type Props = {
 };
 
 const ProductInfo: React.FC<Props> = ({ product }) => {
+  const [showSizeSelect, setShowSizeSelect] = useState(false);
+
   return (
     <Container css={gap({ bottom: 1.5 })}>
       <div>
         <ModelId>{product.modelId}</ModelId>
         <h1>{product.title}</h1>
       </div>
-      <Button>
+
+      <Button onClick={() => setShowSizeSelect(!showSizeSelect)}>
         <p>Size</p>
-        <p>48</p>
+        <p>48 &#8250;</p>
       </Button>
+
       <div css={gap({ bottom: 0.75 })}>
         <h3>${product.price}</h3>
         <SquareButton>Place in Cart</SquareButton>
@@ -28,6 +33,11 @@ const ProductInfo: React.FC<Props> = ({ product }) => {
           <FontAwesomeIcon icon={faHeart} /> Add to Wishlist
         </SquareButton>
       </div>
+
+      <SideModal
+        isVisible={showSizeSelect}
+        onClose={() => setShowSizeSelect(false)}
+      />
     </Container>
   );
 };
