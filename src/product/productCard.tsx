@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
+import formatCurrency from "../common/formatCurrency";
 import { lightGrayOutline } from "../style/helpers";
 import { Product } from "./types";
 
@@ -16,7 +17,7 @@ const ItemCard: React.FC<Props> = ({ product }) => {
 
         <div>
           <h3>{product.title}</h3>
-          <Price>${product.price}</Price>
+          <Price>{formatCurrency(product.price)}</Price>
         </div>
       </Container>
     </Link>

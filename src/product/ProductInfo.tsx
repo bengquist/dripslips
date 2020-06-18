@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useCart } from "../cart/CartContext";
+import formatCurrency from "../common/formatCurrency";
 import { gap } from "../style/helpers";
 import SquareButton from "../ui/SquareButton";
 import ProductSizeModal from "./ProductSizeModal";
@@ -36,7 +37,7 @@ const ProductInfo: React.FC<Props> = ({ product }) => {
       </Button>
 
       <div css={gap({ bottom: 1 })}>
-        <h3>${product.price}</h3>
+        <h3>{formatCurrency(product.price)}</h3>
         <SquareButton onClick={addProduct}>Place in Cart</SquareButton>
         <SquareButton variant="secondary">
           <FontAwesomeIcon icon={faHeart} /> Add to Wishlist

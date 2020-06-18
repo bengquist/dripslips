@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
+import formatCurrency from "../common/formatCurrency";
 import SideModal, { SideModalProps } from "../modal/SideModal";
 import { flexSpaceBetweenAlignCenter } from "../style/helpers";
 import SquareButton from "../ui/SquareButton";
@@ -22,7 +23,9 @@ const CartSideModal: React.FC<SideModalProps> = (props) => {
 
           <TotalPrice>
             <h3>TOTAL</h3>
-            <h2 style={{ fontWeight: "normal" }}>${state.totalPrice}</h2>
+            <h2 style={{ fontWeight: "normal" }}>
+              {formatCurrency(state.totalPrice)}
+            </h2>
           </TotalPrice>
           <Link href="/cart">
             <SquareButton onClick={props.onClose}>
