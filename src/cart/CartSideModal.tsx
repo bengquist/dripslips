@@ -14,22 +14,34 @@ const CartSideModal: React.FC<SideModalProps> = (props) => {
     <CartProductCard product={product} quantity={quantity} />
   ));
 
+  const renderBody = () => {
+    if (state.productCount > 0) {
+      return (
+        <>
+          {cartProducts}
+
+          <TotalPrice>
+            <h3>TOTAL</h3>
+            <h2 style={{ fontWeight: "normal" }}>$1,800.00</h2>
+          </TotalPrice>
+          <Link href="/cart">
+            <SquareButton onClick={props.onClose}>
+              View Your Shopping Bag
+            </SquareButton>
+          </Link>
+        </>
+      );
+    } else {
+      return <div>Bag is empty</div>;
+    }
+  };
+
   return (
     <SideModal {...props}>
-      <SideModal.Header onClose={props.onClose}>Cart</SideModal.Header>
-      <SideModal.Body>
-        {cartProducts}
-
-        <TotalPrice>
-          <h3>TOTAL</h3>
-          <h2 style={{ fontWeight: "normal" }}>$1,800.00</h2>
-        </TotalPrice>
-        <Link href="/cart">
-          <SquareButton onClick={props.onClose}>
-            View Your Shopping Bag
-          </SquareButton>
-        </Link>
-      </SideModal.Body>
+      <SideModal.Header onClose={props.onClose}>
+        YOUR SHOPPING BAG {state.productCount ? `(${state.productCount})` : ""}
+      </SideModal.Header>
+      <SideModal.Body>{renderBody()}</SideModal.Body>
     </SideModal>
   );
 };

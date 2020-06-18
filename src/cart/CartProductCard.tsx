@@ -10,12 +10,16 @@ type Props = {
 };
 
 const CartProductCard: React.FC<Props> = ({ product, quantity }) => {
+  const count = quantity > 1 ? `(${quantity})` : "";
+
   return (
     <Link href="/product/[id]" as={`/product/${product.id}`}>
       <Container>
         <Inner>
           <Image src={product.images[0]} />
-          <h3>{product.title} ajkdshfk lajsdlhfa kljfshkajlsdf</h3>
+          <h3>
+            {product.title} ajkdshfk lajsdlhfa kljfshkajlsdf {count}
+          </h3>
         </Inner>
         <h3 style={{ fontWeight: "normal" }}>${product.price}</h3>
       </Container>
