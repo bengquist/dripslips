@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { Product } from "../product/types";
@@ -10,28 +11,37 @@ type Props = {
 
 const CartProductCard: React.FC<Props> = ({ product, quantity }) => {
   return (
-    <Container>
-      <div css={flexSpaceBetweenAlignCenter}>
-        <Image src={product.images[0]} />
-        <h4>{product.title}</h4>
-      </div>
-      <p style={{ fontWeight: "normal" }}>${product.price}</p>
-    </Container>
+    <Link href="/product/[id]" as={`/product/${product.id}`}>
+      <Container>
+        <Inner>
+          <Image src={product.images[0]} />
+          <h3>{product.title} ajkdshfk lajsdlhfa kljfshkajlsdf</h3>
+        </Inner>
+        <h3 style={{ fontWeight: "normal" }}>${product.price}</h3>
+      </Container>
+    </Link>
   );
 };
 
 export default CartProductCard;
 
-const Container = styled.div`
+const Container = styled.button`
   ${flexSpaceBetweenAlignCenter};
   width: 100%;
   text-transform: uppercase;
   border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
 `;
 
+const Inner = styled.div`
+  ${flexSpaceBetweenAlignCenter};
+  padding-right: 1.5rem;
+  text-align: left;
+`;
+
 const Image = styled.img`
+  flex: 1;
   object-fit: contain;
-  max-width: 5rem;
-  max-height: 5rem;
-  margin-right: 0.75rem;
+  max-width: 6rem;
+  max-height: 6rem;
+  margin-right: 1.5rem;
 `;
