@@ -2,10 +2,13 @@ import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
 import { faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import CartSideModal from "../cart/CartSideModal";
 
 const HeaderActions = () => {
+  const [showCartModal, setShowCartModal] = useState(false);
+
   return (
     <Container>
       <Link href="/wishlist">
@@ -18,11 +21,14 @@ const HeaderActions = () => {
           <FontAwesomeIcon icon={faUser} size="lg" />
         </Action>
       </Link>
-      <Link href="/cart">
-        <Action>
-          <FontAwesomeIcon icon={faShoppingBasket} size="lg" />
-        </Action>
-      </Link>
+      <Action onClick={() => setShowCartModal(true)}>
+        <FontAwesomeIcon icon={faShoppingBasket} size="lg" /> 1
+      </Action>
+
+      <CartSideModal
+        isVisible={showCartModal}
+        onClose={() => setShowCartModal(false)}
+      />
     </Container>
   );
 };
@@ -34,5 +40,5 @@ const Container = styled.div`
 `;
 
 const Action = styled.button`
-  padding: 0.75rem;
+  min-width: 3rem;
 `;

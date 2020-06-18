@@ -6,14 +6,14 @@ type Props = SideModalProps & {
   sizes: number[];
 };
 
-const ProductSizeModal: React.FC<Props> = ({ onClose, ...props }) => {
+const ProductSizeModal: React.FC<Props> = (props) => {
   return (
-    <SideModal onClose={onClose} {...props}>
-      <SideModal.Header onClose={onClose}>Size</SideModal.Header>
+    <SideModal {...props}>
+      <SideModal.Header onClose={props.onClose}>Size</SideModal.Header>
       <SideModal.Body>
         <SizeOptionContainer>
           {props.sizes.map((size) => (
-            <SizeOption onClick={onClose}>{size}</SizeOption>
+            <SizeOption onClick={props.onClose}>{size}</SizeOption>
           ))}
         </SizeOptionContainer>
       </SideModal.Body>

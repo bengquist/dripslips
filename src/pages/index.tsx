@@ -1,7 +1,6 @@
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import React from "react";
-import { initializeApollo } from "../apollo/apolloClient";
 import SEO from "../app/SEO";
 import ProductCard from "../product/ProductCard";
 import ProductListNav from "../product/ProductListNav";
@@ -36,28 +35,6 @@ const IndexPage = () => {
       </div>
     </Loader>
   );
-};
-
-IndexPage.getInitialProps = async () => {
-  const apolloClient = initializeApollo();
-
-  await apolloClient.query({
-    query: gql`
-      {
-        products {
-          id
-          title
-          description
-          type
-          gender
-          price
-          images
-        }
-      }
-    `,
-  });
-
-  return apolloClient.cache.extract();
 };
 
 export default IndexPage;
