@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import SideModal, { SideModalProps } from "../modal.tsx/SideModal";
@@ -23,7 +24,11 @@ const CartSideModal: React.FC<SideModalProps> = (props) => {
           <h3>TOTAL</h3>
           <h2 style={{ fontWeight: "normal" }}>$1,800.00</h2>
         </TotalPrice>
-        <SquareButton>View Your Shopping Bag</SquareButton>
+        <Link href="/cart">
+          <SquareButton onClick={props.onClose}>
+            View Your Shopping Bag
+          </SquareButton>
+        </Link>
       </SideModal.Body>
     </SideModal>
   );

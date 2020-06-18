@@ -1,15 +1,13 @@
 import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
-import { faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useCart } from "../cart/CartContext";
+import CartIcon from "../cart/CartIcon";
 import CartSideModal from "../cart/CartSideModal";
 
 const HeaderActions = () => {
   const [showCartModal, setShowCartModal] = useState(false);
-  const { state } = useCart();
 
   return (
     <Container>
@@ -24,8 +22,7 @@ const HeaderActions = () => {
         </Action>
       </Link>
       <Action onClick={() => setShowCartModal(true)}>
-        <FontAwesomeIcon icon={faShoppingBasket} size="lg" />{" "}
-        {state.productCount}
+        <CartIcon />
       </Action>
 
       <CartSideModal
@@ -43,5 +40,5 @@ const Container = styled.div`
 `;
 
 const Action = styled.button`
-  min-width: 3rem;
+  padding: 0.75rem 1rem;
 `;
