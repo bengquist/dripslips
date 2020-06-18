@@ -22,7 +22,7 @@ const CartSideModal: React.FC<SideModalProps> = (props) => {
 
           <TotalPrice>
             <h3>TOTAL</h3>
-            <h2 style={{ fontWeight: "normal" }}>$1,800.00</h2>
+            <h2 style={{ fontWeight: "normal" }}>${state.totalPrice}</h2>
           </TotalPrice>
           <Link href="/cart">
             <SquareButton onClick={props.onClose}>

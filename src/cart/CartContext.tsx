@@ -7,6 +7,7 @@ type State = {
     quantity: number;
   }[];
   productCount: number;
+  totalPrice: number;
 };
 
 type Action = {
@@ -39,6 +40,7 @@ const reducer = (state: State, action: Action) => {
       return {
         products: productsCopy,
         productCount: ++state.productCount,
+        totalPrice: state.totalPrice + action.payload.price,
       };
     case "REMOVE_PRODUCT":
       return {
@@ -46,6 +48,7 @@ const reducer = (state: State, action: Action) => {
           ({ product }) => product.id !== action.payload.id
         ),
         productCount: --state.productCount,
+        totalPrice: 0,
       };
     default:
       throw new Error(`Unknown action: ${action.type}`);
@@ -56,6 +59,7 @@ export const CartProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, {
     products: [],
     productCount: 0,
+    totalPrice: 0,
   });
 
   const value = { state, dispatch };
