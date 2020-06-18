@@ -2,6 +2,7 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useCart } from "../cart/CartContext";
 import { gap } from "../style/helpers";
 import SquareButton from "../ui/SquareButton";
 import ProductSizeModal from "./ProductSizeModal";
@@ -13,6 +14,14 @@ type Props = {
 
 const ProductInfo: React.FC<Props> = ({ product }) => {
   const [showSizeSelect, setShowSizeSelect] = useState(false);
+  const { dispatch } = useCart();
+
+  const addProduct = () => {
+    dispatch({
+      type: "ADD_PRODUCT",
+      payload: product,
+    });
+  };
 
   return (
     <Container css={gap({ bottom: 1.5 })}>
@@ -28,7 +37,7 @@ const ProductInfo: React.FC<Props> = ({ product }) => {
 
       <div css={gap({ bottom: 0.75 })}>
         <h3>${product.price}</h3>
-        <SquareButton>Place in Cart</SquareButton>
+        <SquareButton onClick={addProduct}>Place in Cart</SquareButton>
         <SquareButton variant="secondary">
           <FontAwesomeIcon icon={faHeart} /> Add to Wishlist
         </SquareButton>

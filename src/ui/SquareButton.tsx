@@ -6,8 +6,16 @@ type Props = ComponentPropsWithoutRef<"button"> & {
   variant?: keyof typeof variants;
 };
 
-const SquareButton: React.FC<Props> = ({ children, variant = "primary" }) => {
-  return <Button css={variants[variant]}>{children}</Button>;
+const SquareButton: React.FC<Props> = ({
+  children,
+  variant = "primary",
+  ...props
+}) => {
+  return (
+    <Button css={variants[variant]} {...props}>
+      {children}
+    </Button>
+  );
 };
 
 export default SquareButton;

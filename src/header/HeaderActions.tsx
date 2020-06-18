@@ -4,10 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useCart } from "../cart/CartContext";
 import CartSideModal from "../cart/CartSideModal";
 
 const HeaderActions = () => {
   const [showCartModal, setShowCartModal] = useState(false);
+  const { state } = useCart();
 
   return (
     <Container>
@@ -22,7 +24,8 @@ const HeaderActions = () => {
         </Action>
       </Link>
       <Action onClick={() => setShowCartModal(true)}>
-        <FontAwesomeIcon icon={faShoppingBasket} size="lg" /> 1
+        <FontAwesomeIcon icon={faShoppingBasket} size="lg" />{" "}
+        {state.products.length}
       </Action>
 
       <CartSideModal
