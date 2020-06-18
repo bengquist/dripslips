@@ -2,9 +2,9 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import styled from "styled-components";
-import SideModal from "../modal.tsx/SideModal";
 import { gap } from "../style/helpers";
 import SquareButton from "../ui/SquareButton";
+import ProductSizeModal from "./ProductSizeModal";
 import { Product } from "./types";
 
 type Props = {
@@ -34,7 +34,7 @@ const ProductInfo: React.FC<Props> = ({ product }) => {
         </SquareButton>
       </div>
 
-      <SideModal
+      <ProductSizeModal
         isVisible={showSizeSelect}
         onClose={() => setShowSizeSelect(false)}
       />

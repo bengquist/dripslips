@@ -1,14 +1,16 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
 import { stopPropagation } from "../common/eventHelpers";
+import { flexAlignCenter, lightGrayOutline } from "../style/helpers";
 import Portal from "./Portal";
 
-type Props = {
+export type SideModalProps = {
+  children?: ReactNode;
   isVisible?: boolean;
   onClose: () => void;
 };
 
-const SideModal: React.FC<Props> = ({ children, isVisible, onClose }) => {
+const SideModal = ({ children, isVisible, onClose }: SideModalProps) => {
   return (
     <Portal>
       <Overlay onClick={onClose} visible={isVisible}>
@@ -21,6 +23,19 @@ const SideModal: React.FC<Props> = ({ children, isVisible, onClose }) => {
 };
 
 export default SideModal;
+
+SideModal.Header = ({ children }: { children: ReactNode }) => {
+  return (
+    <ModalHeader>
+      <ModalTitle>{children}</ModalTitle>
+      <CloseButton>&#215;</CloseButton>
+    </ModalHeader>
+  );
+};
+
+SideModal.Body = ({ children }: { children: ReactNode }) => {
+  return <ModalBody>{children}</ModalBody>;
+};
 
 const Overlay = styled.div<{ visible?: boolean }>`
   display: flex;
@@ -44,4 +59,26 @@ const Modal = styled.div<{ visible?: boolean }>`
   width: 100%;
   height: 100%;
   transition: 0.3s max-width;
+`;
+
+const ModalHeader = styled.div`
+  ${flexAlignCenter};
+  ${lightGrayOutline};
+  padding-left: 1rem;
+`;
+
+const ModalTitle = styled.h2`
+  flex: 1;
+`;
+
+const ModalBody = styled.div`
+  height: 100%;
+  padding: 1rem;
+  ${lightGrayOutline}
+`;
+
+const CloseButton = styled.button`
+  font-size: 1.75rem;
+  padding: 0.75rem 1.5rem;
+  ${lightGrayOutline}
 `;
