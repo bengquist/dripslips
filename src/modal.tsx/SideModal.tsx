@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { stopPropagation } from "../common/eventHelpers";
 import Portal from "./Portal";
 
 type Props = {
@@ -11,7 +12,7 @@ const SideModal: React.FC<Props> = ({ children, isVisible, onClose }) => {
   return (
     <Portal>
       <Overlay onClick={onClose} visible={isVisible}>
-        <Modal onClick={(e) => e.stopPropagation()} visible={isVisible}>
+        <Modal onClick={stopPropagation} visible={isVisible}>
           {children}
         </Modal>
       </Overlay>
