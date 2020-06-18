@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { stopPropagation } from "../common/eventHelpers";
 import { headerHeight } from "../header/Header";
+import Overlay from "../modal.tsx/Overlay";
 import { lightGrayOutline } from "../style/helpers";
-import ProductListFilterSection from "./productListFilterSection";
+import ProductListFilterSection from "./ProductListFilterSection";
 
 const typeFilters = [
   { text: "Moccasins", active: true },
@@ -60,8 +62,9 @@ const Button = styled.button`
   border-right: 1px solid ${({ theme }) => theme.colors.lightGray};
   transition: 0.2s ease-out;
 
+  :hover,
   :focus {
-    box-shadow: 0px 2px 0px ${({ theme }) => theme.colors.black};
+    box-shadow: 0px 1px 0px ${({ theme }) => theme.colors.black};
   }
 `;
 
@@ -70,23 +73,22 @@ type FilterListProps = {
   onClose: () => void;
 };
 
-const FilterList: React.FC<FilterListProps> = ({
-  isVisible = false,
-  onClose,
-}) => {
+const FilterList: React.FC<FilterListProps> = ({ isVisible, onClose }) => {
   return (
-    <FiltersContainer isVisible={isVisible}>
-      <SectionContainer>
-        <ProductListFilterSection title="Type" listItems={typeFilters} />
-        <ProductListFilterSection title="Size" boxItems={sizeFilters} />
-        <ProductListFilterSection title="Color" boxItems={colorFilters} />
-      </SectionContainer>
-      <HideButton onClick={onClose}> Hide Filters</HideButton>
-    </FiltersContainer>
+    <Overlay onClick={onClose} visible={isVisible}>
+      <FiltersContainer onClick={stopPropagation} visible={isVisible}>
+        <SectionContainer>
+          <ProductListFilterSection title="Type" listItems={typeFilters} />
+          <ProductListFilterSection title="Size" boxItems={sizeFilters} />
+          <ProductListFilterSection title="Color" boxItems={colorFilters} />
+        </SectionContainer>
+        <HideButton onClick={onClose}> Hide Filters</HideButton>
+      </FiltersContainer>
+    </Overlay>
   );
 };
 
-const FiltersContainer = styled.div<{ isVisible: boolean }>`
+const FiltersContainer = styled.div<{ visible?: boolean }>`
   position: absolute;
   top: ${headerHeight};
   right: 0;
@@ -97,7 +99,7 @@ const FiltersContainer = styled.div<{ isVisible: boolean }>`
   ${lightGrayOutline};
   margin-top: 1px;
   width: 100%;
-  max-height: ${(props) => (props.isVisible ? 500 : 0)}px;
+  max-height: ${({ visible }) => (visible ? 500 : 0)}px;
   overflow: hidden;
   background: white;
 
