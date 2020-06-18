@@ -55,7 +55,7 @@ const ProductInfo: React.FC<Props> = ({ product }) => {
 export default ProductInfo;
 
 const Container = styled.div`
-  flex: 0.75;
+  flex: 0.3;
   padding: 3rem;
 `;
 

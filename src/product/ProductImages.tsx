@@ -17,7 +17,7 @@ const ProductImages: React.FC<Props> = ({ images }) => {
 export default ProductImages;
 
 const Container = styled.div`
-  flex: 2.25;
+  flex: 0.7;
   display: grid;
   grid-template-columns: 1fr 1fr;
   ${lightGrayOutline};
