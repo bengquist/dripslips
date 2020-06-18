@@ -73,4 +73,10 @@ const CloseButton = styled.button`
   font-size: 1.75rem;
   padding: 0.75rem 1.5rem;
   ${lightGrayOutline}
+  transition: .3s;
+
+  :hover,
+  :focus {
+    background: ${({ theme }) => theme.colors.lightGray};
+  }
 `;

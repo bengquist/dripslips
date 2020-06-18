@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-import SideModal, { SideModalProps } from "../modal.tsx/SideModal";
+import SideModal, { SideModalProps } from "../modal/SideModal";
 import { flexSpaceBetweenAlignCenter } from "../style/helpers";
 import SquareButton from "../ui/SquareButton";
 import { useCart } from "./CartContext";

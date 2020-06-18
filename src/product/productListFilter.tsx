@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { stopPropagation } from "../common/eventHelpers";
 import { headerHeight } from "../header/Header";
-import Overlay from "../modal.tsx/Overlay";
+import Overlay from "../modal/Overlay";
 import { lightGrayOutline } from "../style/helpers";
 import { colorFilters, sizeFilters, typeFilters } from "./filterData";
 import ProductListFilterSection from "./ProductListFilterSection";

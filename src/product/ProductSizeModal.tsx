@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import SideModal, { SideModalProps } from "../modal.tsx/SideModal";
+import SideModal, { SideModalProps } from "../modal/SideModal";
 
 type Props = SideModalProps & {
   sizes: number[];
