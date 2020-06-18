@@ -24,7 +24,7 @@ const ProductInfo: React.FC<Props> = ({ product }) => {
   };
 
   return (
-    <Container css={gap({ bottom: 1.5 })}>
+    <Container css={gap({ bottom: 2 })}>
       <div>
         <ModelId>{product.modelId}</ModelId>
         <h1>{product.title}</h1>
@@ -35,7 +35,7 @@ const ProductInfo: React.FC<Props> = ({ product }) => {
         <p>48 &#8250;</p>
       </Button>
 
-      <div css={gap({ bottom: 0.75 })}>
+      <div css={gap({ bottom: 1 })}>
         <h3>${product.price}</h3>
         <SquareButton onClick={addProduct}>Place in Cart</SquareButton>
         <SquareButton variant="secondary">
@@ -69,5 +69,5 @@ const Button = styled.button`
   justify-content: space-between;
   border-top: 1px solid ${({ theme }) => theme.colors.lightGray};
   border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
-  padding: 1rem 0;
+  padding: 1.5rem 0;
 `;
