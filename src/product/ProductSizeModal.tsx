@@ -9,7 +9,7 @@ type Props = SideModalProps & {
 const ProductSizeModal: React.FC<Props> = ({ onClose, ...props }) => {
   return (
     <SideModal onClose={onClose} {...props}>
-      <SideModal.Header>Size</SideModal.Header>
+      <SideModal.Header onClose={onClose}>Size</SideModal.Header>
       <SideModal.Body>
         <SizeOptionContainer>
           {props.sizes.map((size) => (

@@ -24,11 +24,17 @@ const SideModal = ({ children, isVisible, onClose }: SideModalProps) => {
 
 export default SideModal;
 
-SideModal.Header = ({ children }: { children: ReactNode }) => {
+SideModal.Header = ({
+  children,
+  onClose,
+}: {
+  children: ReactNode;
+  onClose: () => void;
+}) => {
   return (
     <ModalHeader>
       <ModalTitle>{children}</ModalTitle>
-      <CloseButton>&#215;</CloseButton>
+      <CloseButton onClick={onClose}>&#215;</CloseButton>
     </ModalHeader>
   );
 };
