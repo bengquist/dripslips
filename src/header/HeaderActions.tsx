@@ -25,7 +25,7 @@ const HeaderActions = () => {
       </Link>
       <Action onClick={() => setShowCartModal(true)}>
         <FontAwesomeIcon icon={faShoppingBasket} size="lg" />{" "}
-        {state.products.length}
+        {state.productCount}
       </Action>
 
       <CartSideModal
