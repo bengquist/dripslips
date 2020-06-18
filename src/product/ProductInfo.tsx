@@ -37,6 +37,7 @@ const ProductInfo: React.FC<Props> = ({ product }) => {
       <ProductSizeModal
         isVisible={showSizeSelect}
         onClose={() => setShowSizeSelect(false)}
+        sizes={product.availableSizes}
       />
     </Container>
   );

@@ -64,7 +64,7 @@ const Modal = styled.div<{ visible?: boolean }>`
 const ModalHeader = styled.div`
   ${flexAlignCenter};
   ${lightGrayOutline};
-  padding-left: 1rem;
+  padding-left: 1.5rem;
 `;
 
 const ModalTitle = styled.h2`
@@ -73,8 +73,8 @@ const ModalTitle = styled.h2`
 
 const ModalBody = styled.div`
   height: 100%;
-  padding: 1rem;
-  ${lightGrayOutline}
+  padding: 1.5rem;
+  ${lightGrayOutline};
 `;
 
 const CloseButton = styled.button`
