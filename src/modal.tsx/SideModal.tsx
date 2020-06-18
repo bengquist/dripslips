@@ -46,10 +46,11 @@ SideModal.Body = ({ children }: { children: ReactNode }) => {
 
 const Modal = styled.div<{ visible?: boolean }>`
   background: ${({ theme }) => theme.colors.white};
-  max-width: ${({ visible }) => (visible ? 20 : 0)}rem;
+  max-width: 25rem;
   width: 100%;
   height: 100%;
-  transition: 0.3s max-width;
+  transition: 0.3s;
+  transform: translateX(${({ visible }) => (visible ? 0 : 25)}rem);
 `;
 
 const ModalHeader = styled.div`
