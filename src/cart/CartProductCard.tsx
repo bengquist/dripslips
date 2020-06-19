@@ -1,20 +1,20 @@
 import Link from "next/link";
-import React from "react";
+import React, { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
 import { Product } from "../product/types";
 import { flexSpaceBetweenAlignCenter } from "../style/helpers";
 
-type Props = {
+type Props = ComponentPropsWithoutRef<"button"> & {
   product: Product;
   quantity: number;
 };
 
-const CartProductCard: React.FC<Props> = ({ product, quantity }) => {
+const CartProductCard: React.FC<Props> = ({ product, quantity, ...props }) => {
   const count = quantity > 1 ? `(${quantity})` : "";
 
   return (
     <Link href="/product/[id]" as={`/product/${product.id}`}>
-      <Container>
+      <Container {...props}>
         <Inner>
           <Image src={product.images[0]} />
           <h3>
@@ -34,6 +34,12 @@ const Container = styled.button`
   width: 100%;
   text-transform: uppercase;
   border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
+  transition: 0.3s;
+
+  :focus {
+    outline: none;
+    border-bottom: 1px solid ${({ theme }) => theme.colors.black};
+  }
 `;
 
 const Inner = styled.div`

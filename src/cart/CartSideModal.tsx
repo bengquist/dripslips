@@ -12,7 +12,11 @@ const CartSideModal: React.FC<SideModalProps> = (props) => {
   const { state } = useCart();
 
   const cartProducts = state.products.map(({ product, quantity }) => (
-    <CartProductCard product={product} quantity={quantity} />
+    <CartProductCard
+      onClick={props.onClose}
+      product={product}
+      quantity={quantity}
+    />
   ));
 
   const renderBody = () => {
