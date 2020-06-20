@@ -39,6 +39,10 @@ export default createGlobalStyle`
     padding: 0;
   }
 
+  h1 {
+    line-height: 1.75rem;
+  }
+
   h1, h2, h3, h4, h5, h6, p {
     margin: 0;
     color: "#19110B";

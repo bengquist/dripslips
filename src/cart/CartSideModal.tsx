@@ -6,13 +6,13 @@ import SideModal, { SideModalProps } from "../modal/SideModal";
 import { flexSpaceBetweenAlignCenter } from "../style/helpers";
 import SquareButton from "../ui/SquareButton";
 import { useCart } from "./CartContext";
-import CartProductCard from "./CartProductCard";
+import CartProductModalCard from "./CartProductModalCard";
 
 const CartSideModal: React.FC<SideModalProps> = (props) => {
   const { state } = useCart();
 
   const cartProducts = state.products.map(({ product, quantity }) => (
-    <CartProductCard
+    <CartProductModalCard
       onClick={props.onClose}
       product={product}
       quantity={quantity}
