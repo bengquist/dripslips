@@ -1,11 +1,9 @@
 import React, { createContext, useContext, useReducer } from "react";
 import { Product } from "../product/types";
+import { CartProduct } from "./types";
 
 type State = {
-  products: {
-    product: Product;
-    quantity: number;
-  }[];
+  products: CartProduct[];
   productCount: number;
   totalPrice: number;
 };
@@ -34,7 +32,12 @@ const reducer = (state: State, action: Action) => {
       if (productInCart) {
         productInCart.quantity++;
       } else {
-        productsCopy.push({ product: action.payload, quantity: 1 });
+        productsCopy.push({
+          product: action.payload,
+          quantity: 1,
+          size: 0,
+          color: "black",
+        });
       }
 
       return {

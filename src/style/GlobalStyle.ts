@@ -19,7 +19,6 @@ export default createGlobalStyle`
   html {
     font-weight: bold;
     color: "#19110B";
-    min-height: 100vh;
 
     * > * {
       font-family: "Karla", sans-serif;
@@ -29,7 +28,12 @@ export default createGlobalStyle`
   }
 
   body {
+    height: 100vh;
     margin: 0;
+  }
+
+  body > div {
+    height: 100%;
   }
 
   button {
@@ -49,7 +53,8 @@ export default createGlobalStyle`
   }
 
   img {
-    width: 100%;
+    height: auto;
+    width: 100%; 
     object-fit: contain;
   }
 `;

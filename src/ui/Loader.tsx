@@ -11,7 +11,7 @@ type Props = {
 
 const Loader: React.FC<Props> = ({ children, error, isLoading }) => {
   if (error) {
-    return <div>Something went wrong</div>;
+    return <Container>Something went wrong</Container>;
   }
 
   return <Container>{isLoading ? <Spinner /> : children}</Container>;
@@ -20,5 +20,6 @@ const Loader: React.FC<Props> = ({ children, error, isLoading }) => {
 export default Loader;
 
 const Container = styled.div`
+  height: 100%;
   animation: 0.5s ${fadeIn};
 `;

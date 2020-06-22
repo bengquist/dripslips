@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { gap } from "../style/helpers";
+import { flexAlignCenter, gap } from "../style/helpers";
+import LinkButton from "../ui/LinkButton";
+import SquareButton from "../ui/SquareButton";
 import { useCart } from "./CartContext";
 import CartProductCard from "./CartProductCard";
 
@@ -8,16 +10,23 @@ const CartList = () => {
   const { state } = useCart();
 
   const renderProducts = () => {
-    return state.products.map(({ product }) => (
+    return state.products.map((product) => (
       <CartProductCard product={product} />
     ));
   };
 
   return (
     <Container>
+      <LinkButton>Fake Payment</LinkButton>
+
+      <HeaderNav>
+        <SquareButton variant="secondary">Continue Shopping</SquareButton>
+        <SquareButton>Proceed</SquareButton>
+      </HeaderNav>
+
       <Header>
         <h1>MY SHOPPING BAG</h1>
-        <span>(3 items)</span>
+        <span>({state.productCount} items)</span>
       </Header>
 
       {renderProducts()}
@@ -39,4 +48,9 @@ const Header = styled.div`
   > span {
     font-weight: normal;
   }
+`;
+
+const HeaderNav = styled.div`
+  ${flexAlignCenter};
+  ${gap({ right: 1 })};
 `;
