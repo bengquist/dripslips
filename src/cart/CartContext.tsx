@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useReducer } from "react";
-import { CartAction, cartReducer, CartState } from "./reducer";
+import { CartActionTypes, cartReducer, CartState } from "./reducer";
 
 type ContextProps = {
   state: CartState;
-  dispatch: (action: CartAction) => void;
+  dispatch: (action: CartActionTypes) => void;
 };
 
 const CartContext = createContext({} as ContextProps);

@@ -10,10 +10,17 @@ export type CartState = {
   totalPrice: number;
 };
 
-export type CartAction = {
-  type: string;
+export type AddProductAction = {
+  type: typeof ADD_PRODUCT;
   payload: Product;
 };
+
+export type RemoveProductAction = {
+  type: typeof REMOVE_PRODUCT;
+  payload: string;
+};
+
+export type CartActionTypes = AddProductAction | RemoveProductAction;
 
 const addProductToCart = (product: Product, state: CartState) => {
   const cartCopy = [...state.cart];
@@ -40,11 +47,11 @@ const addProductToCart = (product: Product, state: CartState) => {
   };
 };
 
-const removeProductFromCart = (product: Product, state: CartState) => {
+const removeProductFromCart = (productId: string, state: CartState) => {
   const cartCopy = [...state.cart];
 
   const updatedProductIndex = cartCopy.findIndex(
-    (cartProduct) => cartProduct.product.id === product.id
+    ({ product }) => product.id === productId
   );
   const updatedProduct = {
     ...cartCopy[updatedProductIndex],
@@ -65,13 +72,13 @@ const removeProductFromCart = (product: Product, state: CartState) => {
   };
 };
 
-export const cartReducer = (state: CartState, action: CartAction) => {
+export const cartReducer = (state: CartState, action: CartActionTypes) => {
   switch (action.type) {
     case ADD_PRODUCT:
       return addProductToCart(action.payload, state);
     case REMOVE_PRODUCT:
       return removeProductFromCart(action.payload, state);
     default:
-      throw new Error(`Unknown action: ${action.type}`);
+      throw new Error(`Unknown action: ${action}`);
   }
 };
