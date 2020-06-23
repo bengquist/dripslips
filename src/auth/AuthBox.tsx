@@ -5,20 +5,22 @@ import Input from "../ui/Input";
 import LinkButton from "../ui/LinkButton";
 import SquareButton from "../ui/SquareButton";
 
-const AuthBox = () => {
-  return (
-    <>
-      <Container>
-        <AuthInput label="Login *" />
-        <AuthInput label="Password *" />
-        <LinkButton>Forgot your password?</LinkButton>
-      </Container>
+type Props = {
+  title?: string;
+};
 
-      <div css={[flexAlignCenter, gap({ right: 1 })]}>
+const AuthBox: React.FC<Props> = ({ title }) => {
+  return (
+    <Container>
+      {title && <h2>{title}</h2>}
+      <AuthInput label="Login *" />
+      <AuthInput label="Password *" />
+      <LinkButton>Forgot your password?</LinkButton>
+      <div style={{ width: "100%" }} css={[flexAlignCenter, gap({ right: 1 })]}>
         <SquareButton variant="secondary">Register</SquareButton>
         <SquareButton>Sign In</SquareButton>
       </div>
-    </>
+    </Container>
   );
 };
 
@@ -31,7 +33,11 @@ const Container = styled.div`
   align-items: flex-start;
   background: ${({ theme }) => theme.colors.white};
   ${gap({ bottom: 2 })}
-  padding: 3rem;
+  padding: 2rem;
+
+  > h2 {
+    margin-bottom: 1rem;
+  }
 `;
 
 const AuthInput = styled(Input)`

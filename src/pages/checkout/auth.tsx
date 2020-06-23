@@ -1,9 +1,11 @@
+import Link from "next/link";
 import React from "react";
 import styled, { css } from "styled-components";
 import SEO from "../../app/SEO";
 import AuthBox from "../../auth/AuthBox";
-import { gap } from "../../style/helpers";
+import { flexAlignSelfRight, gap } from "../../style/helpers";
 import Loader from "../../ui/Loader";
+import SquareButton from "../../ui/SquareButton";
 
 const CheckoutAuthPage = () => {
   return (
@@ -16,6 +18,15 @@ const CheckoutAuthPage = () => {
         </Left>
         <Right>
           <h1>CONTINUE WITHOUT AN ACCOUNT</h1>
+          <p>
+            Creating an account will enable you to track your online orders,
+            access your purchase history, receipts, washlistt and more.
+          </p>
+          <div css={flexAlignSelfRight}>
+            <Link href="/checkout/shipping">
+              <SquareButton>Continue without an account</SquareButton>
+            </Link>
+          </div>
         </Right>
       </Container>
     </Loader>
@@ -25,6 +36,9 @@ const CheckoutAuthPage = () => {
 export default CheckoutAuthPage;
 
 const baseSectionStyles = css`
+  display: flex;
+  flex-direction: column;
+
   width: 100%;
   padding: 3rem;
   ${gap({ bottom: 2 })}
@@ -36,9 +50,6 @@ const Container = styled.div`
 `;
 
 const Left = styled.section`
-  display: flex;
-  flex-direction: column;
-
   ${baseSectionStyles};
   background: ${({ theme }) => theme.colors.shadedWhite};
   border-right: 1px solid ${({ theme }) => theme.colors.lightGray};

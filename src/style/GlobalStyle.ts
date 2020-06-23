@@ -57,6 +57,7 @@ export default createGlobalStyle`
 
   p {
     font-weight: normal;
+    line-height: 1.75rem;
   }
 
   img {

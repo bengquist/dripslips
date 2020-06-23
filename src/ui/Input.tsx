@@ -8,7 +8,7 @@ type Props = ComponentPropsWithoutRef<"input"> & {
 
 const inputStyle = css`
   font-size: 1rem;
-  padding: 0.75rem;
+  padding: 0.8rem;
   border: 1px solid ${({ theme }) => theme.colors.lightGray};
   transition: 0.3s;
   outline: none;
