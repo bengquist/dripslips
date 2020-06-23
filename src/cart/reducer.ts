@@ -16,7 +16,7 @@ export type CartAction = {
 };
 
 const addProductToCart = (product: Product, state: CartState) => {
-  const cartCopy = state.cart.slice();
+  const cartCopy = [...state.cart];
 
   const productInCart = cartCopy.find(
     (cartProduct) => cartProduct.product.id === product.id
@@ -41,10 +41,25 @@ const addProductToCart = (product: Product, state: CartState) => {
 };
 
 const removeProductFromCart = (product: Product, state: CartState) => {
-  const cartCopy = state.cart.slice();
+  const cartCopy = [...state.cart];
+
+  const updatedProductIndex = cartCopy.findIndex(
+    (cartProduct) => cartProduct.product.id === product.id
+  );
+  const updatedProduct = {
+    ...cartCopy[updatedProductIndex],
+  };
+
+  updatedProduct.quantity--;
+
+  if (updatedProduct.quantity <= 0) {
+    cartCopy.splice(updatedProductIndex, 1);
+  } else {
+    cartCopy[updatedProductIndex] = updatedProduct;
+  }
 
   return {
-    cart: cartCopy.filter(({ product }) => product.id !== product.id),
+    cart: cartCopy,
     productCount: --state.productCount,
     totalPrice: 0,
   };
