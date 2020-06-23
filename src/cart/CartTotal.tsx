@@ -1,7 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import formatCurrency from "../common/formatCurrency";
-import { flexSpaceBetweenAlignCenter, gap } from "../style/helpers";
+import {
+  flexAlignCenter,
+  flexSpaceBetweenAlignCenter,
+  gap,
+} from "../style/helpers";
+import Input from "../ui/Input";
 import { useCart } from "./CartContext";
 
 const CartTotal = () => {
@@ -14,7 +19,10 @@ const CartTotal = () => {
         <p>{formatCurrency(state.totalPrice)}</p>
       </Row>
       <Row>
-        <p>Estimated Tax by Zip Code</p>
+        <div css={[flexAlignCenter, gap({ right: 1 })]}>
+          <p>Estimated Tax by Zip Code</p>
+          <Input type="number" />
+        </div>
         <p>{formatCurrency(state.totalPrice)}</p>
       </Row>
       <Row>
@@ -35,7 +43,7 @@ const Container = styled.div`
 const Row = styled.div`
   ${flexSpaceBetweenAlignCenter};
 
-  > p {
+  p {
     font-size: 1.25rem;
     font-weight: normal;
   }
