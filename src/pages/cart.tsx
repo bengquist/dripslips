@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import SEO from "../app/SEO";
 import CartList from "../cart/CartList";
+import CartTotal from "../cart/CartTotal";
+import { gap } from "../style/helpers";
 import Loader from "../ui/Loader";
 
 const CartPage = () => {
@@ -10,6 +12,7 @@ const CartPage = () => {
       <SEO title="My Shopping Bag" />
       <Container>
         <CartList />
+        <CartTotal />
       </Container>
     </Loader>
   );
@@ -18,7 +21,7 @@ const CartPage = () => {
 export default CartPage;
 
 const Container = styled.div`
-  height: 100%;
   padding: 3rem;
   background: ${({ theme }) => theme.colors.shadedWhite};
+  ${gap({ bottom: 2 })}
 `;
