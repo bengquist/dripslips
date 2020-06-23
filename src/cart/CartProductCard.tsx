@@ -14,6 +14,7 @@ import {
 import IconButton from "../ui/IconButton";
 import SquareButton from "../ui/SquareButton";
 import { useCart } from "./CartContext";
+import { REMOVE_PRODUCT } from "./reducer";
 import { CartProduct } from "./types";
 
 type Props = {
@@ -26,7 +27,7 @@ const CartProductCard: React.FC<Props> = (props) => {
   const { product, color, size, quantity } = props.product;
 
   const removeProduct = () => {
-    dispatch({ type: "REMOVE_PRODUCT", payload: product });
+    dispatch({ type: REMOVE_PRODUCT, payload: product });
     setShowModal(false);
   };
 

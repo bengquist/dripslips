@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useCart } from "../cart/CartContext";
+import { ADD_PRODUCT } from "../cart/reducer";
 import formatCurrency from "../common/formatCurrency";
 import { gap } from "../style/helpers";
 import SquareButton from "../ui/SquareButton";
@@ -19,7 +20,7 @@ const ProductInfo: React.FC<Props> = ({ product }) => {
 
   const addProduct = () => {
     dispatch({
-      type: "ADD_PRODUCT",
+      type: ADD_PRODUCT,
       payload: product,
     });
   };

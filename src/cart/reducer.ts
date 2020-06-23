@@ -1,6 +1,9 @@
 import { Product } from "../product/types";
 import { CartProduct } from "./types";
 
+export const ADD_PRODUCT = "ADD_PRODUCT";
+export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
+
 export type CartState = {
   products: CartProduct[];
   productCount: number;
@@ -16,7 +19,7 @@ export const cartReducer = (state: CartState, action: CartAction) => {
   const productsCopy = state.products.slice();
 
   switch (action.type) {
-    case "ADD_PRODUCT":
+    case ADD_PRODUCT:
       const productInCart = productsCopy.find(
         ({ product }) => product.id === action.payload.id
       );
@@ -37,7 +40,7 @@ export const cartReducer = (state: CartState, action: CartAction) => {
         productCount: ++state.productCount,
         totalPrice: state.totalPrice + action.payload.price,
       };
-    case "REMOVE_PRODUCT":
+    case REMOVE_PRODUCT:
       return {
         products: productsCopy.filter(
           ({ product }) => product.id !== action.payload.id
