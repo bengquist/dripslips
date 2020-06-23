@@ -1,6 +1,8 @@
+import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { flexAlignCenter, gap } from "../style/helpers";
+import Header from "../ui/Header";
 import SquareButton from "../ui/SquareButton";
 import { useCart } from "./CartContext";
 import CartProductCard from "./CartProductCard";
@@ -23,7 +25,9 @@ const CartList = () => {
     <CartFooter>
       <CartTotal />
       <BottomNav>
-        <SquareButton>Proceed</SquareButton>
+        <Link href="/checkout">
+          <SquareButton>Proceed</SquareButton>
+        </Link>
       </BottomNav>
     </CartFooter>
   );
@@ -31,9 +35,11 @@ const CartList = () => {
   const emptyCart = (
     <EmptyState>
       <p>Your shopping bag is empty</p>
-      <SquareButton variant="secondary" style={{ maxWidth: "15rem" }}>
-        Start Shopping
-      </SquareButton>
+      <Link href="/">
+        <SquareButton variant="secondary" style={{ maxWidth: "15rem" }}>
+          Start Shopping
+        </SquareButton>
+      </Link>
     </EmptyState>
   );
 
@@ -42,15 +48,21 @@ const CartList = () => {
       {cartHasProducts && (
         <TopNav>
           <CartNav>
-            <SquareButton variant="secondary">Continue Shopping</SquareButton>
-            <SquareButton>Proceed</SquareButton>
+            <Link href="/">
+              <SquareButton variant="secondary">Continue Shopping</SquareButton>
+            </Link>
+            <Link href="/checkout">
+              <SquareButton>Proceed</SquareButton>
+            </Link>
           </CartNav>
         </TopNav>
       )}
 
       <Header>
         <h1>MY SHOPPING BAG</h1>
-        <span>({state.productCount} products)</span>
+        <span style={{ fontWeight: "normal" }}>
+          ({state.productCount} products)
+        </span>
       </Header>
 
       {products}
@@ -61,16 +73,6 @@ const CartList = () => {
 };
 
 export default CartList;
-
-const Header = styled.div`
-  ${gap({ right: 0.5 })};
-  display: flex;
-  align-items: flex-end;
-
-  > span {
-    font-weight: normal;
-  }
-`;
 
 const TopNav = styled.div`
   display: flex;
