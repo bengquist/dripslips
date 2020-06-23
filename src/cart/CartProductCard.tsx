@@ -13,6 +13,7 @@ import {
 } from "../style/helpers";
 import IconButton from "../ui/IconButton";
 import SquareButton from "../ui/SquareButton";
+import { useCart } from "./CartContext";
 import { CartProduct } from "./types";
 
 type Props = {
@@ -20,8 +21,14 @@ type Props = {
 };
 
 const CartProductCard: React.FC<Props> = (props) => {
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const { dispatch } = useCart();
   const { product, color, size, quantity } = props.product;
+
+  const removeProduct = () => {
+    dispatch({ type: "REMOVE_PRODUCT", payload: product });
+    setShowModal(false);
+  };
 
   const modal = (
     <CenterModal onClose={() => setShowModal(false)} isVisible={showModal}>
@@ -34,7 +41,7 @@ const CartProductCard: React.FC<Props> = (props) => {
           <SquareButton variant="secondary" onClick={() => setShowModal(false)}>
             Cancel
           </SquareButton>
-          <SquareButton>Delete</SquareButton>
+          <SquareButton onClick={removeProduct}>Delete</SquareButton>
         </div>
       </CenterModal.Body>
     </CenterModal>
