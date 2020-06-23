@@ -12,9 +12,6 @@ const Overlay: React.FC<Props> = ({ children, ...props }) => {
 export default Overlay;
 
 const Container = styled.div<{ visible?: boolean }>`
-  display: flex;
-  flex-direction: row-reverse;
-
   position: fixed;
   top: 0;
   bottom: 0;

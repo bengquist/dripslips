@@ -1,15 +1,18 @@
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import formatCurrency from "../common/formatCurrency";
+import CenterModal from "../modal/CenterModal";
 import {
+  flexAlignCenter,
   flexSpaceBetweenAlignCenter,
   gap,
   lightGrayOutline,
 } from "../style/helpers";
 import IconButton from "../ui/IconButton";
+import SquareButton from "../ui/SquareButton";
 import { CartProduct } from "./types";
 
 type Props = {
@@ -17,29 +20,51 @@ type Props = {
 };
 
 const CartProductCard: React.FC<Props> = (props) => {
+  const [showModal, setShowModal] = useState(true);
   const { product, color, size, quantity } = props.product;
 
+  const modal = (
+    <CenterModal onClose={() => setShowModal(false)} isVisible={showModal}>
+      <CenterModal.Header onClose={() => setShowModal(false)}>
+        REMOVE THIS PRODUCT
+      </CenterModal.Header>
+      <CenterModal.Body>
+        <p>Do you wish to remove this product from your shopping bag?</p>
+        <div css={[flexAlignCenter, gap({ right: 1 })]}>
+          <SquareButton variant="secondary" onClick={() => setShowModal(false)}>
+            Cancel
+          </SquareButton>
+          <SquareButton>Delete</SquareButton>
+        </div>
+      </CenterModal.Body>
+    </CenterModal>
+  );
+
   return (
-    <Container>
-      <Image src={product.images[0]} alt="" />
-      <Info css={gap({ bottom: 1 })}>
-        <Link href="/product/[id]" as={`/product/${product.id}`}>
-          <button>
-            <h2>{product.title}</h2>
-          </button>
-        </Link>
-        <p>Reference: {product.modelId}</p>
-        <p>{color}</p>
-        <p>Size: {size}</p>
-        <IconButton onClick={() => console.log("delete it")}>
-          <FontAwesomeIcon icon={faTrashAlt} />
-        </IconButton>
-      </Info>
-      <Right>
-        <Quantity>{quantity}</Quantity>
-        <p>{formatCurrency(product.price)}</p>
-      </Right>
-    </Container>
+    <>
+      <Container>
+        <Image src={product.images[0]} alt="" />
+        <Info css={gap({ bottom: 1 })}>
+          <Link href="/product/[id]" as={`/product/${product.id}`}>
+            <button>
+              <h2>{product.title}</h2>
+            </button>
+          </Link>
+          <p>Reference: {product.modelId}</p>
+          <p>{color}</p>
+          <p>Size: {size}</p>
+          <IconButton onClick={() => setShowModal(true)}>
+            <FontAwesomeIcon icon={faTrashAlt} />
+          </IconButton>
+        </Info>
+        <Right>
+          <Quantity>{quantity}</Quantity>
+          <p>{formatCurrency(product.price)}</p>
+        </Right>
+      </Container>
+
+      {modal}
+    </>
   );
 };
 
