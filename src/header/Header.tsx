@@ -52,6 +52,7 @@ const Logo = styled.button`
   font-size: 1.5rem;
   margin-right: 2rem;
   height: 100%;
+  font-weight: bold;
 `;
 
 const OptionContainer = styled.div`
