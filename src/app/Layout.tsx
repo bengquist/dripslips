@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../header/Header";
+import Header, { headerHeight } from "../header/Header";
 
 const Layout: React.FC = ({ children }) => {
   return (
     <Container>
       <Header />
-      <main>{children}</main>
+      <Main>{children}</Main>
     </Container>
   );
 };
@@ -14,5 +14,9 @@ const Layout: React.FC = ({ children }) => {
 export default Layout;
 
 const Container = styled.div`
-  min-height: 100%;
+  height: 100%;
+`;
+
+const Main = styled.main`
+  height: calc(100% - ${headerHeight});
 `;

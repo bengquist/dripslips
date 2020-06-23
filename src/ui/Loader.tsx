@@ -20,5 +20,6 @@ const Loader: React.FC<Props> = ({ children, error, isLoading }) => {
 export default Loader;
 
 const Container = styled.div`
+  height: 100%;
   animation: 0.5s ${fadeIn};
 `;

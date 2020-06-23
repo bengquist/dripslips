@@ -54,6 +54,10 @@ export default createGlobalStyle`
     color: "#19110B";
   }
 
+  p {
+    font-weight: normal;
+  }
+
   img {
     height: auto;
     width: 100%; 

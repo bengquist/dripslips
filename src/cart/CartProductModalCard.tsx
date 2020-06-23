@@ -21,11 +21,11 @@ const CartProductModalCard: React.FC<Props> = ({
       <Container {...props}>
         <Inner>
           <Image src={product.images[0]} />
-          <h3>
-            {product.title} ajkdshfk lajsdlhfa kljfshkajlsdf {count}
-          </h3>
+          <h4>
+            {product.title} {count}
+          </h4>
         </Inner>
-        <h3 style={{ fontWeight: "normal" }}>${product.price}</h3>
+        <p style={{ fontWeight: "normal" }}>${product.price}</p>
       </Container>
     </Link>
   );
