@@ -11,7 +11,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState();
 
   const login = (user: any) => {
-    console.log(user);
+    setUser(user);
   };
 
   return (

@@ -46,6 +46,7 @@ export default createGlobalStyle`
   }
 
   h1 {
+    font-size: 2rem;
     line-height: 1.75rem;
   }
 

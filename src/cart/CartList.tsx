@@ -2,7 +2,6 @@ import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { flexAlignCenter, gap } from "../style/helpers";
-import Header from "../ui/Header";
 import SquareButton from "../ui/SquareButton";
 import { useCart } from "./CartContext";
 import CartProductCard from "./CartProductCard";
@@ -60,9 +59,7 @@ const CartList = () => {
 
       <Header>
         <h1>MY SHOPPING BAG</h1>
-        <span style={{ fontWeight: "normal" }}>
-          ({state.productCount} products)
-        </span>
+        <p>({state.productCount} products)</p>
       </Header>
 
       {products}
@@ -105,4 +102,10 @@ const EmptyState = styled.div`
 const CartFooter = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const Header = styled.div`
+  ${gap({ right: 0.5 })};
+  display: flex;
+  align-items: flex-end;
 `;

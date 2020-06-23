@@ -1,5 +1,10 @@
 import React, { ComponentPropsWithoutRef } from "react";
-import { css } from "styled-components";
+import styled, { css } from "styled-components";
+import { gap } from "../style/helpers";
+
+type Props = ComponentPropsWithoutRef<"input"> & {
+  label?: string;
+};
 
 const inputStyle = css`
   font-size: 1rem;
@@ -20,8 +25,22 @@ const inputStyle = css`
   }
 `;
 
-const Input: React.FC<ComponentPropsWithoutRef<"input">> = (props) => {
-  return <input css={inputStyle} type="text" {...props} />;
+const Input: React.FC<Props> = ({ label, ...props }) => {
+  return (
+    <Container>
+      {label && <p>{label}</p>}
+      <input css={inputStyle} type="text" {...props} />
+    </Container>
+  );
 };
 
 export default Input;
+
+const Container = styled.label`
+  width: 100%;
+  ${gap({ bottom: 0.5 })}
+
+  > p {
+    font-size: 0.8rem;
+  }
+`;
