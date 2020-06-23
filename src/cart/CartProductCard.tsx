@@ -1,9 +1,14 @@
 import { faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import formatCurrency from "../common/formatCurrency";
-import { flexAlignCenter, gap, lightGrayOutline } from "../style/helpers";
+import {
+  flexSpaceBetweenAlignCenter,
+  gap,
+  lightGrayOutline,
+} from "../style/helpers";
 import IconButton from "../ui/IconButton";
 import { CartProduct } from "./types";
 
@@ -18,9 +23,11 @@ const CartProductCard: React.FC<Props> = (props) => {
     <Container>
       <Image src={product.images[0]} alt="" />
       <Info css={gap({ bottom: 1 })}>
-        <button>
-          <h2>{product.title}</h2>
-        </button>
+        <Link href="/product/[id]" as={`/product/${product.id}`}>
+          <button>
+            <h2>{product.title}</h2>
+          </button>
+        </Link>
         <p>Reference: {product.modelId}</p>
         <p>{color}</p>
         <p>Size: {size}</p>
@@ -28,10 +35,10 @@ const CartProductCard: React.FC<Props> = (props) => {
           <FontAwesomeIcon icon={faTrashAlt} />
         </IconButton>
       </Info>
-      <div css={[flexAlignCenter, gap({ right: 5 })]}>
+      <Right>
         <Quantity>{quantity}</Quantity>
         <p>{formatCurrency(product.price)}</p>
-      </div>
+      </Right>
     </Container>
   );
 };
@@ -63,4 +70,9 @@ const Image = styled.img`
 const Quantity = styled.div`
   ${lightGrayOutline}
   padding: 1rem 1.5rem;
+`;
+
+const Right = styled.div`
+  ${flexSpaceBetweenAlignCenter}
+  min-width: 10rem;
 `;

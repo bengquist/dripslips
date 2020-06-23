@@ -42,8 +42,7 @@ const Header = styled.div`
   ${gap({ right: 0.5 })};
   display: flex;
   align-items: flex-end;
-  margin: 0;
-  padding: 0;
+  padding: 1.5rem 0;
 
   > span {
     font-weight: normal;
