@@ -8,7 +8,7 @@ import { Product } from "../product/types";
 import { fluidGrid } from "../style/helpers";
 import Loader from "../ui/Loader";
 
-const IndexPage = () => {
+const HomePage = () => {
   const { loading, data } = useQuery(gql`
     {
       products {
@@ -37,4 +37,4 @@ const IndexPage = () => {
   );
 };
 
-export default IndexPage;
+export default HomePage;

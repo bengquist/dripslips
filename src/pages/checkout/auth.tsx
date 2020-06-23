@@ -1,14 +1,14 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import SEO from "../app/SEO";
-import AuthBox from "../auth/AuthBox";
-import { gap } from "../style/helpers";
-import Loader from "../ui/Loader";
+import SEO from "../../app/SEO";
+import AuthBox from "../../auth/AuthBox";
+import { gap } from "../../style/helpers";
+import Loader from "../../ui/Loader";
 
-const checkout = () => {
+const CheckoutAuthPage = () => {
   return (
     <Loader>
-      <SEO title="Checkout" />
+      <SEO title="Identification" />
       <Container>
         <Left>
           <h1>I ALREADY HAVE AN ACCOUNT</h1>
@@ -22,7 +22,7 @@ const checkout = () => {
   );
 };
 
-export default checkout;
+export default CheckoutAuthPage;
 
 const baseSectionStyles = css`
   width: 100%;
@@ -36,6 +36,9 @@ const Container = styled.div`
 `;
 
 const Left = styled.section`
+  display: flex;
+  flex-direction: column;
+
   ${baseSectionStyles};
   background: ${({ theme }) => theme.colors.shadedWhite};
   border-right: 1px solid ${({ theme }) => theme.colors.lightGray};
