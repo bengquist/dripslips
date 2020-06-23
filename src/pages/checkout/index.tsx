@@ -7,9 +7,9 @@ const CheckoutPage = () => {
 
   useEffect(() => {
     if (user) {
-      Router.push("/checkout/billing");
+      Router.replace("/checkout/billing");
     } else {
-      Router.push("/checkout/auth");
+      Router.replace("/checkout/auth");
     }
   }, []);
 
