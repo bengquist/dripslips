@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import { ThemeProvider } from "styled-components";
 import { useApollo } from "../apollo/apolloClient";
 import Layout from "../app/Layout";
+import { AuthProvider } from "../auth/AuthContext";
 import { CartProvider } from "../cart/CartContext";
 import GlobalStyle from "../style/GlobalStyle";
 import theme from "../style/theme";
@@ -20,11 +21,13 @@ export default function App({ Component, pageProps }: AppProps) {
       <GlobalStyle />
       <ApolloProvider client={apolloClient}>
         <ThemeProvider theme={theme}>
-          <CartProvider>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </CartProvider>
+          <AuthProvider>
+            <CartProvider>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </CartProvider>
+          </AuthProvider>
         </ThemeProvider>
       </ApolloProvider>
     </>
