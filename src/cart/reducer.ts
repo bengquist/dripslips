@@ -5,7 +5,7 @@ export const ADD_PRODUCT = "ADD_PRODUCT";
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 
 export type CartState = {
-  products: CartProduct[];
+  cart: CartProduct[];
   productCount: number;
   totalPrice: number;
 };
@@ -15,39 +15,47 @@ export type CartAction = {
   payload: Product;
 };
 
-export const cartReducer = (state: CartState, action: CartAction) => {
-  const productsCopy = state.products.slice();
+const addProductToCart = (product: Product, state: CartState) => {
+  const cartCopy = state.cart.slice();
 
+  const productInCart = cartCopy.find(
+    (cartProduct) => cartProduct.product.id === product.id
+  );
+
+  if (productInCart) {
+    productInCart.quantity++;
+  } else {
+    cartCopy.push({
+      product: product,
+      quantity: 1,
+      size: 0,
+      color: "black",
+    });
+  }
+
+  return {
+    cart: cartCopy,
+    productCount: ++state.productCount,
+    totalPrice: state.totalPrice + product.price,
+  };
+};
+
+const removeProductFromCart = (product: Product, state: CartState) => {
+  const cartCopy = state.cart.slice();
+
+  return {
+    cart: cartCopy.filter(({ product }) => product.id !== product.id),
+    productCount: --state.productCount,
+    totalPrice: 0,
+  };
+};
+
+export const cartReducer = (state: CartState, action: CartAction) => {
   switch (action.type) {
     case ADD_PRODUCT:
-      const productInCart = productsCopy.find(
-        ({ product }) => product.id === action.payload.id
-      );
-
-      if (productInCart) {
-        productInCart.quantity++;
-      } else {
-        productsCopy.push({
-          product: action.payload,
-          quantity: 1,
-          size: 0,
-          color: "black",
-        });
-      }
-
-      return {
-        products: productsCopy,
-        productCount: ++state.productCount,
-        totalPrice: state.totalPrice + action.payload.price,
-      };
+      return addProductToCart(action.payload, state);
     case REMOVE_PRODUCT:
-      return {
-        products: productsCopy.filter(
-          ({ product }) => product.id !== action.payload.id
-        ),
-        productCount: --state.productCount,
-        totalPrice: 0,
-      };
+      return removeProductFromCart(action.payload, state);
     default:
       throw new Error(`Unknown action: ${action.type}`);
   }

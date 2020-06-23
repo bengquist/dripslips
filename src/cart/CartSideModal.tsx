@@ -11,7 +11,7 @@ import CartProductModalCard from "./CartProductModalCard";
 const CartSideModal: React.FC<SideModalProps> = (props) => {
   const { state } = useCart();
 
-  const cartProducts = state.products.map(({ product, quantity }) => (
+  const cartProducts = state.cart.map(({ product, quantity }) => (
     <CartProductModalCard
       onClick={props.onClose}
       product={product}

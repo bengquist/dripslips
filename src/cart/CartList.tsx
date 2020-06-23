@@ -12,9 +12,9 @@ const CartList = () => {
 
   const cartHasProducts = state.productCount > 0;
 
-  const products = (
+  const cart = (
     <div css={gap({ bottom: 1 })}>
-      {state.products.map((product) => (
+      {state.cart.map((product) => (
         <CartProductCard product={product} />
       ))}
     </div>
@@ -62,7 +62,7 @@ const CartList = () => {
         <p>({state.productCount} products)</p>
       </Header>
 
-      {products}
+      {cart}
 
       {cartHasProducts ? cartFooter : emptyCart}
     </div>

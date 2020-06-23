@@ -10,7 +10,7 @@ const CartContext = createContext({} as ContextProps);
 
 export const CartProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, {
-    products: [],
+    cart: [],
     productCount: 0,
     totalPrice: 0,
   });
