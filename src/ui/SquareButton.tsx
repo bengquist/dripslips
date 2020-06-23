@@ -30,7 +30,8 @@ const baseStyle = css`
   outline: 1px solid ${({ theme }) => theme.colors.black};
   transition: 0.3s;
 
-  :hover {
+  :hover,
+  :focus {
     color: ${({ theme }) => theme.colors.black};
     background: ${({ theme }) => theme.colors.lightGray};
     ${lightGrayOutline}

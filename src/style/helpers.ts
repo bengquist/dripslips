@@ -29,7 +29,7 @@ export const gap = ({ bottom = 0, right = 0 }) => css`
     margin-right: ${right}rem;
   }
 
-  :nth-last-child() {
+  *:last-child {
     margin: 0;
   }
 `;

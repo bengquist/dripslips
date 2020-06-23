@@ -6,6 +6,7 @@ const Portal: React.FC = ({ children }) => {
 
   useEffect(() => {
     const div = document.createElement("div");
+    div.style.display = "contents";
     document.body.append(div);
     setContainer(div);
     return () => div.remove();

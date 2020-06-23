@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../header/Header";
+import Header, { headerHeight } from "../header/Header";
 
 const Layout: React.FC = ({ children }) => {
   return (
@@ -18,5 +18,5 @@ const Container = styled.div`
 `;
 
 const Main = styled.main`
-  height: 100%;
+  height: calc(100% - ${headerHeight});
 `;

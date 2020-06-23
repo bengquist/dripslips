@@ -29,7 +29,7 @@ const CartList = () => {
         <span>({state.productCount} items)</span>
       </Header>
 
-      {renderProducts()}
+      <div css={gap({ bottom: 1 })}>{renderProducts()}</div>
     </Container>
   );
 };
