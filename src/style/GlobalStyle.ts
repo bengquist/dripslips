@@ -65,4 +65,9 @@ export default createGlobalStyle`
     width: 100%; 
     object-fit: contain;
   }
+
+  input {
+    margin: 0;
+    padding: 0;
+  }
 `;

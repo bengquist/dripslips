@@ -32,8 +32,8 @@ const InputCustom = styled.input`
   font-size: 1rem;
   padding: 0.8rem;
   border: 1px solid ${({ theme }) => theme.colors.lightGray};
-  transition: 0.3s;
   outline: none;
+  transition: 0.3s;
 
   ::-webkit-outer-spin-button,
   ::-webkit-inner-spin-button {
@@ -44,5 +44,8 @@ const InputCustom = styled.input`
   :hover,
   :focus {
     border: 1px solid ${({ theme }) => theme.colors.black};
+  }
+  :disabled {
+    background: ${({ theme }) => theme.colors.shadedWhite};
   }
 `;

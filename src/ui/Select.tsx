@@ -1,19 +1,19 @@
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
 import { gap } from "../style/helpers";
 
-type Props = {
+type Props = ComponentPropsWithoutRef<"select"> & {
   label?: string;
   options: string[];
 };
 
-const Select: React.FC<Props> = ({ options, label }) => {
+const Select: React.FC<Props> = ({ options, label, ...props }) => {
   return (
     <Container>
       {label && <p>{label}</p>}
-      <SelectCustom>
+      <SelectCustom {...props}>
         {options.map((option) => (
           <option value={option}>{option}</option>
         ))}
