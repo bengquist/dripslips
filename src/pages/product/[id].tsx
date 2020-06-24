@@ -38,7 +38,9 @@ const ProductPage = () => {
     <Loader isLoading={loading} error={error}>
       <Container>
         <SEO title={data?.product.title} />
-        <BackButton />
+        <BackButtonContainer>
+          <BackButton />
+        </BackButtonContainer>
         <ProductImages images={data?.product.images} />
         <ProductInfo product={data?.product} />
       </Container>
@@ -51,4 +53,10 @@ export default ProductPage;
 const Container = styled.div`
   position: relative;
   display: flex;
+`;
+
+const BackButtonContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
 `;

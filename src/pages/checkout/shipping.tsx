@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import SEO from "../../app/SEO";
 import CartSideBar from "../../cart/CartSideBar";
+import CheckoutHeader from "../../checkout/CheckoutHeader";
 import ShippingForm from "../../checkout/ShippingForm";
 import Loader from "../../ui/Loader";
 
@@ -9,10 +10,14 @@ const CheckoutShippingPage = () => {
   return (
     <Loader>
       <SEO title="Identification" />
+
+      <CheckoutHeader onAutoFill={() => console.log("Auto fill")} />
+
       <Container>
         <Section>
           <ShippingForm />
         </Section>
+
         <CartSideBar />
       </Container>
     </Loader>

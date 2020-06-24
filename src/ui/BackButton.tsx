@@ -12,13 +12,10 @@ const BackButton = () => {
 export default BackButton;
 
 const Container = styled.button`
-  position: absolute;
-  top: 0;
-  left: 0;
-
+  background: ${({ theme }) => theme.colors.white};
   ${lightGrayOutline};
   font-size: 1.5rem;
-  padding: 1rem 2rem;
+  padding: 1.25rem 2.5rem;
   transition: 0.3s;
 
   :hover {

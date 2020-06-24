@@ -1,5 +1,6 @@
 import { Formik } from "formik";
-import React from "react";
+import Router from "next/router";
+import React, { useState } from "react";
 import styled from "styled-components";
 import phoneCodes from "../data/phoneCodes";
 import states from "../data/states";
@@ -73,11 +74,21 @@ const validate = (values: ShippingFormValues) => {
 };
 
 const ShippingForm = () => {
+  const [sameAsBilling, setSameAsBilling] = useState(true);
+
+  const onSubmit = () => {
+    if (sameAsBilling) {
+      Router.push("/payment");
+    } else {
+      Router.push("/billing");
+    }
+  };
+
   return (
     <Formik
       initialValues={initialValues}
       validate={validate}
-      onSubmit={(values, actions) => console.log({ values, actions })}
+      onSubmit={onSubmit}
     >
       {({
         values,
@@ -199,7 +210,11 @@ const ShippingForm = () => {
           </FormSection>
 
           <FormSection>
-            <Checkbox label="Use for Billing Address" defaultChecked />
+            <Checkbox
+              label="Use for Billing Address"
+              onChange={() => setSameAsBilling(!sameAsBilling)}
+              checked={sameAsBilling}
+            />
           </FormSection>
 
           <h1>SHIPPING METHOD</h1>
