@@ -10,6 +10,11 @@ export const flexAlignStart = css`
   align-items: flex-start;
 `;
 
+export const flexAlignEnd = css`
+  display: flex;
+  align-items: flex-end;
+`;
+
 export const flexSpaceBetweenAlignCenter = css`
   display: flex;
   justify-content: space-between;

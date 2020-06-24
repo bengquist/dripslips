@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import phoneCodes from "../data/phoneCodes";
 import states from "../data/states";
-import { gap } from "../style/helpers";
+import { flexAlignEnd, gap } from "../style/helpers";
 import Checkbox from "../ui/Checkbox";
 import Input from "../ui/Input";
 import Radio from "../ui/Radio";
@@ -24,9 +24,9 @@ const ShippingForm = () => {
         <Input label="City *" />
         <Select label="State *" options={states} />
         <Input label="Country" value="United States" disabled />
-        <div>
-          <Select options={phoneCodes} />
-          <Input label="Phone Number *" />
+        <div css={[gap({ right: 1 }), flexAlignEnd]}>
+          <Select label="Phone Number *" options={phoneCodes} />
+          <Input />
         </div>
       </FormSection>
 

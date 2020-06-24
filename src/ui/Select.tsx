@@ -41,6 +41,7 @@ const Container = styled.label`
 const SelectCustom = styled.select`
   width: 100%;
   font-size: 1rem;
+  margin: 0;
   padding: 0.8rem;
   border: 1px solid ${({ theme }) => theme.colors.lightGray};
   transition: 0.3s;
@@ -56,6 +57,6 @@ const SelectCustom = styled.select`
 
 const Arrow = styled.div`
   position: absolute;
-  bottom: 1.25rem;
+  bottom: 0.8rem;
   right: 0.8rem;
 `;
