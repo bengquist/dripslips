@@ -1,7 +1,9 @@
 import { Formik } from "formik";
 import React from "react";
 import styled from "styled-components";
-import { gap } from "../style/helpers";
+import months from "../data/months";
+import years from "../data/years";
+import { flexAlignEnd, gap } from "../style/helpers";
 import Input from "../ui/Input";
 import Select from "../ui/Select";
 import SquareButton from "../ui/SquareButton";
@@ -10,7 +12,8 @@ import { PaymentFormValues } from "./types";
 const initialValues = {
   cardNumber: "",
   cardHolder: "",
-  expirationDate: "",
+  expirationMonth: "January",
+  expirationYear: String(new Date().getFullYear()),
   securityCode: "",
 };
 
@@ -23,8 +26,11 @@ const validate = (values: PaymentFormValues) => {
   if (!values.cardHolder) {
     errors.cardHolder = "Required";
   }
-  if (!values.expirationDate) {
-    errors.expirationDate = "Required";
+  if (!values.expirationMonth) {
+    errors.expirationMonth = "Required";
+  }
+  if (!values.expirationYear) {
+    errors.expirationYear = "Required";
   }
   if (!values.securityCode) {
     errors.securityCode = "Required";
@@ -55,37 +61,54 @@ const PaymentForm: React.FC = () => {
         <form css={gap({ bottom: 2 })} onSubmit={handleSubmit}>
           <h1>DELIVERY ADDRESS</h1>
           <FormSection>
-            <Select
-              name="title"
+            <Input
+              name="cardNumber"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.title}
-              label="Title *"
-              options={["Mr", "Mrs", "Ms"]}
-              error={errors.title && touched.title && errors.title}
+              value={values.cardNumber}
+              label="Credit Card Number *"
+              error={
+                errors.cardNumber && touched.cardNumber && errors.cardNumber
+              }
             />
             <Input
-              name="firstName"
+              name="cardHolder"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.firstName}
-              label="First Name *"
-              error={errors.firstName && touched.firstName && errors.firstName}
+              value={values.cardHolder}
+              label="Name of Card Holder *"
+              error={
+                errors.cardHolder && touched.cardHolder && errors.cardHolder
+              }
             />
+            <div css={[flexAlignEnd, gap({ right: 0.5 })]}>
+              <Select
+                name="expirationMonth"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.expirationMonth}
+                label="Expiration Date *"
+                options={months}
+              />
+              <Select
+                name="expirationYear"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.expirationYear}
+                options={years}
+              />
+            </div>
             <Input
-              name="lastName"
+              name="securityCode"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.lastName}
-              label="Last Name *"
-              error={errors.lastName && touched.lastName && errors.lastName}
-            />
-            <Input
-              name="companyName"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.companyName}
-              label="Company Name"
+              value={values.securityCode}
+              label="Security Code *"
+              error={
+                errors.securityCode &&
+                touched.securityCode &&
+                errors.securityCode
+              }
             />
           </FormSection>
 

@@ -18,6 +18,7 @@ export type ShippingFormValues = {
 export type PaymentFormValues = {
   cardNumber: string;
   cardHolder: string;
-  expirationDate: string;
+  expirationMonth: string;
+  expirationYear: string;
   securityCode: string;
 };
