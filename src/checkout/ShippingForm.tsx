@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { gap } from "../style/helpers";
 import Checkbox from "../ui/Checkbox";
 import Input from "../ui/Input";
+import Radio from "../ui/Radio";
 import Select from "../ui/Select";
 import SquareButton from "../ui/SquareButton";
 
@@ -30,9 +31,9 @@ const ShippingForm = () => {
 
       <h1>SHIPPING METHOD</h1>
       <FormSection>
-        <Input label="Title *" />
-        <Input label="First Name *" />
-        <Input label="Last Name *" />
+        <Radio label="Standard" subLabel="2-5 Business days Complimentary" />
+        <Radio label="Express" subLabel="1-4 Business days $15.00" />
+        <Radio label="Overnight" subLabel="1 Business day $20.00" />
       </FormSection>
 
       <div>
