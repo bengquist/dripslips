@@ -59,4 +59,5 @@ const Arrow = styled.div`
   position: absolute;
   bottom: 0.8rem;
   right: 0.8rem;
+  pointer-events: none;
 `;
