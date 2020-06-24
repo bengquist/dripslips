@@ -1,4 +1,5 @@
 export default [
+  "Select",
   "Alabama",
   "Alaska",
   "American Samoa",

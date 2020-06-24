@@ -49,6 +49,7 @@ const Container = styled.label<{ error?: string | false }>`
 
 const SelectCustom = styled.select<{ error?: string | false }>`
   width: 100%;
+  min-width: 10rem;
   font-size: 1rem;
   margin: 0;
   padding: 0.8rem;

@@ -47,14 +47,26 @@ const initialValues: ShippingFormValues = {
 const validate = (values: ShippingFormValues) => {
   const errors: Partial<ShippingFormValues> = {};
 
-  if (!values.title) {
-    errors.title = "Required";
-  }
   if (!values.firstName) {
     errors.firstName = "Required";
   }
+  if (!values.lastName) {
+    errors.lastName = "Required";
+  }
+  if (!values.addressOne) {
+    errors.addressOne = "Required";
+  }
+  if (!values.postalCode) {
+    errors.postalCode = "Required";
+  }
+  if (!values.city) {
+    errors.city = "Required";
+  }
   if (!values.state) {
     errors.state = "Required";
+  }
+  if (!values.phoneNumber) {
+    errors.phoneNumber = "Required";
   }
 
   return errors;
@@ -102,6 +114,7 @@ const ShippingForm = () => {
               onBlur={handleBlur}
               value={values.lastName}
               label="Last Name *"
+              error={errors.lastName && touched.lastName && errors.lastName}
             />
             <Input
               name="companyName"
@@ -116,6 +129,9 @@ const ShippingForm = () => {
               onBlur={handleBlur}
               value={values.addressOne}
               label="Address 1 *"
+              error={
+                errors.addressOne && touched.addressOne && errors.addressOne
+              }
             />
             <Input
               name="addressTwo"
@@ -130,6 +146,9 @@ const ShippingForm = () => {
               onBlur={handleBlur}
               value={values.postalCode}
               label="Postal Code *"
+              error={
+                errors.postalCode && touched.postalCode && errors.postalCode
+              }
             />
             <Input
               name="city"
@@ -137,6 +156,7 @@ const ShippingForm = () => {
               onBlur={handleBlur}
               value={values.city}
               label="City *"
+              error={errors.city && touched.city && errors.city}
             />
             <Select
               name="state"
@@ -169,6 +189,11 @@ const ShippingForm = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.phoneNumber}
+                error={
+                  errors.phoneNumber &&
+                  touched.phoneNumber &&
+                  errors.phoneNumber
+                }
               />
             </div>
           </FormSection>
