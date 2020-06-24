@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import phoneCodes from "../data/phoneCodes";
 import states from "../data/states";
 import { gap } from "../style/helpers";
 import Checkbox from "../ui/Checkbox";
@@ -10,7 +11,7 @@ import SquareButton from "../ui/SquareButton";
 
 const ShippingForm = () => {
   return (
-    <Form css={gap({ bottom: 1.5 })}>
+    <Form css={gap({ bottom: 2 })}>
       <h1>DELIVERY ADDRESS</h1>
       <FormSection>
         <Select label="Title *" options={["Mr", "Mrs", "Ms"]} />
@@ -23,7 +24,10 @@ const ShippingForm = () => {
         <Input label="City *" />
         <Select label="State *" options={states} />
         <Input label="Country" value="United States" disabled />
-        <Input label="Phone Number *" />
+        <div>
+          <Select options={phoneCodes} />
+          <Input label="Phone Number *" />
+        </div>
       </FormSection>
 
       <FormSection>
@@ -49,7 +53,7 @@ const ShippingForm = () => {
         />
       </FormSection>
 
-      <div>
+      <div css={gap({ bottom: 0.25 })}>
         <h1>YOUR EMAIL ADDRESS</h1>
         <p>TO TRACK YOUR SHIPMENT</p>
       </div>
