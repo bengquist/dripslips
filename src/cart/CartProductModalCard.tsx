@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
+import formatCurrency from "../common/formatCurrency";
 import { Product } from "../product/types";
 import { flexSpaceBetweenAlignCenter } from "../style/helpers";
 
@@ -14,18 +15,17 @@ const CartProductModalCard: React.FC<Props> = ({
   quantity,
   ...props
 }) => {
-  const count = quantity > 1 ? `(${quantity})` : "";
-
   return (
     <Link href="/product/[id]" as={`/product/${product.id}`}>
       <Container {...props}>
-        <Inner>
+        <Info>
           <Image src={product.images[0]} />
-          <h4>
-            {product.title} {count}
-          </h4>
-        </Inner>
-        <p style={{ fontWeight: "normal" }}>${product.price}</p>
+          <div>
+            <p>{product.title}</p>
+            <p>Quantity: {quantity}</p>
+            <p>{formatCurrency(product.price)}</p>
+          </div>
+        </Info>
       </Container>
     </Link>
   );
@@ -36,6 +36,7 @@ export default CartProductModalCard;
 const Container = styled.button`
   ${flexSpaceBetweenAlignCenter};
   width: 100%;
+  padding: 1rem 0;
   text-transform: uppercase;
   border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
   transition: 0.3s;
@@ -46,9 +47,8 @@ const Container = styled.button`
   }
 `;
 
-const Inner = styled.div`
+const Info = styled.div`
   ${flexSpaceBetweenAlignCenter};
-  padding-right: 1.5rem;
   text-align: left;
 `;
 
