@@ -44,10 +44,27 @@ const initialValues: ShippingFormValues = {
   email: "",
 };
 
+const validate = (values: ShippingFormValues) => {
+  const errors: Partial<ShippingFormValues> = {};
+
+  if (!values.title) {
+    errors.title = "Required";
+  }
+  if (!values.firstName) {
+    errors.firstName = "Required";
+  }
+  if (!values.state) {
+    errors.state = "Required";
+  }
+
+  return errors;
+};
+
 const ShippingForm = () => {
   return (
     <Formik
       initialValues={initialValues}
+      validate={validate}
       onSubmit={(values, actions) => console.log({ values, actions })}
     >
       {({
@@ -69,6 +86,7 @@ const ShippingForm = () => {
               value={values.title}
               label="Title *"
               options={["Mr", "Mrs", "Ms"]}
+              error={errors.title && touched.title && errors.title}
             />
             <Input
               name="firstName"
@@ -76,6 +94,7 @@ const ShippingForm = () => {
               onBlur={handleBlur}
               value={values.firstName}
               label="First Name *"
+              error={errors.firstName && touched.firstName && errors.firstName}
             />
             <Input
               name="lastName"
@@ -126,6 +145,7 @@ const ShippingForm = () => {
               value={values.state}
               label="State *"
               options={states}
+              error={errors.state && touched.state && errors.state}
             />
             <Input
               name="country"
@@ -193,6 +213,7 @@ const ShippingForm = () => {
           <FormSection>
             <Input
               name="email"
+              type="email"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}

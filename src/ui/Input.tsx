@@ -1,23 +1,28 @@
 import React, { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
 import { gap } from "../style/helpers";
+import ErrorMessage from "./ErrorMessage";
 
 type Props = ComponentPropsWithoutRef<"input"> & {
   label?: string;
+  error?: string | false;
 };
 
-const Input: React.FC<Props> = ({ label, ...props }) => {
+const Input: React.FC<Props> = ({ label, error, ...props }) => {
   return (
-    <Container>
+    <Container error={error}>
       {label && <p>{label}</p>}
-      <InputCustom type="text" {...props} />
+      <InputCustom type="text" error={error} {...props} />
+      {error && <ErrorMessage>{error}</ErrorMessage>}
     </Container>
   );
 };
 
 export default Input;
 
-const Container = styled.label`
+const Container = styled.label<{ error?: string | false }>`
+  color: ${({ theme, error }) =>
+    error ? theme.colors.red : theme.colors.black};
   display: inline-block;
   width: 100%;
   ${gap({ bottom: 0.5 })}
@@ -27,11 +32,12 @@ const Container = styled.label`
   }
 `;
 
-const InputCustom = styled.input`
+const InputCustom = styled.input<{ error?: string | false }>`
   width: 100%;
   font-size: 1rem;
   padding: 0.8rem;
-  border: 1px solid ${({ theme }) => theme.colors.lightGray};
+  border: 1px solid
+    ${({ theme, error }) => (error ? theme.colors.red : theme.colors.lightGray)};
   outline: none;
   transition: 0.3s;
 
