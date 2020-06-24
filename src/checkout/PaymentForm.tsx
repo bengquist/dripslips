@@ -97,18 +97,20 @@ const PaymentForm: React.FC = () => {
                 options={years}
               />
             </div>
-            <Input
-              name="securityCode"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.securityCode}
-              label="Security Code *"
-              error={
-                errors.securityCode &&
-                touched.securityCode &&
-                errors.securityCode
-              }
-            />
+            <div style={{ maxWidth: "8rem" }}>
+              <Input
+                name="securityCode"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.securityCode}
+                label="Security Code *"
+                error={
+                  errors.securityCode &&
+                  touched.securityCode &&
+                  errors.securityCode
+                }
+              />
+            </div>
           </FormSection>
 
           <SquareButton type="submit">Proceed to Checkout</SquareButton>

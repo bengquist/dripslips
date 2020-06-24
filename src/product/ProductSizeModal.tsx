@@ -12,8 +12,10 @@ const ProductSizeModal: React.FC<Props> = (props) => {
       <SideModal.Header onClose={props.onClose}>Size</SideModal.Header>
       <SideModal.Body>
         <SizeOptionContainer>
-          {props.sizes.map((size) => (
-            <SizeOption onClick={props.onClose}>{size}</SizeOption>
+          {props.sizes.map((size, index) => (
+            <SizeOption key={`${size}${index}`} onClick={props.onClose}>
+              {size}
+            </SizeOption>
           ))}
         </SizeOptionContainer>
       </SideModal.Body>
