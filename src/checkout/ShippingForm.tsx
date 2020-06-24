@@ -10,25 +10,9 @@ import Input from "../ui/Input";
 import Radio from "../ui/Radio";
 import Select from "../ui/Select";
 import SquareButton from "../ui/SquareButton";
+import { ShippingFormValues } from "./types";
 
-type ShippingFormValues = {
-  title: string;
-  firstName: string;
-  lastName: string;
-  companyName: string;
-  addressOne: string;
-  addressTwo: string;
-  postalCode: string;
-  city: string;
-  state: string;
-  country: string;
-  phoneCountry: string;
-  phoneNumber: string;
-  shippingMethod: string;
-  email: string;
-};
-
-const initialValues: ShippingFormValues = {
+const initialValues = {
   title: "Mr",
   firstName: "",
   lastName: "",
@@ -69,18 +53,21 @@ const validate = (values: ShippingFormValues) => {
   if (!values.phoneNumber) {
     errors.phoneNumber = "Required";
   }
+  if (!values.phoneNumber) {
+    errors.phoneNumber = "Required";
+  }
 
   return errors;
 };
 
-const ShippingForm = () => {
+const ShippingForm: React.FC = () => {
   const [sameAsBilling, setSameAsBilling] = useState(true);
 
   const onSubmit = () => {
     if (sameAsBilling) {
-      Router.push("/payment");
+      Router.push("/checkout/payment");
     } else {
-      Router.push("/billing");
+      Router.push("/checkout/billing");
     }
   };
 
@@ -97,7 +84,6 @@ const ShippingForm = () => {
         handleChange,
         handleBlur,
         handleSubmit,
-        isSubmitting,
       }) => (
         <form css={gap({ bottom: 2 })} onSubmit={handleSubmit}>
           <h1>DELIVERY ADDRESS</h1>
