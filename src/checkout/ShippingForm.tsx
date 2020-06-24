@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { gap } from "../style/helpers";
 import Input from "../ui/Input";
+import Select from "../ui/Select";
 import SquareButton from "../ui/SquareButton";
 
 const ShippingForm = () => {
@@ -9,7 +10,7 @@ const ShippingForm = () => {
     <div css={gap({ bottom: 2 })}>
       <h1>DELIVERY ADDRESS</h1>
       <Form>
-        <Input label="Title *" />
+        <Select label="Title *" options={["Mr", "Mrs", "Ms"]} />
         <Input label="First Name *" />
         <Input label="Last Name *" />
         <Input label="Company Name" />
