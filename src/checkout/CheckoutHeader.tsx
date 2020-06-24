@@ -10,16 +10,12 @@ import {
 import BackButton from "../ui/BackButton";
 import LinkButton from "../ui/LinkButton";
 
-type Props = {
-  onAutoFill: () => void;
-};
-
-const CheckoutHeader: React.FC<Props> = ({ onAutoFill }) => {
+const CheckoutHeader: React.FC = () => {
   return (
     <Container>
       <Left>
         <BackButton />
-        <LinkButton onClick={onAutoFill}>
+        <LinkButton>
           <FontAwesomeIcon icon={faPencilAlt} /> Auto Fill
         </LinkButton>
       </Left>

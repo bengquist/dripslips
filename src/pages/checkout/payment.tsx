@@ -11,7 +11,7 @@ const CheckoutPaymentPage = () => {
     <Loader>
       <SEO title="Identification" />
 
-      <CheckoutHeader onAutoFill={() => console.log("Auto fill!")} />
+      <CheckoutHeader />
 
       <Container>
         <Section>
