@@ -62,7 +62,9 @@ const Row = styled.div`
 `;
 
 const PriceInfo = styled.div`
-  ${gap({ bottom: 1 })}
+  * {
+    margin-bottom: 1rem;
+  }
   padding: 1rem 0;
   border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
 `;

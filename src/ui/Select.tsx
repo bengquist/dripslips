@@ -15,7 +15,9 @@ const Select: React.FC<Props> = ({ options, label, ...props }) => {
       {label && <p>{label}</p>}
       <SelectCustom {...props}>
         {options.map((option) => (
-          <option value={option}>{option}</option>
+          <option key={option} value={option}>
+            {option}
+          </option>
         ))}
       </SelectCustom>
       <Arrow>

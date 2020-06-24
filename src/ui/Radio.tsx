@@ -11,9 +11,9 @@ const Radio: React.FC<Props> = ({ label, subLabel, ...props }) => {
   return (
     <Container>
       <input type="radio" {...props} />
-      <div>
+      <div css={gap({ bottom: 0.5 })}>
         <p>{label}</p>
-        {subLabel && <p>{subLabel}</p>}
+        {subLabel && <p style={{ fontSize: "0.8rem" }}>{subLabel}</p>}
       </div>
     </Container>
   );

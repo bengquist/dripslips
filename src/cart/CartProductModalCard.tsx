@@ -3,7 +3,7 @@ import React, { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
 import formatCurrency from "../common/formatCurrency";
 import { Product } from "../product/types";
-import { flexSpaceBetweenAlignCenter } from "../style/helpers";
+import { flexSpaceBetweenAlignCenter, gap } from "../style/helpers";
 
 type Props = ComponentPropsWithoutRef<"button"> & {
   product: Product;
@@ -20,7 +20,7 @@ const CartProductModalCard: React.FC<Props> = ({
       <Container {...props}>
         <Info>
           <Image src={product.images[0]} />
-          <div>
+          <div css={gap({ bottom: 1 })}>
             <p>{product.title}</p>
             <p>Quantity: {quantity}</p>
             <p>{formatCurrency(product.price)}</p>
