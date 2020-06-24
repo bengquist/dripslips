@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Router from "next/router";
 import React from "react";
 import styled, { css } from "styled-components";
 import SEO from "../../app/SEO";
@@ -8,6 +8,10 @@ import Loader from "../../ui/Loader";
 import SquareButton from "../../ui/SquareButton";
 
 const CheckoutAuthPage = () => {
+  const redirect = () => {
+    Router.replace("/checkout/shipping");
+  };
+
   return (
     <Loader>
       <SEO title="Identification" />
@@ -23,9 +27,9 @@ const CheckoutAuthPage = () => {
             access your purchase history, receipts, washlistt and more.
           </p>
           <div css={flexAlignSelfRight}>
-            <Link href="/checkout/shipping">
-              <SquareButton>Continue without an account</SquareButton>
-            </Link>
+            <SquareButton onClick={redirect}>
+              Continue without an account
+            </SquareButton>
           </div>
         </Right>
       </Container>

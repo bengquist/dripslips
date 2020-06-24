@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { gap } from "../style/helpers";
+import formatCurrency from "../common/formatCurrency";
+import { flexSpaceBetweenAlignCenter, gap } from "../style/helpers";
 import { useCart } from "./CartContext";
 import CartProductModalCard from "./CartProductModalCard";
 
@@ -15,6 +16,26 @@ const CartSideBar = () => {
           <CartProductModalCard {...cartProduct} />
         ))}
       </div>
+
+      <PriceInfo>
+        <Row>
+          <p>Subtotal:</p>
+          <p>{formatCurrency(state.totalPrice)}</p>
+        </Row>
+        <Row>
+          <p>Shipping:</p>
+          <p>{formatCurrency(0)}</p>
+        </Row>
+        <Row>
+          <p>Tax:</p>
+          <p>{formatCurrency(0)}</p>
+        </Row>
+      </PriceInfo>
+
+      <Row>
+        <h2>Total:</h2>
+        <h2>{formatCurrency(state.totalPrice)}</h2>
+      </Row>
     </Container>
   );
 };
@@ -30,5 +51,15 @@ const Container = styled.aside`
 
 const HeaderTitle = styled.h2`
   padding-bottom: 1.5rem;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
+`;
+
+const Row = styled.div`
+  ${flexSpaceBetweenAlignCenter}
+`;
+
+const PriceInfo = styled.div`
+  ${gap({ bottom: 1 })}
+  padding: 1rem 0;
   border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
 `;
