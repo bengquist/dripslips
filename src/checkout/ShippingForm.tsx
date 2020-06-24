@@ -207,26 +207,26 @@ const ShippingForm: React.FC = () => {
           <FormSection>
             <Radio
               defaultChecked
-              name="shipping-method"
+              name="shippingMethod"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.shippingMethod}
+              value="Standard"
               label="Standard"
               subLabel="2-5 Business days Complimentary"
             />
             <Radio
-              name="shipping-method"
+              name="shippingMethod"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.shippingMethod}
+              value="Express"
               label="Express"
               subLabel="1-4 Business days $15.00"
             />
             <Radio
-              name="shipping-method"
+              name="shippingMethod"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.shippingMethod}
+              value="Overnight"
               label="Overnight"
               subLabel="1 Business day $20.00"
             />

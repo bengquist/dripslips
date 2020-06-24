@@ -59,7 +59,6 @@ const PaymentForm: React.FC = () => {
         handleSubmit,
       }) => (
         <form css={gap({ bottom: 2 })} onSubmit={handleSubmit}>
-          <h1>DELIVERY ADDRESS</h1>
           <FormSection>
             <Input
               name="cardNumber"
