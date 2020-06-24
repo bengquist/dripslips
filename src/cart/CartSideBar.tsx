@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import formatCurrency from "../common/formatCurrency";
+import { headerHeight } from "../header/Header";
 import { flexSpaceBetweenAlignCenter, gap } from "../style/helpers";
 import { useCart } from "./CartContext";
 import CartProductModalCard from "./CartProductModalCard";
@@ -43,6 +44,8 @@ const CartSideBar = () => {
 export default CartSideBar;
 
 const Container = styled.aside`
+  position: sticky;
+  top: ${headerHeight};
   width: 40%;
   height: 100%;
   padding: 3rem;

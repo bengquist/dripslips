@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import states from "../data/states";
 import { gap } from "../style/helpers";
 import Checkbox from "../ui/Checkbox";
 import Input from "../ui/Input";
@@ -9,7 +10,7 @@ import SquareButton from "../ui/SquareButton";
 
 const ShippingForm = () => {
   return (
-    <Form css={gap({ bottom: 2 })}>
+    <Form css={gap({ bottom: 1.5 })}>
       <h1>DELIVERY ADDRESS</h1>
       <FormSection>
         <Select label="Title *" options={["Mr", "Mrs", "Ms"]} />
@@ -20,7 +21,7 @@ const ShippingForm = () => {
         <Input label="Address 2" />
         <Input label="Postal Code *" />
         <Input label="City *" />
-        <Select label="State *" options={["Nebraska"]} />
+        <Select label="State *" options={states} />
         <Input label="Country" value="United States" disabled />
         <Input label="Phone Number *" />
       </FormSection>
@@ -31,9 +32,21 @@ const ShippingForm = () => {
 
       <h1>SHIPPING METHOD</h1>
       <FormSection>
-        <Radio label="Standard" subLabel="2-5 Business days Complimentary" />
-        <Radio label="Express" subLabel="1-4 Business days $15.00" />
-        <Radio label="Overnight" subLabel="1 Business day $20.00" />
+        <Radio
+          name="shipping-method"
+          label="Standard"
+          subLabel="2-5 Business days Complimentary"
+        />
+        <Radio
+          name="shipping-method"
+          label="Express"
+          subLabel="1-4 Business days $15.00"
+        />
+        <Radio
+          name="shipping-method"
+          label="Overnight"
+          subLabel="1 Business day $20.00"
+        />
       </FormSection>
 
       <div>
