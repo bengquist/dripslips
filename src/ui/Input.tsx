@@ -7,6 +7,7 @@ type Props = ComponentPropsWithoutRef<"input"> & {
 };
 
 const inputStyle = css`
+  width: 100%;
   font-size: 1rem;
   padding: 0.8rem;
   border: 1px solid ${({ theme }) => theme.colors.lightGray};
@@ -37,6 +38,7 @@ const Input: React.FC<Props> = ({ label, ...props }) => {
 export default Input;
 
 const Container = styled.label`
+  display: inline-block;
   width: 100%;
   ${gap({ bottom: 0.5 })}
 

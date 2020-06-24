@@ -1,13 +1,22 @@
 import React from "react";
 import styled from "styled-components";
+import SEO from "../../app/SEO";
+import CartSideBar from "../../cart/CartSideBar";
+import ShippingForm from "../../checkout/ShippingForm";
 import { flexAlignCenter } from "../../style/helpers";
+import Loader from "../../ui/Loader";
 
 const CheckoutShippingPage = () => {
   return (
-    <Container>
-      <Section>yo</Section>
-      <Aside>aside</Aside>
-    </Container>
+    <Loader>
+      <SEO title="Identification" />
+      <Container>
+        <Section>
+          <ShippingForm />
+        </Section>
+        <CartSideBar />
+      </Container>
+    </Loader>
   );
 };
 
@@ -15,7 +24,7 @@ export default CheckoutShippingPage;
 
 const Container = styled.div`
   ${flexAlignCenter}
-  height: 100%;
+  min-height: 100%;
 `;
 
 const Section = styled.section`
@@ -23,9 +32,4 @@ const Section = styled.section`
   width: 70%;
   padding: 3rem;
   background: ${({ theme }) => theme.colors.shadedWhite};
-`;
-
-const Aside = styled.aside`
-  width: 30%;
-  height: 100%;
 `;
