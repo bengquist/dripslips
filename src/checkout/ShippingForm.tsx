@@ -192,6 +192,7 @@ const ShippingForm = () => {
           </div>
           <FormSection>
             <Input
+              name="email"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.email}
@@ -199,7 +200,7 @@ const ShippingForm = () => {
             />
           </FormSection>
 
-          <SquareButton>Proceed to Billing</SquareButton>
+          <SquareButton type="submit">Proceed to Billing</SquareButton>
         </form>
       )}
     </Formik>
