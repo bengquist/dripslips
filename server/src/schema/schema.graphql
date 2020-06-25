@@ -25,8 +25,8 @@ type Product {
   price: Float!
   size: Float!
   type: String!
-  gender: Gender
-  colorGroup: String
+  gender: Gender!
+  colorGroup: String!
   availableColors: [String]!
   availableSizes: [String]!
   images: [String]!
@@ -42,8 +42,7 @@ type User {
 }
 
 type Query {
-  helloWorld: String!
-  products(type: String): [Product]
+  products(type: String): [Product]!
   product(id: ID!): Product
-  user(id: ID!): User
+  user(id: ID!): User!
 }

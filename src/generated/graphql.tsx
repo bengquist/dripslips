@@ -41,8 +41,8 @@ export type Product = {
   price: Scalars['Float'];
   size: Scalars['Float'];
   type: Scalars['String'];
-  gender?: Maybe<Gender>;
-  colorGroup?: Maybe<Scalars['String']>;
+  gender: Gender;
+  colorGroup: Scalars['String'];
   availableColors: Array<Maybe<Scalars['String']>>;
   availableSizes: Array<Maybe<Scalars['String']>>;
   images: Array<Maybe<Scalars['String']>>;
@@ -60,10 +60,9 @@ export type User = {
 
 export type Query = {
   __typename?: 'Query';
-  helloWorld: Scalars['String'];
-  products?: Maybe<Array<Maybe<Product>>>;
+  products: Array<Maybe<Product>>;
   product?: Maybe<Product>;
-  user?: Maybe<User>;
+  user: User;
 };
 
 
@@ -81,23 +80,12 @@ export type QueryUserArgs = {
   id: Scalars['ID'];
 };
 
-export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type Unnamed_1_Query = (
-  { __typename?: 'Query' }
-  & { products?: Maybe<Array<Maybe<(
-    { __typename?: 'Product' }
-    & Pick<Product, 'id' | 'title' | 'description' | 'type' | 'gender' | 'price' | 'images'>
-  )>>> }
-);
-
-export type GetProductQueryVariables = Exact<{
+export type ProductQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetProductQuery = (
+export type ProductQuery = (
   { __typename?: 'Query' }
   & { product?: Maybe<(
     { __typename?: 'Product' }
@@ -105,9 +93,20 @@ export type GetProductQuery = (
   )> }
 );
 
+export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
-export const GetProductDocument = gql`
-    query getProduct($id: ID!) {
+
+export type ProductsQuery = (
+  { __typename?: 'Query' }
+  & { products: Array<Maybe<(
+    { __typename?: 'Product' }
+    & Pick<Product, 'id' | 'title' | 'availableColors' | 'price' | 'images'>
+  )>> }
+);
+
+
+export const ProductDocument = gql`
+    query Product($id: ID!) {
   product(id: $id) {
     id
     modelId
@@ -125,27 +124,63 @@ export const GetProductDocument = gql`
     `;
 
 /**
- * __useGetProductQuery__
+ * __useProductQuery__
  *
- * To run a query within a React component, call `useGetProductQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetProductQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useProductQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetProductQuery({
+ * const { data, loading, error } = useProductQuery({
  *   variables: {
  *      id: // value for 'id'
  *   },
  * });
  */
-export function useGetProductQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetProductQuery, GetProductQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetProductQuery, GetProductQueryVariables>(GetProductDocument, baseOptions);
+export function useProductQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ProductQuery, ProductQueryVariables>) {
+        return ApolloReactHooks.useQuery<ProductQuery, ProductQueryVariables>(ProductDocument, baseOptions);
       }
-export function useGetProductLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetProductQuery, GetProductQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetProductQuery, GetProductQueryVariables>(GetProductDocument, baseOptions);
+export function useProductLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ProductQuery, ProductQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<ProductQuery, ProductQueryVariables>(ProductDocument, baseOptions);
         }
-export type GetProductQueryHookResult = ReturnType<typeof useGetProductQuery>;
-export type GetProductLazyQueryHookResult = ReturnType<typeof useGetProductLazyQuery>;
-export type GetProductQueryResult = ApolloReactCommon.QueryResult<GetProductQuery, GetProductQueryVariables>;
+export type ProductQueryHookResult = ReturnType<typeof useProductQuery>;
+export type ProductLazyQueryHookResult = ReturnType<typeof useProductLazyQuery>;
+export type ProductQueryResult = ApolloReactCommon.QueryResult<ProductQuery, ProductQueryVariables>;
+export const ProductsDocument = gql`
+    query Products {
+  products {
+    id
+    title
+    availableColors
+    price
+    images
+  }
+}
+    `;
+
+/**
+ * __useProductsQuery__
+ *
+ * To run a query within a React component, call `useProductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProductsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useProductsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ProductsQuery, ProductsQueryVariables>) {
+        return ApolloReactHooks.useQuery<ProductsQuery, ProductsQueryVariables>(ProductsDocument, baseOptions);
+      }
+export function useProductsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ProductsQuery, ProductsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<ProductsQuery, ProductsQueryVariables>(ProductsDocument, baseOptions);
+        }
+export type ProductsQueryHookResult = ReturnType<typeof useProductsQuery>;
+export type ProductsLazyQueryHookResult = ReturnType<typeof useProductsLazyQuery>;
+export type ProductsQueryResult = ApolloReactCommon.QueryResult<ProductsQuery, ProductsQueryVariables>;

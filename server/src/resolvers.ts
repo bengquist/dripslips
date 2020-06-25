@@ -4,9 +4,6 @@ import users from "./data/users";
 
 const resolvers: IResolvers = {
   Query: {
-    helloWorld(): string {
-      return `👋 Hello world! 👋`;
-    },
     products: () => {
       return products;
     },

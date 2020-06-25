@@ -1,6 +1,6 @@
 module.exports = {
   schema: "http://localhost:4000/graphql",
-  documents: ["./src/**/*.tsx", "./src/**/*.ts"],
+  documents: "src/graphql/*.graphql",
   overwrite: true,
   generates: {
     "./src/generated/graphql.tsx": {

@@ -1,7 +1,6 @@
-import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
 import React from "react";
 import SEO from "../app/SEO";
+import { useProductsQuery } from "../generated/graphql";
 import ProductCard from "../product/ProductCard";
 import ProductListNav from "../product/ProductListNav";
 import { Product } from "../product/types";
@@ -9,19 +8,7 @@ import { fluidGrid } from "../style/helpers";
 import Loader from "../ui/Loader";
 
 const HomePage = () => {
-  const { loading, data } = useQuery(gql`
-    {
-      products {
-        id
-        title
-        description
-        type
-        gender
-        price
-        images
-      }
-    }
-  `);
+  const { loading, data } = useProductsQuery();
 
   return (
     <Loader isLoading={loading}>
