@@ -8,7 +8,7 @@ export class Product extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Field(() => String)
+  @Field(() => ID)
   @Column("text")
   modelId: string;
 

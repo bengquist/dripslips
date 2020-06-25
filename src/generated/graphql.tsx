@@ -12,85 +12,44 @@ export type Scalars = {
   Float: number;
 };
 
-export enum Gender {
-  Male = 'Male',
-  Female = 'Female'
-}
+export type Query = {
+  __typename?: 'Query';
+  product: Product;
+  products: Array<Product>;
+};
 
-export type Address = {
-  __typename?: 'Address';
-  title: Scalars['String'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  companyName?: Maybe<Scalars['String']>;
-  addressPrimary: Scalars['String'];
-  addressSecondary?: Maybe<Scalars['String']>;
-  postalCode: Scalars['Int'];
-  city: Scalars['String'];
-  state: Scalars['String'];
-  country: Scalars['String'];
-  phoneNumber: Scalars['Int'];
+
+export type QueryProductArgs = {
+  id: Scalars['String'];
 };
 
 export type Product = {
   __typename?: 'Product';
   id: Scalars['ID'];
-  modelId: Scalars['ID'];
+  modelId: Scalars['String'];
   title: Scalars['String'];
   description: Scalars['String'];
   price: Scalars['Float'];
   size: Scalars['Float'];
   type: Scalars['String'];
-  gender: Gender;
+  gender: Scalars['String'];
   colorGroup: Scalars['String'];
-  availableColors: Array<Maybe<Scalars['String']>>;
-  availableSizes: Array<Maybe<Scalars['String']>>;
-  images: Array<Maybe<Scalars['String']>>;
-};
-
-export type User = {
-  __typename?: 'User';
-  id: Scalars['ID'];
-  email: Scalars['String'];
-  wishlistProducts?: Maybe<Array<Maybe<Product>>>;
-  cartProducts?: Maybe<Array<Maybe<Product>>>;
-  deliveryAddress?: Maybe<Address>;
-  billingAddress?: Maybe<Address>;
-};
-
-export type Query = {
-  __typename?: 'Query';
-  products: Array<Maybe<Product>>;
-  product?: Maybe<Product>;
-  user: User;
-};
-
-
-export type QueryProductsArgs = {
-  type?: Maybe<Scalars['String']>;
-};
-
-
-export type QueryProductArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryUserArgs = {
-  id: Scalars['ID'];
+  availableColors: Array<Scalars['String']>;
+  availableSizes: Array<Scalars['String']>;
+  images: Array<Scalars['String']>;
 };
 
 export type ProductQueryVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars['String'];
 }>;
 
 
 export type ProductQuery = (
   { __typename?: 'Query' }
-  & { product?: Maybe<(
+  & { product: (
     { __typename?: 'Product' }
     & Pick<Product, 'id' | 'modelId' | 'title' | 'description' | 'type' | 'colorGroup' | 'availableColors' | 'availableSizes' | 'gender' | 'price' | 'images'>
-  )> }
+  ) }
 );
 
 export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
@@ -98,15 +57,15 @@ export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type ProductsQuery = (
   { __typename?: 'Query' }
-  & { products: Array<Maybe<(
+  & { products: Array<(
     { __typename?: 'Product' }
     & Pick<Product, 'id' | 'title' | 'availableColors' | 'price' | 'images'>
-  )>> }
+  )> }
 );
 
 
 export const ProductDocument = gql`
-    query Product($id: ID!) {
+    query Product($id: String!) {
   product(id: $id) {
     id
     modelId

@@ -4,7 +4,7 @@ import { Product } from "../models/Product";
 
 @Resolver()
 export class ProductResolver {
-  @Query(() => [Product])
+  @Query(() => Product)
   product(@Arg("id") id: string) {
     const product = products.find((product) => product.id === id);
     return product;

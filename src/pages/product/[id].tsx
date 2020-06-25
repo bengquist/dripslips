@@ -17,12 +17,12 @@ const ProductPage = () => {
   return (
     <Loader isLoading={loading} error={error}>
       <Container>
-        <SEO title={data.product.title} />
+        <SEO title={data?.product.title} />
         <BackButtonContainer>
           <BackButton />
         </BackButtonContainer>
-        <ProductImages images={data.product.images} />
-        <ProductInfo product={data.product} />
+        <ProductImages images={data?.product.images} />
+        <ProductInfo product={data?.product} />
       </Container>
     </Loader>
   );

@@ -1,4 +1,4 @@
-query Product($id: ID!) {
+query Product($id: String!) {
   product(id: $id) {
     id
     modelId
