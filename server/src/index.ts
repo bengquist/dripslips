@@ -1,31 +1,38 @@
 import { ApolloServer } from "apollo-server-express";
-import compression from "compression";
-import cors from "cors";
+import "dotenv/config";
 import express from "express";
-import { GraphQLSchema } from "graphql";
-import depthLimit from "graphql-depth-limit";
-import "graphql-import-node";
-import { makeExecutableSchema } from "graphql-tools";
+import "reflect-metadata";
+import { buildSchema } from "type-graphql";
+import { createConnection } from "typeorm";
 import resolvers from "./resolvers";
-import * as typeDefs from "./schema/schema.graphql";
 
 const port = process.env.PORT || 4000;
 
-const schema: GraphQLSchema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
-});
+(async () => {
+  await createConnection();
 
-const app = express();
-app.use("*", cors());
-app.use(compression());
+  const app = express();
 
-const server = new ApolloServer({
-  schema,
-  validationRules: [depthLimit(7)],
-});
-server.applyMiddleware({ app, path: "/graphql" });
+  /* might use this later */
 
-app.listen({ port }, (): void =>
-  console.log(`🚀 We're in boys @ http://localhost:${port}/graphql 🚀`)
-);
+  // app.use("/refresh_token", cookieParser()).use(cors());
+  // app.post("/refresh_token", refreshToken);
+
+  const schema = await buildSchema({
+    resolvers,
+    validate: false,
+  });
+
+  const server = new ApolloServer({
+    schema,
+    context: ({ req, res }) => ({ req, res }),
+  });
+
+  server.applyMiddleware({ app, path: "/" });
+
+  app.listen({ port }, () => {
+    console.info(
+      `🚀 Server ready at http://localhost:${port}${server.graphqlPath}`
+    );
+  });
+})();
