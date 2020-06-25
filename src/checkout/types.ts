@@ -3,8 +3,8 @@ export type ShippingFormValues = {
   firstName: string;
   lastName: string;
   companyName: string;
-  addressOne: string;
-  addressTwo: string;
+  addressPrimary: string;
+  addressSecondary: string;
   postalCode: string;
   city: string;
   state: string;

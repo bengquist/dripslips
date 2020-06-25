@@ -17,8 +17,8 @@ const initialValues = {
   firstName: "",
   lastName: "",
   companyName: "",
-  addressOne: "",
-  addressTwo: "",
+  addressPrimary: "",
+  addressSecondary: "",
   postalCode: "",
   city: "",
   state: "",
@@ -38,8 +38,8 @@ const validate = (values: ShippingFormValues) => {
   if (!values.lastName) {
     errors.lastName = "Required";
   }
-  if (!values.addressOne) {
-    errors.addressOne = "Required";
+  if (!values.addressPrimary) {
+    errors.addressPrimary = "Required";
   }
   if (!values.postalCode) {
     errors.postalCode = "Required";
@@ -121,21 +121,23 @@ const ShippingForm: React.FC = () => {
               label="Company Name"
             />
             <Input
-              name="addressOne"
+              name="addressPrimary"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.addressOne}
+              value={values.addressPrimary}
               label="Address 1 *"
               error={
-                errors.addressOne && touched.addressOne && errors.addressOne
+                errors.addressPrimary &&
+                touched.addressPrimary &&
+                errors.addressPrimary
               }
             />
             <Input
-              name="addressTwo"
+              name="addressSecondary"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.addressTwo}
-              label="AddressTwo"
+              value={values.addressSecondary}
+              label="addressSecondary"
             />
             <Input
               name="postalCode"

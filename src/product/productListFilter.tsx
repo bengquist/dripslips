@@ -77,7 +77,7 @@ const FiltersContainer = styled.div<{ visible?: boolean }>`
 `;
 
 const SectionContainer = styled.div`
-  height: 100%;
+  height: 20rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 `;
