@@ -4,11 +4,17 @@ import { headerHeight } from "../header/Header";
 import { lightGrayOutline } from "../style/helpers";
 import ProductListFilter from "./ProductListFilter";
 
-const ItemListNav = () => {
+type Props = {
+  title: string;
+  numberOfProducts: number;
+};
+
+const ProductListHeader: React.FC<Props> = ({ title, numberOfProducts }) => {
   return (
     <Container>
       <p>
-        The Essentials <ItemCount>(79 looks)</ItemCount>
+        <strong>{title}</strong>{" "}
+        <ItemCount>({numberOfProducts} looks)</ItemCount>
       </p>
 
       <ProductListFilter />
@@ -16,7 +22,7 @@ const ItemListNav = () => {
   );
 };
 
-export default ItemListNav;
+export default ProductListHeader;
 
 const Container = styled.div`
   display: flex;
