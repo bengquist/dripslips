@@ -23,10 +23,15 @@ export type QueryProductArgs = {
   id: Scalars['String'];
 };
 
+
+export type QueryProductsArgs = {
+  gender?: Maybe<Scalars['String']>;
+};
+
 export type Product = {
   __typename?: 'Product';
   id: Scalars['ID'];
-  modelId: Scalars['String'];
+  modelId: Scalars['ID'];
   title: Scalars['String'];
   description: Scalars['String'];
   price: Scalars['Float'];
@@ -38,6 +43,19 @@ export type Product = {
   availableSizes: Array<Scalars['String']>;
   images: Array<Scalars['String']>;
 };
+
+export type FilteredProductsQueryVariables = Exact<{
+  gender?: Maybe<Scalars['String']>;
+}>;
+
+
+export type FilteredProductsQuery = (
+  { __typename?: 'Query' }
+  & { products: Array<(
+    { __typename?: 'Product' }
+    & Pick<Product, 'id' | 'title' | 'availableColors' | 'price' | 'images'>
+  )> }
+);
 
 export type ProductQueryVariables = Exact<{
   id: Scalars['String'];
@@ -64,6 +82,43 @@ export type ProductsQuery = (
 );
 
 
+export const FilteredProductsDocument = gql`
+    query FilteredProducts($gender: String) {
+  products(gender: $gender) {
+    id
+    title
+    availableColors
+    price
+    images
+  }
+}
+    `;
+
+/**
+ * __useFilteredProductsQuery__
+ *
+ * To run a query within a React component, call `useFilteredProductsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFilteredProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFilteredProductsQuery({
+ *   variables: {
+ *      gender: // value for 'gender'
+ *   },
+ * });
+ */
+export function useFilteredProductsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<FilteredProductsQuery, FilteredProductsQueryVariables>) {
+        return ApolloReactHooks.useQuery<FilteredProductsQuery, FilteredProductsQueryVariables>(FilteredProductsDocument, baseOptions);
+      }
+export function useFilteredProductsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<FilteredProductsQuery, FilteredProductsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<FilteredProductsQuery, FilteredProductsQueryVariables>(FilteredProductsDocument, baseOptions);
+        }
+export type FilteredProductsQueryHookResult = ReturnType<typeof useFilteredProductsQuery>;
+export type FilteredProductsLazyQueryHookResult = ReturnType<typeof useFilteredProductsLazyQuery>;
+export type FilteredProductsQueryResult = ApolloReactCommon.QueryResult<FilteredProductsQuery, FilteredProductsQueryVariables>;
 export const ProductDocument = gql`
     query Product($id: String!) {
   product(id: $id) {

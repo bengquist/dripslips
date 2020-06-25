@@ -1,0 +1,9 @@
+query FilteredProducts($gender: String) {
+  products(gender: $gender) {
+    id
+    title
+    availableColors
+    price
+    images
+  }
+}

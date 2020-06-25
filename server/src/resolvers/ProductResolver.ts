@@ -11,7 +11,11 @@ export class ProductResolver {
   }
 
   @Query(() => [Product])
-  products() {
+  products(@Arg("gender", { nullable: true }) gender?: string) {
+    if (gender) {
+      return products.filter((product) => product.gender === gender);
+    }
+
     return products;
   }
 }
