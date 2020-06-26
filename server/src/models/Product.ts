@@ -19,7 +19,7 @@ export default class Product extends BaseEntity {
   @OneToMany(() => ProductDetail, (productDetail) => productDetail.product)
   productDetails: ProductDetail;
 
-  @Field(() => ID)
+  @Field()
   @Column()
   modelId: string;
 

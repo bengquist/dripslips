@@ -1,6 +1,7 @@
-import { Arg, Query, Resolver } from "type-graphql";
+import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import products from "../data/products";
 import Product from "../models/Product";
+import AddProductInput from "./inputs/AddProductInput";
 
 @Resolver()
 export default class ProductResolver {
@@ -17,5 +18,17 @@ export default class ProductResolver {
     }
 
     return products;
+  }
+
+  @Mutation(() => Product)
+  addProduct(@Arg("data") { color, size, ...newProductData }: AddProductInput) {
+    const product = Product.create({
+      ...newProductData,
+      productDetails: { color, size },
+    });
+
+    console.log(product);
+
+    return product;
   }
 }
