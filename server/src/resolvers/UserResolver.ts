@@ -11,13 +11,13 @@ import {
 } from "type-graphql";
 import { isAuth } from "../middleware/isAuth";
 import User from "../models/User";
-import { LoginResponse } from "../responses/LoginResponse";
 import { AppContext } from "../types";
 import {
   createAccessToken,
   createRefreshToken,
   sendRefreshToken,
 } from "../utils/auth";
+import { LoginResponse } from "./responses/LoginResponse";
 
 @Resolver()
 export class UserResolver {
@@ -55,7 +55,7 @@ export class UserResolver {
   async login(
     @Arg("user") user: string,
     @Arg("password") password: string,
-    @Ctx() { req, res }: AppContext
+    @Ctx() { res }: AppContext
   ): Promise<LoginResponse> {
     const userData = await User.findOne({
       where: [{ username: user }, { email: user }],

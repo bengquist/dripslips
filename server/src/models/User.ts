@@ -38,18 +38,6 @@ export default class User extends BaseEntity {
 
   @Field()
   @Column()
-  firstName: string;
-
-  @Field()
-  @Column()
-  lastName: string;
-
-  @Field()
-  @Column()
-  title: string;
-
-  @Field()
-  @Column()
   phoneNumber: string;
 
   @CreateDateColumn({ type: "timestamp" })
