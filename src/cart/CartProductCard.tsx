@@ -27,7 +27,7 @@ const CartProductCard: React.FC<Props> = (props) => {
   const { product, color, size, quantity } = props.product;
 
   const removeProduct = () => {
-    dispatch({ type: REMOVE_PRODUCT, payload: product });
+    dispatch({ type: REMOVE_PRODUCT, payload: product.id });
     setShowModal(false);
   };
 

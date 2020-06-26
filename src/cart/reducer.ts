@@ -3,6 +3,7 @@ import { CartProduct } from "./types";
 
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
+export const RESTORE_CART = "RESTORE_CART";
 
 export type CartState = {
   cart: CartProduct[];
@@ -20,7 +21,15 @@ export type RemoveProductAction = {
   payload: string;
 };
 
-export type CartActionTypes = AddProductAction | RemoveProductAction;
+export type RestoreCartAction = {
+  type: typeof RESTORE_CART;
+  payload: CartProduct[];
+};
+
+export type CartActionTypes =
+  | AddProductAction
+  | RemoveProductAction
+  | RestoreCartAction;
 
 const addProductToCart = (product: Product, state: CartState) => {
   const cartCopy = [...state.cart];
@@ -71,6 +80,8 @@ const removeProductFromCart = (productId: string, state: CartState) => {
     totalPrice: 0,
   };
 };
+
+const restoreCart = () => {};
 
 export const cartReducer = (state: CartState, action: CartActionTypes) => {
   switch (action.type) {
