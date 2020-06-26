@@ -4,13 +4,11 @@ import { verify } from "jsonwebtoken";
 import {
   Arg,
   Ctx,
-  Int,
   Mutation,
   Query,
   Resolver,
   UseMiddleware,
 } from "type-graphql";
-import { getConnection } from "typeorm";
 import { isAuth } from "../middleware/isAuth";
 import User from "../models/User";
 import { LoginResponse } from "../responses/LoginResponse";
@@ -115,16 +113,6 @@ export class UserResolver {
   @Mutation(() => Boolean)
   async logout(@Ctx() { res }: AppContext) {
     sendRefreshToken(res, "");
-
-    return true;
-  }
-
-  //only use this for testing
-  @Mutation(() => Boolean)
-  async revokeRefreshToken(@Arg("userId", () => Int) userId: string) {
-    await getConnection()
-      .getRepository(User)
-      .increment({ id: userId }, "tokenVersion", 1);
 
     return true;
   }

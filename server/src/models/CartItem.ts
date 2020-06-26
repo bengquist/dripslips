@@ -18,8 +18,8 @@ export class CartItem extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
+  @Field(() => User)
   @ManyToOne(() => User, (user) => user.cartItems)
-  @Column(() => User)
   user: User;
 
   @OneToOne(() => ProductDetail)
