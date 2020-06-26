@@ -2,9 +2,9 @@
   "type": "postgres",
   "host": "localhost",
   "port": 5432,
-  "username": "blake",
+  "username": "postgres",
   "password": "yourmom1023",
-  "database": "roompals",
+  "database": "dripslips",
   "synchronize": true,
   "entities": ["./src/models/*.ts"]
 }

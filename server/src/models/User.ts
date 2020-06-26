@@ -1,35 +1,57 @@
 import { Field, ID, ObjectType } from "type-graphql";
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import Address from "./Address";
+import { CartItem } from "./CartItem";
 
 @Entity()
 @ObjectType()
-export class User extends BaseEntity {
+export default class User extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Field(() => String)
-  @Column("text", { unique: true })
+  @Field(() => [Address])
+  @OneToMany(() => Address, (address) => address.user)
+  address: Address[];
+
+  @Field(() => [CartItem])
+  @OneToMany(() => CartItem, (cartItem) => cartItem.user)
+  cartItems: CartItem[];
+
+  @Field()
+  @Column("varchar", { unique: true })
   username: string;
 
-  @Field(() => String)
-  @Column("text", { unique: true })
+  @Field()
+  @Column("varchar", { unique: true })
   email: string;
 
-  @Column("text")
+  @Column()
   password: string;
 
-  @Column("int", { default: 0 })
-  tokenVersion: number;
+  @Field()
+  @Column()
+  firstName: string;
 
-  @Column("bool", { default: true })
-  newUser: number;
+  @Field()
+  @Column()
+  lastName: string;
 
-  // @Field(() => [Chore], { nullable: true })
-  // @OneToMany(() => Chore, (chore) => chore.owner)
-  // chores: Chore[];
+  @Field()
+  @Column()
+  title: string;
 
-  // @Field(() => UserGroup, { nullable: true })
-  // @ManyToOne(() => UserGroup, (group) => group.users)
-  // group: UserGroup;
+  @Field()
+  @Column()
+  phoneNumber: string;
+
+  @CreateDateColumn({ type: "timestamp" })
+  created: Date;
 }

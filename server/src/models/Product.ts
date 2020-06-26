@@ -1,54 +1,41 @@
-import { Field, Float, ID, ObjectType } from "type-graphql";
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Field, ID, ObjectType } from "type-graphql";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import ProductDetail from "./ProductDetail";
 
 @Entity()
 @ObjectType()
-export class Product extends BaseEntity {
+export default class Product extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
+  @Field(() => [ProductDetail])
+  @OneToMany(() => ProductDetail, (productDetail) => productDetail.product)
+  details: ProductDetail;
+
   @Field(() => ID)
-  @Column("text")
+  @Column()
   modelId: string;
 
-  @Field(() => String)
-  @Column("text")
+  @Field()
+  @Column()
   title: string;
 
-  @Field(() => String)
-  @Column("text")
+  @Field()
+  @Column()
   description: string;
 
-  @Field(() => Float)
-  @Column("text")
+  @Field()
+  @Column()
   price: number;
 
-  @Field(() => Float)
-  @Column("text")
-  size: number;
-
-  @Field(() => String)
-  @Column("text")
-  type: string;
-
-  @Field(() => String)
-  @Column("text")
+  @Field()
+  @Column()
   gender: string;
-
-  @Field(() => String)
-  @Column("text")
-  colorGroup: string;
-
-  @Field(() => [String])
-  @Column("text")
-  availableColors: string[];
-
-  @Field(() => [String])
-  @Column("text")
-  availableSizes: string[];
-
-  @Field(() => [String])
-  @Column("text")
-  images: string[];
 }

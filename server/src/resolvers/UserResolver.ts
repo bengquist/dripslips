@@ -12,7 +12,7 @@ import {
 } from "type-graphql";
 import { getConnection } from "typeorm";
 import { isAuth } from "../middleware/isAuth";
-import { User } from "../models/User";
+import User from "../models/User";
 import { LoginResponse } from "../responses/LoginResponse";
 import { AppContext } from "../types";
 import {
