@@ -1,5 +1,5 @@
 import ProductDetailResolver from "./ProductDetailResolver";
 import ProductResolver from "./ProductResolver";
-import { UserResolver } from "./UserResolver";
+import UserResolver from "./UserResolver";
 
-export default [ProductResolver, UserResolver, ProductDetailResolver];
+export default [ProductResolver, ProductDetailResolver, UserResolver];

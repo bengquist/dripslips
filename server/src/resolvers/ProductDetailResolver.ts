@@ -1,5 +1,20 @@
-import { Resolver } from "type-graphql";
+import { Query, Resolver } from "type-graphql";
 import Product from "../models/Product";
+import ProductDetail from "../models/ProductDetail";
 
-@Resolver(() => Product)
-export default class ProductDetailResolver {}
+@Resolver()
+export default class ProductDetailResolver {
+  @Query(() => Product)
+  product() {
+    console.log("yo");
+    const product = ProductDetail.find({ relations: ["product"] });
+    return product;
+  }
+
+  @Query(() => ProductDetail)
+  productDetails() {
+    console.log("yo");
+    const product = ProductDetail.find({ relations: ["product"] });
+    return product;
+  }
+}

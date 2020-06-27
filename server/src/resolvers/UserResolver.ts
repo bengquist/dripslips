@@ -20,7 +20,7 @@ import {
 import { LoginResponse } from "./responses/LoginResponse";
 
 @Resolver()
-export class UserResolver {
+export default class UserResolver {
   @Query(() => User, { nullable: true })
   me(@Ctx() context: AppContext) {
     const authorization = context.req.headers["authorization"];
