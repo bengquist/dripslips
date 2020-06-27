@@ -13,7 +13,7 @@ export default class ProductResolver {
   }
 
   @Query(() => [Product])
-  products(@Arg("gender", { nullable: true }) gender?: string) {
+  products() {
     const products = Product.find({ relations: ["productDetails"] });
 
     return products;
@@ -22,11 +22,7 @@ export default class ProductResolver {
   @Mutation(() => Product)
   addProduct(@Arg("data") { color, size, ...newProductData }: AddProductInput) {
     const product = Product.create(newProductData);
-    const productDetail = ProductDetail.create({ color, size });
-    productDetail.product = product;
-
-    product.save();
-    productDetail.save();
+    ProductDetail.create({ color, size, product });
 
     return product;
   }

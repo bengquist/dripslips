@@ -16,7 +16,9 @@ export default class ProductDetail extends BaseEntity {
   id: string;
 
   @Field(() => Product)
-  @ManyToOne(() => Product, (product) => product.productDetails)
+  @ManyToOne(() => Product, (product) => product.productDetails, {
+    cascade: true,
+  })
   product: Product;
 
   @Field()
