@@ -14,10 +14,6 @@ import User from "./User";
 @Entity()
 @ObjectType()
 export class CartItem extends BaseEntity {
-  @Field(() => ID)
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
-
   @Field(() => User)
   @ManyToOne(() => User, (user) => user.cartItems)
   user: User;
@@ -25,6 +21,10 @@ export class CartItem extends BaseEntity {
   @OneToOne(() => ProductDetail)
   @JoinColumn()
   productDetails: ProductDetail;
+
+  @Field(() => ID)
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Field()
   @Column()

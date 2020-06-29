@@ -20,9 +20,17 @@ export default class ProductResolver {
   }
 
   @Mutation(() => Product)
-  addProduct(@Arg("data") { color, size, ...newProductData }: AddProductInput) {
-    const product = Product.create(newProductData);
-    ProductDetail.create({ color, size, product });
+  async addProduct(
+    @Arg("data") { color, size, ...newProductData }: AddProductInput
+  ) {
+    const product = await Product.create(newProductData);
+    const details = await ProductDetail.create({ color, size, product });
+    await product.productDetails.push(details);
+    console.log(product);
+    console.log(details);
+
+    // await product.save();
+    // await details.save();
 
     return product;
   }

@@ -11,15 +11,13 @@ import Product from "./Product";
 @Entity()
 @ObjectType()
 export default class ProductDetail extends BaseEntity {
+  @Field(() => Product)
+  @ManyToOne(() => Product, (product) => product.productDetails)
+  product: Product;
+
   @Field(() => ID)
   @PrimaryGeneratedColumn("uuid")
   id: string;
-
-  @Field(() => Product)
-  @ManyToOne(() => Product, (product) => product.productDetails, {
-    cascade: true,
-  })
-  product: Product;
 
   @Field()
   @Column()

@@ -12,10 +12,6 @@ import ProductDetail from "./ProductDetail";
 @Entity()
 @ObjectType()
 export default class OrderItem extends BaseEntity {
-  @Field(() => ID)
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
-
   @Field(() => Order)
   @ManyToOne(() => Order)
   order: Order;
@@ -23,6 +19,10 @@ export default class OrderItem extends BaseEntity {
   @Field(() => ProductDetail)
   @ManyToOne(() => ProductDetail)
   productDetails: ProductDetail;
+
+  @Field(() => ID)
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Field()
   @Column()

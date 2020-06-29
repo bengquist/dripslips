@@ -11,13 +11,13 @@ import User from "./User";
 @Entity()
 @ObjectType()
 export default class Address extends BaseEntity {
-  @Field(() => ID)
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
-
   @Field(() => User)
   @ManyToOne(() => User, (user) => user.address)
   user: User;
+
+  @Field(() => ID)
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Field()
   @Column()

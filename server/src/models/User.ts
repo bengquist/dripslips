@@ -13,10 +13,6 @@ import { CartItem } from "./CartItem";
 @Entity()
 @ObjectType()
 export default class User extends BaseEntity {
-  @Field(() => ID)
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
-
   @Field(() => [Address])
   @OneToMany(() => Address, (address) => address.user)
   address: Address[];
@@ -24,6 +20,10 @@ export default class User extends BaseEntity {
   @Field(() => [CartItem])
   @OneToMany(() => CartItem, (cartItem) => cartItem.user)
   cartItems: CartItem[];
+
+  @Field(() => ID)
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Field()
   @Column("varchar", { unique: true })
