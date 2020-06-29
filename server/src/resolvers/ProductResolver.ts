@@ -24,13 +24,12 @@ export default class ProductResolver {
     @Arg("data") { color, size, ...newProductData }: AddProductInput
   ) {
     const product = await Product.create(newProductData);
-    const details = await ProductDetail.create({ color, size, product });
-    await product.productDetails.push(details);
-    console.log(product);
-    console.log(details);
+    const details = await ProductDetail.create({ color, size });
+    product.productDetails = [details];
+    details.product = product;
 
-    // await product.save();
-    // await details.save();
+    await product.save();
+    await details.save();
 
     return product;
   }

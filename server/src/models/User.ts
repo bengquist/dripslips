@@ -26,11 +26,11 @@ export default class User extends BaseEntity {
   id: string;
 
   @Field()
-  @Column("varchar", { unique: true })
+  @Column({ unique: true })
   username: string;
 
   @Field()
-  @Column("varchar", { unique: true })
+  @Column({ unique: true })
   email: string;
 
   @Column()
