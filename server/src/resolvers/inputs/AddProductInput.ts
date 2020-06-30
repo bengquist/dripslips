@@ -23,4 +23,7 @@ export default class AddProductInput implements Partial<Product> {
 
   @Field()
   size: number;
+
+  @Field(() => [String])
+  images: string[];
 }

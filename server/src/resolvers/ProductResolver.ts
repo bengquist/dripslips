@@ -2,6 +2,7 @@ import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import products from "../data/products";
 import Product from "../models/Product";
 import ProductDetail from "../models/ProductDetail";
+import { ProductImage } from "../models/ProductImage";
 import AddProductInput from "./inputs/AddProductInput";
 
 @Resolver()
@@ -21,15 +22,23 @@ export default class ProductResolver {
 
   @Mutation(() => Product)
   async addProduct(
-    @Arg("data") { color, size, ...newProductData }: AddProductInput
+    @Arg("data") { color, size, images, ...newProductData }: AddProductInput
   ) {
     const product = await Product.create(newProductData);
     const details = await ProductDetail.create({ color, size });
+    const productImages = images.map((image) => {
+      const productImage = ProductImage.create({ url: image });
+      productImage.productDetails = details;
+      return productImage;
+    });
+
     product.productDetails = [details];
+    details.productImages = productImages;
     details.product = product;
 
     await product.save();
     await details.save();
+    await Promise.all(productImages.map((image) => image.save()));
 
     return product;
   }

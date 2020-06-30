@@ -6,14 +6,17 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import Product from "./Product";
+import ProductDetail from "./ProductDetail";
 
 @Entity()
 @ObjectType()
 export class ProductImage extends BaseEntity {
-  @Field(() => Product)
-  @ManyToOne(() => Product, (product) => product.productImages)
-  product: Product;
+  @Field(() => ProductDetail)
+  @ManyToOne(
+    () => ProductDetail,
+    (productDetails) => productDetails.productImages
+  )
+  productDetails: ProductDetail;
 
   @Field(() => ID)
   @PrimaryGeneratedColumn("uuid")
