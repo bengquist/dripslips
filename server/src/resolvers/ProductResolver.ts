@@ -16,11 +16,8 @@ export default class ProductResolver {
   @Query(() => [Product])
   async products() {
     const products = await Product.find({
-      relations: ["productDetails"],
+      relations: ["productDetails", "productDetails.productImages"],
     });
-
-    console.log(products);
-    console.log(products[0].productDetails);
 
     return products;
   }
