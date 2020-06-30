@@ -14,8 +14,12 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
+  productDetails: Array<ProductDetail>;
   product: Product;
   products: Array<Product>;
+  me?: Maybe<User>;
+  user: User;
+  users: Array<User>;
 };
 
 
@@ -24,24 +28,126 @@ export type QueryProductArgs = {
 };
 
 
-export type QueryProductsArgs = {
-  gender?: Maybe<Scalars['String']>;
+export type QueryUserArgs = {
+  id: Scalars['String'];
+};
+
+export type ProductDetail = {
+  __typename?: 'ProductDetail';
+  product: Product;
+  productImages: Array<ProductImage>;
+  id: Scalars['ID'];
+  size: Scalars['Float'];
+  color: Scalars['String'];
 };
 
 export type Product = {
   __typename?: 'Product';
+  productDetails: Array<ProductDetail>;
   id: Scalars['ID'];
-  modelId: Scalars['ID'];
+  modelId: Scalars['String'];
   title: Scalars['String'];
   description: Scalars['String'];
   price: Scalars['Float'];
-  size: Scalars['Float'];
-  type: Scalars['String'];
   gender: Scalars['String'];
-  colorGroup: Scalars['String'];
-  availableColors: Array<Scalars['String']>;
-  availableSizes: Array<Scalars['String']>;
+};
+
+export type ProductImage = {
+  __typename?: 'ProductImage';
+  productDetails: ProductDetail;
+  id: Scalars['ID'];
+  url: Scalars['String'];
+};
+
+export type User = {
+  __typename?: 'User';
+  address: Array<Address>;
+  cartItems: Array<CartItem>;
+  id: Scalars['ID'];
+  username: Scalars['String'];
+  email: Scalars['String'];
+  phoneNumber: Scalars['String'];
+};
+
+export type Address = {
+  __typename?: 'Address';
+  user: User;
+  id: Scalars['ID'];
+  title: Scalars['String'];
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  companyName: Scalars['String'];
+  addressPrimary: Scalars['String'];
+  addressSecondary: Scalars['String'];
+  postalCode: Scalars['Float'];
+  city: Scalars['String'];
+  state: Scalars['String'];
+  country: Scalars['String'];
+};
+
+export type CartItem = {
+  __typename?: 'CartItem';
+  user: User;
+  id: Scalars['ID'];
+  quantity: Scalars['Float'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  addProduct: Product;
+  login: LoginResponse;
+  signup: Scalars['Boolean'];
+  logout: Scalars['Boolean'];
+};
+
+
+export type MutationAddProductArgs = {
+  data: AddProductInput;
+};
+
+
+export type MutationLoginArgs = {
+  password: Scalars['String'];
+  user: Scalars['String'];
+};
+
+
+export type MutationSignupArgs = {
+  password: Scalars['String'];
+  email: Scalars['String'];
+  username: Scalars['String'];
+};
+
+/** New product data */
+export type AddProductInput = {
+  modelId: Scalars['String'];
+  title: Scalars['String'];
+  description: Scalars['String'];
+  price: Scalars['Float'];
+  gender: Scalars['String'];
+  color: Scalars['String'];
+  size: Scalars['Float'];
   images: Array<Scalars['String']>;
+};
+
+export type LoginResponse = {
+  __typename?: 'LoginResponse';
+  accessToken: Scalars['String'];
+};
+
+export type Order = {
+  __typename?: 'Order';
+  id: Scalars['ID'];
+  amount: Scalars['Float'];
+  status: Scalars['String'];
+};
+
+export type OrderItem = {
+  __typename?: 'OrderItem';
+  order: Order;
+  productDetails: ProductDetail;
+  id: Scalars['ID'];
+  quantity: Scalars['Float'];
 };
 
 export type FilteredProductsQueryVariables = Exact<{
@@ -53,7 +159,15 @@ export type FilteredProductsQuery = (
   { __typename?: 'Query' }
   & { products: Array<(
     { __typename?: 'Product' }
-    & Pick<Product, 'id' | 'title' | 'availableColors' | 'price' | 'images'>
+    & Pick<Product, 'modelId' | 'title' | 'description' | 'price' | 'gender'>
+    & { productDetails: Array<(
+      { __typename?: 'ProductDetail' }
+      & Pick<ProductDetail, 'size' | 'color'>
+      & { productImages: Array<(
+        { __typename?: 'ProductImage' }
+        & Pick<ProductImage, 'url'>
+      )> }
+    )> }
   )> }
 );
 
@@ -66,7 +180,15 @@ export type ProductQuery = (
   { __typename?: 'Query' }
   & { product: (
     { __typename?: 'Product' }
-    & Pick<Product, 'id' | 'modelId' | 'title' | 'description' | 'type' | 'colorGroup' | 'availableColors' | 'availableSizes' | 'gender' | 'price' | 'images'>
+    & Pick<Product, 'modelId' | 'title' | 'description' | 'price' | 'gender'>
+    & { productDetails: Array<(
+      { __typename?: 'ProductDetail' }
+      & Pick<ProductDetail, 'size' | 'color'>
+      & { productImages: Array<(
+        { __typename?: 'ProductImage' }
+        & Pick<ProductImage, 'url'>
+      )> }
+    )> }
   ) }
 );
 
@@ -77,19 +199,34 @@ export type ProductsQuery = (
   { __typename?: 'Query' }
   & { products: Array<(
     { __typename?: 'Product' }
-    & Pick<Product, 'id' | 'title' | 'availableColors' | 'price' | 'images'>
+    & Pick<Product, 'modelId' | 'title' | 'description' | 'price' | 'gender'>
+    & { productDetails: Array<(
+      { __typename?: 'ProductDetail' }
+      & Pick<ProductDetail, 'size' | 'color'>
+      & { productImages: Array<(
+        { __typename?: 'ProductImage' }
+        & Pick<ProductImage, 'url'>
+      )> }
+    )> }
   )> }
 );
 
 
 export const FilteredProductsDocument = gql`
     query FilteredProducts($gender: String) {
-  products(gender: $gender) {
-    id
+  products {
+    modelId
     title
-    availableColors
+    description
     price
-    images
+    gender
+    productDetails {
+      size
+      color
+      productImages {
+        url
+      }
+    }
   }
 }
     `;
@@ -122,17 +259,18 @@ export type FilteredProductsQueryResult = ApolloReactCommon.QueryResult<Filtered
 export const ProductDocument = gql`
     query Product($id: String!) {
   product(id: $id) {
-    id
     modelId
     title
     description
-    type
-    colorGroup
-    availableColors
-    availableSizes
-    gender
     price
-    images
+    gender
+    productDetails {
+      size
+      color
+      productImages {
+        url
+      }
+    }
   }
 }
     `;
@@ -165,11 +303,18 @@ export type ProductQueryResult = ApolloReactCommon.QueryResult<ProductQuery, Pro
 export const ProductsDocument = gql`
     query Products {
   products {
-    id
+    modelId
     title
-    availableColors
+    description
     price
-    images
+    gender
+    productDetails {
+      size
+      color
+      productImages {
+        url
+      }
+    }
   }
 }
     `;

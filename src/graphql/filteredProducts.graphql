@@ -1,9 +1,16 @@
 query FilteredProducts($gender: String) {
-  products(gender: $gender) {
-    id
+  products {
+    modelId
     title
-    availableColors
+    description
     price
-    images
+    gender
+    productDetails {
+      size
+      color
+      productImages {
+        url
+      }
+    }
   }
 }

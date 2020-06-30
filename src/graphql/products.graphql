@@ -1,9 +1,16 @@
 query Products {
   products {
-    id
+    modelId
     title
-    availableColors
+    description
     price
-    images
+    gender
+    productDetails {
+      size
+      color
+      productImages {
+        url
+      }
+    }
   }
 }
