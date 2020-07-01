@@ -2,9 +2,9 @@ import { Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 import User from "../models/User";
 import {
+  attachRefreshToken,
   createAccessToken,
   createRefreshToken,
-  sendRefreshToken,
 } from "./auth";
 
 export default async (req: Request, res: Response) => {
@@ -35,7 +35,7 @@ export default async (req: Request, res: Response) => {
     return res.send({ ok: false, accessToken: "" });
   }
 
-  sendRefreshToken(res, createRefreshToken(user));
+  attachRefreshToken(res, createRefreshToken(user));
 
   return res.send({ ok: true, accessToken: createAccessToken(user.id) });
 };

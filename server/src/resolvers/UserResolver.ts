@@ -13,9 +13,9 @@ import { isAuth } from "../middleware/isAuth";
 import User from "../models/User";
 import { AppContext } from "../types";
 import {
+  attachRefreshToken,
   createAccessToken,
   createRefreshToken,
-  sendRefreshToken,
 } from "../utils/auth";
 import { LoginResponse } from "./responses/LoginResponse";
 
@@ -73,7 +73,7 @@ export default class UserResolver {
       throw new AuthenticationError("Incorrect password");
     }
 
-    sendRefreshToken(res, createRefreshToken(userData));
+    attachRefreshToken(res, createRefreshToken(userData));
 
     return { accessToken: createAccessToken(userData.id) };
   }
@@ -112,7 +112,7 @@ export default class UserResolver {
 
   @Mutation(() => Boolean)
   async logout(@Ctx() { res }: AppContext) {
-    sendRefreshToken(res, "");
+    attachRefreshToken(res, "");
 
     return true;
   }
