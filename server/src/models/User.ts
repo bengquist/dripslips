@@ -44,6 +44,10 @@ export default class User extends BaseEntity {
   @Column({ default: false })
   isAdmin: boolean;
 
+  @Field()
+  @Column({ default: 0 })
+  tokenVersion: number;
+
   @CreateDateColumn({ type: "timestamp" })
   created: Date;
 }
