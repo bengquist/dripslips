@@ -37,8 +37,12 @@ export default class User extends BaseEntity {
   password: string;
 
   @Field()
-  @Column()
+  @Column({ nullable: true })
   phoneNumber: string;
+
+  @Field()
+  @Column({ default: false })
+  isAdmin: boolean;
 
   @CreateDateColumn({ type: "timestamp" })
   created: Date;
