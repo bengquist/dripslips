@@ -22,7 +22,7 @@ export class CartItem extends BaseEntity {
   @Column()
   quantity: number;
 
-  @ManyToOne(() => User, (user) => user.cartItems)
+  @ManyToOne(() => User, (user) => user.cart)
   user: User;
 
   @Field(() => ProductDetail)

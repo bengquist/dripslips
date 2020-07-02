@@ -5,9 +5,6 @@ import OrderItem from "../../models/OrderItem";
 @InputType()
 export default class CreateOrderInput implements Partial<Order> {
   @Field()
-  userId: string;
-
-  @Field()
   addressId: string;
 
   @Field(() => [OrderItem])

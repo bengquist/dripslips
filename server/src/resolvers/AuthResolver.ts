@@ -35,7 +35,6 @@ export default class AuthResolver {
     @Arg("password") password: string,
     @Ctx() { res }: AppContext
   ): Promise<LoginResponse> {
-    console.log(res);
     const userData = await User.findOne({
       where: [{ username: user }, { email: user }],
     });
@@ -104,7 +103,7 @@ export default class AuthResolver {
   }
 
   @FieldResolver()
-  async cartItems(@Root() user: User): Promise<CartItem[]> {
+  async cart(@Root() user: User): Promise<CartItem[]> {
     return CartItem.find({ where: { user } });
   }
 }

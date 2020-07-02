@@ -62,7 +62,7 @@ export default class User extends BaseEntity {
 
   @Field(() => [CartItem])
   @OneToMany(() => CartItem, (cartItem) => cartItem.user)
-  cartItems: CartItem[];
+  cart: CartItem[];
 
   @Field(() => [Order])
   @OneToMany(() => Order, (order) => order.user)
