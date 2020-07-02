@@ -17,13 +17,14 @@ export default class OrderResolver {
 
     const cart = await CartItem.find({
       where: { user },
-      relations: ["productDetails"],
+      relations: ["productDetails", "productDetails.product"],
     });
     const address = await Address.findOne(data.addressId);
     const order = Order.create({ status: data.status, address, user });
-    const items = cart.map(({ productDetails, quantity }) =>
-      OrderItem.create({ productDetails, quantity })
-    );
+    const items = cart.map(({ productDetails, quantity }) => {
+      amount += productDetails.product.price * quantity;
+      return OrderItem.create({ productDetails, quantity });
+    });
 
     order.amount = amount;
     order.items = items;
