@@ -19,17 +19,17 @@ export default class Address extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Field()
+  @Field({ nullable: true })
   @Column({ nullable: true })
-  companyName: string;
+  companyName?: string;
 
   @Field()
   @Column()
   addressPrimary: string;
 
-  @Field()
-  @Column()
-  addressSecondary: string;
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  addressSecondary?: string;
 
   @Field()
   @Column()

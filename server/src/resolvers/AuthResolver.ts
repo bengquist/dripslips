@@ -26,7 +26,7 @@ export default class AuthResolver {
       const token = authorization?.split(" ")[1];
       const payload: any = verify(token, process.env.JWT_ACCESS_TOKEN_SECRET!);
       context.payload = payload as any;
-      return User.findOne(payload.userId);
+      return User.findOne(payload.userId, { relations: ["address"] });
     } catch (err) {
       console.error(err);
       return null;
