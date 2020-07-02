@@ -46,6 +46,8 @@ export default class Order extends BaseEntity {
   @Field(() => Address)
   @ManyToOne(() => Address, (address) => address.orders)
   address: Address;
+  @Column()
+  addressId: string;
 
   @Field(() => [OrderItem])
   @OneToMany(() => OrderItem, (orderItem) => orderItem.order, { cascade: true })

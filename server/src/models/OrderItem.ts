@@ -31,4 +31,6 @@ export default class OrderItem extends BaseEntity {
   @OneToOne(() => ProductDetail)
   @JoinColumn()
   productDetails: ProductDetail;
+  @Column()
+  productDetailsId: string;
 }

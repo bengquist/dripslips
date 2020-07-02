@@ -1,4 +1,11 @@
-import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
+import {
+  Arg,
+  Ctx,
+  FieldResolver,
+  Mutation,
+  Resolver,
+  Root,
+} from "type-graphql";
 import Address from "../models/Address";
 import { CartItem } from "../models/CartItem";
 import Order from "../models/Order";
@@ -30,5 +37,16 @@ export default class OrderResolver {
     order.items = items;
 
     return order.save();
+  }
+
+  @FieldResolver()
+  async address(@Root() order: Order): Promise<Address> {
+    //@ts-ignore
+    return Address.findOne(order.addressId);
+  }
+
+  @FieldResolver()
+  async items(@Root() order: Order): Promise<OrderItem[]> {
+    return OrderItem.find({ where: { order } });
   }
 }
