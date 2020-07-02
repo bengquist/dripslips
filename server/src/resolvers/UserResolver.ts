@@ -1,15 +1,7 @@
 import { AuthenticationError } from "apollo-server-express";
 import bcrypt from "bcrypt";
 import { verify } from "jsonwebtoken";
-import {
-  Arg,
-  Ctx,
-  Mutation,
-  Query,
-  Resolver,
-  UseMiddleware,
-} from "type-graphql";
-import { isAuth } from "../middleware/isAuth";
+import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import User from "../models/User";
 import { AppContext } from "../types";
 import {
@@ -17,6 +9,7 @@ import {
   createAccessToken,
   createRefreshToken,
 } from "../utils/auth";
+import SignupInput from "./inputs/SignupInput";
 import { LoginResponse } from "./responses/LoginResponse";
 
 @Resolver()
@@ -42,13 +35,7 @@ export default class UserResolver {
 
   @Query(() => User)
   user(@Arg("id") id: string) {
-    return User.findOne({ where: { id }, relations: ["group", "chores"] });
-  }
-
-  @Query(() => [User])
-  @UseMiddleware(isAuth)
-  users() {
-    return User.find({ relations: ["group", "chores"] });
+    return User.findOne({ where: { id }, relations: ["address", "orders"] });
   }
 
   @Mutation(() => LoginResponse)
@@ -79,13 +66,11 @@ export default class UserResolver {
   }
 
   @Mutation(() => Boolean)
-  async signup(
-    @Arg("username") username: string,
-    @Arg("email") email: string,
-    @Arg("password") password: string
-  ) {
-    const userWithUsername = await User.findOne({ username });
-    const userWithEmail = await User.findOne({ email });
+  async signup(@Arg("data") userData: SignupInput) {
+    const userWithUsername = await User.findOne({
+      username: userData.username,
+    });
+    const userWithEmail = await User.findOne({ email: userData.email });
 
     if (userWithUsername) {
       throw new AuthenticationError("Username is already taken");
@@ -94,12 +79,11 @@ export default class UserResolver {
       throw new AuthenticationError("Email is already taken");
     }
 
-    const hashedPassword = await bcrypt.hash(password, 12);
+    const hashedPassword = await bcrypt.hash(userData.password, 12);
 
     try {
-      User.insert({
-        username,
-        email,
+      await User.insert({
+        ...userData,
         password: hashedPassword,
       });
     } catch (err) {

@@ -3,7 +3,6 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import "dotenv/config";
 import express from "express";
-import jwt from "express-jwt";
 import "reflect-metadata";
 import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
@@ -30,14 +29,6 @@ const path = "/graphql";
     schema,
     context: ({ req, res }) => ({ req, res }),
   });
-
-  app.use(
-    path,
-    jwt({
-      secret: "TypeGraphQL",
-      credentialsRequired: false,
-    })
-  );
 
   server.applyMiddleware({ app, path });
 

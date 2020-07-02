@@ -1,7 +1,7 @@
 import { Field, InputType } from "type-graphql";
 import Product from "../../models/Product";
 
-@InputType({ description: "New product data" })
+@InputType()
 export default class AddProductInput implements Partial<Product> {
   @Field()
   modelId: string;

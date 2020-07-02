@@ -37,7 +37,19 @@ export default class User extends BaseEntity {
   password: string;
 
   @Field()
-  @Column({ nullable: true })
+  @Column()
+  title: string;
+
+  @Field()
+  @Column()
+  firstName: string;
+
+  @Field()
+  @Column()
+  lastName: string;
+
+  @Field()
+  @Column()
   phoneNumber: string;
 
   @Field()
