@@ -27,7 +27,6 @@ export default class CartResolver {
       productDetails,
     });
 
-    console.log(cartItem);
     await cartItem.save();
 
     return cartItem;
@@ -35,13 +34,13 @@ export default class CartResolver {
 
   @FieldResolver()
   async productDetails(@Root() cartItem: CartItem): Promise<ProductDetail> {
-    console.log(cartItem);
-    const productDetail = ProductDetail.findOne(
-      "e5647dd2-a5c4-493b-ba23-299ead6f8a35"
+    const productDetail = await ProductDetail.findOne(
+      cartItem.productDetailsId
     );
 
-    if (productDetail) {
+    if (!productDetail) {
       throw Error("No product detail found with provided id");
+    } else {
     }
 
     return productDetail;

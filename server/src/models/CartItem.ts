@@ -29,4 +29,6 @@ export class CartItem extends BaseEntity {
   @OneToOne(() => ProductDetail)
   @JoinColumn()
   productDetails: ProductDetail;
+  @Column({ nullable: true })
+  productDetailsId: string;
 }

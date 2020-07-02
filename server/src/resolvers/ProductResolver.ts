@@ -1,4 +1,11 @@
-import { Arg, Mutation, Query, Resolver } from "type-graphql";
+import {
+  Arg,
+  FieldResolver,
+  Mutation,
+  Query,
+  Resolver,
+  Root,
+} from "type-graphql";
 import products from "../data/products";
 import Product from "../models/Product";
 import ProductDetail from "../models/ProductDetail";
@@ -43,5 +50,10 @@ export default class ProductResolver {
     await Promise.all(productImages.map((image) => image.save()));
 
     return product;
+  }
+
+  @FieldResolver()
+  async productDetails(@Root() product: Product): Promise<ProductDetail[]> {
+    return ProductDetail.find({ where: { productId: product.id } });
   }
 }
