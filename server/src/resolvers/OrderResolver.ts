@@ -40,6 +40,21 @@ export default class OrderResolver {
   }
 
   @FieldResolver()
+  async amount(@Root() order: Order): Promise<number> {
+    let amount = 0;
+
+    const orderItems = await OrderItem.find({
+      where: { order },
+      relations: ["productDetails", "productDetails.product"],
+    });
+    orderItems.forEach(
+      (item) => (amount += item.productDetails.product.price * item.quantity)
+    );
+
+    return amount;
+  }
+
+  @FieldResolver()
   async address(@Root() order: Order): Promise<Address> {
     //@ts-ignore
     return Address.findOne(order.addressId);
