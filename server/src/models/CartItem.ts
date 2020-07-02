@@ -3,7 +3,6 @@ import {
   BaseEntity,
   Column,
   Entity,
-  JoinColumn,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -14,14 +13,6 @@ import User from "./User";
 @Entity()
 @ObjectType()
 export class CartItem extends BaseEntity {
-  @Field(() => User)
-  @ManyToOne(() => User, (user) => user.cartItems)
-  user: User;
-
-  @OneToOne(() => ProductDetail)
-  @JoinColumn()
-  productDetails: ProductDetail;
-
   @Field(() => ID)
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -29,4 +20,10 @@ export class CartItem extends BaseEntity {
   @Field()
   @Column()
   quantity: number;
+
+  @ManyToOne(() => User, (user) => user.cartItems)
+  user: User;
+
+  @OneToOne(() => ProductDetail)
+  productDetails: ProductDetail;
 }

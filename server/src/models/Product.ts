@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from "type-graphql";
+import { Field, ID, ObjectType, registerEnumType } from "type-graphql";
 import {
   BaseEntity,
   Column,
@@ -8,13 +8,18 @@ import {
 } from "typeorm";
 import ProductDetail from "./ProductDetail";
 
+export enum Gender {
+  Male,
+  Female,
+}
+
+registerEnumType(Gender, {
+  name: "Gender",
+});
+
 @Entity()
 @ObjectType()
 export default class Product extends BaseEntity {
-  @Field(() => [ProductDetail])
-  @OneToMany(() => ProductDetail, (productDetail) => productDetail.product)
-  productDetails: ProductDetail[];
-
   @Field(() => ID)
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -35,7 +40,11 @@ export default class Product extends BaseEntity {
   @Column()
   price: number;
 
-  @Field()
+  @Field(() => Gender)
   @Column()
-  gender: string;
+  gender: Gender;
+
+  @Field(() => [ProductDetail])
+  @OneToMany(() => ProductDetail, (productDetail) => productDetail.product)
+  productDetails: ProductDetail[];
 }

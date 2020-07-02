@@ -1,7 +1,17 @@
 import { AuthenticationError } from "apollo-server-express";
 import bcrypt from "bcrypt";
 import { verify } from "jsonwebtoken";
-import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import {
+  Arg,
+  Ctx,
+  FieldResolver,
+  Mutation,
+  Query,
+  Resolver,
+  Root,
+} from "type-graphql";
+import Address from "../models/Address";
+import Order from "../models/Order";
 import User from "../models/User";
 import { AppContext } from "../types";
 import {
@@ -12,7 +22,7 @@ import {
 import SignupInput from "./inputs/SignupInput";
 import { LoginResponse } from "./responses/LoginResponse";
 
-@Resolver()
+@Resolver(() => User)
 export default class AuthResolver {
   @Query(() => User, { nullable: true })
   me(@Ctx() context: AppContext) {
@@ -26,7 +36,7 @@ export default class AuthResolver {
       const token = authorization?.split(" ")[1];
       const payload: any = verify(token, process.env.JWT_ACCESS_TOKEN_SECRET!);
       context.payload = payload as any;
-      return User.findOne(payload.userId, { relations: ["address"] });
+      return User.findOne(payload.userId);
     } catch (err) {
       console.error(err);
       return null;
@@ -94,5 +104,15 @@ export default class AuthResolver {
     attachRefreshToken(res, "");
 
     return true;
+  }
+
+  @FieldResolver()
+  async orders(@Root() user: User): Promise<Order[]> {
+    return Order.find({ where: { user } });
+  }
+
+  @FieldResolver()
+  async address(@Root() user: User): Promise<Address[]> {
+    return Address.find({ where: { user } });
   }
 }

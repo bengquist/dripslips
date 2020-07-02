@@ -2,7 +2,7 @@ import { Field, InputType } from "type-graphql";
 import Address from "../../models/Address";
 
 @InputType()
-export default class AddUserAddress implements Partial<Address> {
+export default class AddAddress implements Partial<Address> {
   @Field()
   userId: string;
 

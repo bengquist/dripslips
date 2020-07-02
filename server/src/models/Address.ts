@@ -4,17 +4,15 @@ import {
   Column,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import Order from "./Order";
 import User from "./User";
 
 @Entity()
 @ObjectType()
 export default class Address extends BaseEntity {
-  @Field(() => User)
-  @ManyToOne(() => User, (user) => user.address)
-  user: User;
-
   @Field(() => ID)
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -46,4 +44,10 @@ export default class Address extends BaseEntity {
   @Field()
   @Column()
   country: string;
+
+  @ManyToOne(() => User, (user) => user.address)
+  user: User;
+
+  @OneToMany(() => Order, (order) => order.address)
+  orders: Order[];
 }

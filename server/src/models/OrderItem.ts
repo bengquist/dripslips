@@ -3,7 +3,9 @@ import {
   BaseEntity,
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import Order from "./Order";
@@ -12,14 +14,6 @@ import ProductDetail from "./ProductDetail";
 @Entity()
 @ObjectType()
 export default class OrderItem extends BaseEntity {
-  @Field(() => Order)
-  @ManyToOne(() => Order)
-  order: Order;
-
-  @Field(() => ProductDetail)
-  @ManyToOne(() => ProductDetail)
-  productDetails: ProductDetail;
-
   @Field(() => ID)
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -27,4 +21,14 @@ export default class OrderItem extends BaseEntity {
   @Field()
   @Column()
   quantity: number;
+
+  @ManyToOne(() => Order, (order) => order.items)
+  order: Order;
+  @Column({ nullable: true })
+  orderId: string;
+
+  @Field(() => ProductDetail)
+  @OneToOne(() => ProductDetail)
+  @JoinColumn()
+  productDetails: ProductDetail;
 }

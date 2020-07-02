@@ -1,5 +1,5 @@
 import { Field, InputType } from "type-graphql";
-import Product from "../../models/Product";
+import Product, { Gender } from "../../models/Product";
 
 @InputType()
 export default class AddProductInput implements Partial<Product> {
@@ -15,8 +15,8 @@ export default class AddProductInput implements Partial<Product> {
   @Field()
   price: number;
 
-  @Field()
-  gender: string;
+  @Field(() => Gender)
+  gender: Gender;
 
   @Field()
   color: string;

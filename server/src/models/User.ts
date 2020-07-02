@@ -14,18 +14,6 @@ import Order from "./Order";
 @Entity()
 @ObjectType()
 export default class User extends BaseEntity {
-  @Field(() => [Address])
-  @OneToMany(() => Address, (address) => address.user)
-  address: Address[];
-
-  @Field(() => [CartItem])
-  @OneToMany(() => CartItem, (cartItem) => cartItem.user)
-  cartItems: CartItem[];
-
-  @Field(() => [Order])
-  @OneToMany(() => Order, (order) => order.user)
-  orders: Order[];
-
   @Field(() => ID)
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -67,4 +55,16 @@ export default class User extends BaseEntity {
 
   @CreateDateColumn({ type: "timestamp" })
   created: Date;
+
+  @Field(() => [Address])
+  @OneToMany(() => Address, (address) => address.user)
+  address: Address[];
+
+  @Field(() => [CartItem])
+  @OneToMany(() => CartItem, (cartItem) => cartItem.user)
+  cartItems: CartItem[];
+
+  @Field(() => [Order])
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order[];
 }

@@ -11,13 +11,6 @@ import ProductDetail from "./ProductDetail";
 @Entity()
 @ObjectType()
 export class ProductImage extends BaseEntity {
-  @Field(() => ProductDetail)
-  @ManyToOne(
-    () => ProductDetail,
-    (productDetails) => productDetails.productImages
-  )
-  productDetails: ProductDetail;
-
   @Field(() => ID)
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -25,4 +18,12 @@ export class ProductImage extends BaseEntity {
   @Field()
   @Column()
   url: string;
+
+  @ManyToOne(
+    () => ProductDetail,
+    (productDetails) => productDetails.productImages
+  )
+  productDetails: ProductDetail;
+  @Column({ nullable: true })
+  productDetailsId: string;
 }

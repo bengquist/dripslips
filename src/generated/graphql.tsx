@@ -14,12 +14,10 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
+  me?: Maybe<User>;
   productDetails: Array<ProductDetail>;
   product: Product;
   products: Array<Product>;
-  me?: Maybe<User>;
-  user: User;
-  users: Array<User>;
 };
 
 
@@ -27,9 +25,50 @@ export type QueryProductArgs = {
   id: Scalars['String'];
 };
 
+export type User = {
+  __typename?: 'User';
+  address: Array<Address>;
+  cartItems: Array<CartItem>;
+  orders: Array<Order>;
+  id: Scalars['ID'];
+  username: Scalars['String'];
+  email: Scalars['String'];
+  title: Scalars['String'];
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  phoneNumber: Scalars['String'];
+  isAdmin: Scalars['Boolean'];
+  tokenVersion: Scalars['Float'];
+};
 
-export type QueryUserArgs = {
-  id: Scalars['String'];
+export type Address = {
+  __typename?: 'Address';
+  user: User;
+  orders: Array<Order>;
+  id: Scalars['ID'];
+  companyName?: Maybe<Scalars['String']>;
+  addressPrimary: Scalars['String'];
+  addressSecondary?: Maybe<Scalars['String']>;
+  postalCode: Scalars['Float'];
+  city: Scalars['String'];
+  state: Scalars['String'];
+  country: Scalars['String'];
+};
+
+export type Order = {
+  __typename?: 'Order';
+  user: User;
+  address: Address;
+  id: Scalars['ID'];
+  amount: Scalars['Float'];
+  status: Scalars['Float'];
+};
+
+export type CartItem = {
+  __typename?: 'CartItem';
+  user: User;
+  id: Scalars['ID'];
+  quantity: Scalars['Float'];
 };
 
 export type ProductDetail = {
@@ -49,7 +88,7 @@ export type Product = {
   title: Scalars['String'];
   description: Scalars['String'];
   price: Scalars['Float'];
-  gender: Scalars['String'];
+  gender: Scalars['Float'];
 };
 
 export type ProductImage = {
@@ -59,50 +98,18 @@ export type ProductImage = {
   url: Scalars['String'];
 };
 
-export type User = {
-  __typename?: 'User';
-  address: Array<Address>;
-  cartItems: Array<CartItem>;
-  id: Scalars['ID'];
-  username: Scalars['String'];
-  email: Scalars['String'];
-  phoneNumber: Scalars['String'];
-};
-
-export type Address = {
-  __typename?: 'Address';
-  user: User;
-  id: Scalars['ID'];
-  title: Scalars['String'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  companyName: Scalars['String'];
-  addressPrimary: Scalars['String'];
-  addressSecondary: Scalars['String'];
-  postalCode: Scalars['Float'];
-  city: Scalars['String'];
-  state: Scalars['String'];
-  country: Scalars['String'];
-};
-
-export type CartItem = {
-  __typename?: 'CartItem';
-  user: User;
-  id: Scalars['ID'];
-  quantity: Scalars['Float'];
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
-  addProduct: Product;
+  addAddress: Address;
   login: LoginResponse;
   signup: Scalars['Boolean'];
   logout: Scalars['Boolean'];
+  addProduct: Product;
 };
 
 
-export type MutationAddProductArgs = {
-  data: AddProductInput;
+export type MutationAddAddressArgs = {
+  data: AddAddress;
 };
 
 
@@ -113,21 +120,23 @@ export type MutationLoginArgs = {
 
 
 export type MutationSignupArgs = {
-  password: Scalars['String'];
-  email: Scalars['String'];
-  username: Scalars['String'];
+  data: SignupInput;
 };
 
-/** New product data */
-export type AddProductInput = {
-  modelId: Scalars['String'];
-  title: Scalars['String'];
-  description: Scalars['String'];
-  price: Scalars['Float'];
-  gender: Scalars['String'];
-  color: Scalars['String'];
-  size: Scalars['Float'];
-  images: Array<Scalars['String']>;
+
+export type MutationAddProductArgs = {
+  data: AddProductInput;
+};
+
+export type AddAddress = {
+  userId: Scalars['String'];
+  companyName?: Maybe<Scalars['String']>;
+  addressPrimary: Scalars['String'];
+  addressSecondary?: Maybe<Scalars['String']>;
+  postalCode: Scalars['Float'];
+  city: Scalars['String'];
+  state: Scalars['String'];
+  country: Scalars['String'];
 };
 
 export type LoginResponse = {
@@ -135,11 +144,26 @@ export type LoginResponse = {
   accessToken: Scalars['String'];
 };
 
-export type Order = {
-  __typename?: 'Order';
-  id: Scalars['ID'];
-  amount: Scalars['Float'];
-  status: Scalars['String'];
+export type SignupInput = {
+  username: Scalars['String'];
+  email: Scalars['String'];
+  password: Scalars['String'];
+  title: Scalars['String'];
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  phoneNumber: Scalars['String'];
+  isAdmin?: Maybe<Scalars['Boolean']>;
+};
+
+export type AddProductInput = {
+  modelId: Scalars['String'];
+  title: Scalars['String'];
+  description: Scalars['String'];
+  price: Scalars['Float'];
+  gender: Scalars['Float'];
+  color: Scalars['String'];
+  size: Scalars['Float'];
+  images: Array<Scalars['String']>;
 };
 
 export type OrderItem = {

@@ -5,7 +5,7 @@ import ProductDetail from "../models/ProductDetail";
 import { ProductImage } from "../models/ProductImage";
 import AddProductInput from "./inputs/AddProductInput";
 
-@Resolver()
+@Resolver(() => Product)
 export default class ProductResolver {
   @Query(() => Product)
   product(@Arg("id") id: string) {
