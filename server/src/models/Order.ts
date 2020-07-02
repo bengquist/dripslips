@@ -48,6 +48,6 @@ export default class Order extends BaseEntity {
   address: Address;
 
   @Field(() => [OrderItem])
-  @OneToMany(() => OrderItem, (orderItem) => orderItem.order)
+  @OneToMany(() => OrderItem, (orderItem) => orderItem.order, { cascade: true })
   items: OrderItem[];
 }
