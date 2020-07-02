@@ -3,6 +3,7 @@ import {
   BaseEntity,
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -24,6 +25,8 @@ export class CartItem extends BaseEntity {
   @ManyToOne(() => User, (user) => user.cartItems)
   user: User;
 
+  @Field(() => ProductDetail)
   @OneToOne(() => ProductDetail)
+  @JoinColumn()
   productDetails: ProductDetail;
 }

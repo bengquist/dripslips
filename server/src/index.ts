@@ -3,9 +3,11 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import "dotenv/config";
 import express from "express";
+import { verify } from "jsonwebtoken";
 import "reflect-metadata";
 import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
+import User from "./models/User";
 import resolvers from "./resolvers";
 import refreshToken from "./utils/refreshToken";
 
@@ -27,7 +29,23 @@ const path = "/graphql";
 
   const server = new ApolloServer({
     schema,
-    context: ({ req, res }) => ({ req, res }),
+    context: async ({ req, res }) => {
+      let user = null;
+
+      const authorization = req.headers.authorization || "";
+      const token = authorization?.split(" ")[1];
+      console.log(token);
+
+      if (token) {
+        const { userId = "" } = verify(
+          token,
+          process.env.JWT_ACCESS_TOKEN_SECRET!
+        ) as any;
+        user = await User.findOne(userId);
+      }
+
+      return { req, res, user };
+    },
   });
 
   server.applyMiddleware({ app, path });

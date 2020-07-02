@@ -5,7 +5,7 @@ import User from "../models/User";
 const { JWT_ACCESS_TOKEN_SECRET, JWT_REFRESH_TOKEN_SECRET } = process.env;
 
 export const createAccessToken = (userId: string) => {
-  return sign({ userId }, JWT_ACCESS_TOKEN_SECRET!, { expiresIn: "10m" });
+  return sign({ userId }, JWT_ACCESS_TOKEN_SECRET!, { expiresIn: "10d" });
 };
 
 export const createRefreshToken = (user: User) => {

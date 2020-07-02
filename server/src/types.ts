@@ -7,5 +7,6 @@ interface IUserRequest extends Request {
 export interface AppContext {
   req: IUserRequest;
   res: Response;
+  user?: any;
   payload?: { userId: string };
 }
