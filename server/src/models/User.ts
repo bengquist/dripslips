@@ -9,6 +9,7 @@ import {
 } from "typeorm";
 import Address from "./Address";
 import { CartItem } from "./CartItem";
+import Order from "./Order";
 
 @Entity()
 @ObjectType()
@@ -20,6 +21,10 @@ export default class User extends BaseEntity {
   @Field(() => [CartItem])
   @OneToMany(() => CartItem, (cartItem) => cartItem.user)
   cartItems: CartItem[];
+
+  @Field(() => [Order])
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order[];
 
   @Field(() => ID)
   @PrimaryGeneratedColumn("uuid")
