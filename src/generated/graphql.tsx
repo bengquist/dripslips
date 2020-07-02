@@ -15,7 +15,6 @@ export type Scalars = {
 export type Query = {
   __typename?: 'Query';
   me?: Maybe<User>;
-  productDetails: Array<ProductDetail>;
   product: Product;
   products: Array<Product>;
 };
@@ -27,9 +26,6 @@ export type QueryProductArgs = {
 
 export type User = {
   __typename?: 'User';
-  address: Array<Address>;
-  cartItems: Array<CartItem>;
-  orders: Array<Order>;
   id: Scalars['ID'];
   username: Scalars['String'];
   email: Scalars['String'];
@@ -39,12 +35,13 @@ export type User = {
   phoneNumber: Scalars['String'];
   isAdmin: Scalars['Boolean'];
   tokenVersion: Scalars['Float'];
+  address: Array<Address>;
+  cartItems: Array<CartItem>;
+  orders: Array<Order>;
 };
 
 export type Address = {
   __typename?: 'Address';
-  user: User;
-  orders: Array<Order>;
   id: Scalars['ID'];
   companyName?: Maybe<Scalars['String']>;
   addressPrimary: Scalars['String'];
@@ -55,47 +52,64 @@ export type Address = {
   country: Scalars['String'];
 };
 
-export type Order = {
-  __typename?: 'Order';
-  user: User;
-  address: Address;
-  id: Scalars['ID'];
-  amount: Scalars['Float'];
-  status: Scalars['Float'];
-};
-
 export type CartItem = {
   __typename?: 'CartItem';
-  user: User;
   id: Scalars['ID'];
   quantity: Scalars['Float'];
+  productDetails: ProductDetail;
 };
 
 export type ProductDetail = {
   __typename?: 'ProductDetail';
-  product: Product;
-  productImages: Array<ProductImage>;
   id: Scalars['ID'];
   size: Scalars['Float'];
   color: Scalars['String'];
+  product: Product;
+  productImages: Array<ProductImage>;
 };
 
 export type Product = {
   __typename?: 'Product';
-  productDetails: Array<ProductDetail>;
   id: Scalars['ID'];
   modelId: Scalars['String'];
   title: Scalars['String'];
   description: Scalars['String'];
   price: Scalars['Float'];
-  gender: Scalars['Float'];
+  gender: Gender;
+  productDetails: Array<ProductDetail>;
 };
+
+export enum Gender {
+  Male = 'Male',
+  Female = 'Female'
+}
 
 export type ProductImage = {
   __typename?: 'ProductImage';
-  productDetails: ProductDetail;
   id: Scalars['ID'];
   url: Scalars['String'];
+};
+
+export type Order = {
+  __typename?: 'Order';
+  id: Scalars['ID'];
+  amount: Scalars['Float'];
+  status: OrderStatus;
+  user: User;
+  address: Address;
+  items: Array<OrderItem>;
+};
+
+export enum OrderStatus {
+  Pending = 'Pending',
+  Completed = 'Completed'
+}
+
+export type OrderItem = {
+  __typename?: 'OrderItem';
+  id: Scalars['ID'];
+  quantity: Scalars['Float'];
+  productDetails: ProductDetail;
 };
 
 export type Mutation = {
@@ -104,12 +118,13 @@ export type Mutation = {
   login: LoginResponse;
   signup: Scalars['Boolean'];
   logout: Scalars['Boolean'];
+  addCartItem: CartItem;
   addProduct: Product;
 };
 
 
 export type MutationAddAddressArgs = {
-  data: AddAddress;
+  data: AddAddressInput;
 };
 
 
@@ -124,11 +139,16 @@ export type MutationSignupArgs = {
 };
 
 
+export type MutationAddCartItemArgs = {
+  data: AddCartItemInput;
+};
+
+
 export type MutationAddProductArgs = {
   data: AddProductInput;
 };
 
-export type AddAddress = {
+export type AddAddressInput = {
   userId: Scalars['String'];
   companyName?: Maybe<Scalars['String']>;
   addressPrimary: Scalars['String'];
@@ -155,23 +175,20 @@ export type SignupInput = {
   isAdmin?: Maybe<Scalars['Boolean']>;
 };
 
+export type AddCartItemInput = {
+  quantity: Scalars['Float'];
+  productDetailsId: Scalars['String'];
+};
+
 export type AddProductInput = {
   modelId: Scalars['String'];
   title: Scalars['String'];
   description: Scalars['String'];
   price: Scalars['Float'];
-  gender: Scalars['Float'];
+  gender: Gender;
   color: Scalars['String'];
   size: Scalars['Float'];
   images: Array<Scalars['String']>;
-};
-
-export type OrderItem = {
-  __typename?: 'OrderItem';
-  order: Order;
-  productDetails: ProductDetail;
-  id: Scalars['ID'];
-  quantity: Scalars['Float'];
 };
 
 export type FilteredProductsQueryVariables = Exact<{
