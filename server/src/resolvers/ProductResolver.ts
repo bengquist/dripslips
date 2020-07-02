@@ -22,9 +22,7 @@ export default class ProductResolver {
 
   @Query(() => [Product])
   async products() {
-    const products = await Product.find({
-      relations: ["productDetails", "productDetails.productImages"],
-    });
+    const products = await Product.find();
 
     return products;
   }

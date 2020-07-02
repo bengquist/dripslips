@@ -1,11 +1,12 @@
 import { FieldResolver, Resolver, Root } from "type-graphql";
 import Product from "../models/Product";
 import ProductDetail from "../models/ProductDetail";
+import { ProductImage } from "../models/ProductImage";
 
 @Resolver(() => ProductDetail)
 export default class ProductDetailResolver {
   @FieldResolver()
-  async product(@Root() productDetail: ProductDetail): Promise<Product> {
+  product(@Root() productDetail: ProductDetail): Promise<Product> {
     const product = Product.findOne(productDetail.productId);
 
     if (!product) {
@@ -14,5 +15,14 @@ export default class ProductDetailResolver {
 
     //@ts-ignore
     return product;
+  }
+
+  @FieldResolver()
+  productImages(@Root() productDetail: ProductDetail): Promise<ProductImage[]> {
+    const productImages = ProductImage.find({
+      where: { productDetailsId: productDetail.id },
+    });
+
+    return productImages;
   }
 }
