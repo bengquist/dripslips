@@ -7,6 +7,5 @@ fragment ProductInfo on Product {
   details {
     size
     color
-    ...ProductImages
   }
 }

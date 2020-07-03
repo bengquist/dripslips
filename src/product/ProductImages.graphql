@@ -1,5 +1,7 @@
-fragment ProductImages on ProductInfo {
-  productImages {
-    url
+fragment ProductImages on Product {
+  details {
+    productImages {
+      url
+    }
   }
 }
