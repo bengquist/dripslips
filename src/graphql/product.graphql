@@ -1,18 +1,6 @@
 query Product($id: String!) {
   product(id: $id) {
-    id
-    modelId
-    title
-    description
-    price
-    gender
-    details {
-      size
-      color
-      productImages {
-        id
-        url
-      }
-    }
+    ...ProductInfo
+    ...ProductImages
   }
 }

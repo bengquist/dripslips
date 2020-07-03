@@ -1,0 +1,12 @@
+fragment ProductInfo on Product {
+  id
+  modelId
+  title
+  description
+  price
+  details {
+    size
+    color
+    ...ProductImages
+  }
+}
