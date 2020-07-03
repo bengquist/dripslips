@@ -1,5 +1,6 @@
 query FilteredProducts($gender: String) {
   products {
+    id
     modelId
     title
     description

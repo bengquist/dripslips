@@ -2,8 +2,8 @@ import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import formatCurrency from "../common/formatCurrency";
+import { Product } from "../generated/graphql";
 import { lightGrayOutline } from "../style/helpers";
-import { Product } from "./types";
 
 type Props = {
   product: Product;
@@ -13,7 +13,7 @@ const ItemCard: React.FC<Props> = ({ product }) => {
   return (
     <Link href="product/[id]" as={`/product/${product.id}`}>
       <Container>
-        <Image src={product.images[0]} alt="" />
+        <Image src={product.details[0].productImages[0].url} alt="" />
 
         <div>
           <h3>{product.title}</h3>

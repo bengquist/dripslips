@@ -51,7 +51,7 @@ const CartProductCard: React.FC<Props> = (props) => {
   return (
     <>
       <Container>
-        <Image src={product.images[0]} alt="" />
+        <Image src={product.details[0].productImages[0].url} alt="" />
         <Info css={gap({ bottom: 1 })}>
           <Link href="/product/[id]" as={`/product/${product.id}`}>
             <button>

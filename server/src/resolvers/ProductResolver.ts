@@ -6,7 +6,6 @@ import {
   Resolver,
   Root,
 } from "type-graphql";
-import products from "../data/products";
 import Product from "../models/Product";
 import ProductDetail from "../models/ProductDetail";
 import { ProductImage } from "../models/ProductImage";
@@ -16,8 +15,7 @@ import AddProductInput from "./inputs/AddProductInput";
 export default class ProductResolver {
   @Query(() => Product)
   product(@Arg("id") id: string) {
-    const product = products.find((product) => product.id === id);
-    return product;
+    return Product.findOne(id);
   }
 
   @Query(() => [Product])

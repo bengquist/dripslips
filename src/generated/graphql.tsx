@@ -211,7 +211,7 @@ export type FilteredProductsQuery = (
   { __typename?: 'Query' }
   & { products: Array<(
     { __typename?: 'Product' }
-    & Pick<Product, 'modelId' | 'title' | 'description' | 'price' | 'gender'>
+    & Pick<Product, 'id' | 'modelId' | 'title' | 'description' | 'price' | 'gender'>
     & { details: Array<(
       { __typename?: 'ProductDetail' }
       & Pick<ProductDetail, 'size' | 'color'>
@@ -232,7 +232,7 @@ export type ProductQuery = (
   { __typename?: 'Query' }
   & { product: (
     { __typename?: 'Product' }
-    & Pick<Product, 'modelId' | 'title' | 'description' | 'price' | 'gender'>
+    & Pick<Product, 'id' | 'modelId' | 'title' | 'description' | 'price' | 'gender'>
     & { details: Array<(
       { __typename?: 'ProductDetail' }
       & Pick<ProductDetail, 'size' | 'color'>
@@ -251,7 +251,7 @@ export type ProductsQuery = (
   { __typename?: 'Query' }
   & { products: Array<(
     { __typename?: 'Product' }
-    & Pick<Product, 'modelId' | 'title' | 'description' | 'price' | 'gender'>
+    & Pick<Product, 'id' | 'modelId' | 'title' | 'description' | 'price' | 'gender'>
     & { details: Array<(
       { __typename?: 'ProductDetail' }
       & Pick<ProductDetail, 'size' | 'color'>
@@ -267,6 +267,7 @@ export type ProductsQuery = (
 export const FilteredProductsDocument = gql`
     query FilteredProducts($gender: String) {
   products {
+    id
     modelId
     title
     description
@@ -311,6 +312,7 @@ export type FilteredProductsQueryResult = ApolloReactCommon.QueryResult<Filtered
 export const ProductDocument = gql`
     query Product($id: String!) {
   product(id: $id) {
+    id
     modelId
     title
     description
@@ -355,6 +357,7 @@ export type ProductQueryResult = ApolloReactCommon.QueryResult<ProductQuery, Pro
 export const ProductsDocument = gql`
     query Products {
   products {
+    id
     modelId
     title
     description

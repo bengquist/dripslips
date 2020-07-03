@@ -5,10 +5,10 @@ import styled from "styled-components";
 import { useCart } from "../cart/CartContext";
 import { ADD_PRODUCT } from "../cart/reducer";
 import formatCurrency from "../common/formatCurrency";
+import { Product } from "../generated/graphql";
 import { gap } from "../style/helpers";
 import SquareButton from "../ui/SquareButton";
 import ProductSizeModal from "./ProductSizeModal";
-import { Product } from "./types";
 
 type Props = {
   product: Product;
@@ -48,7 +48,7 @@ const ProductInfo: React.FC<Props> = ({ product }) => {
       <ProductSizeModal
         isVisible={showSizeSelect}
         onClose={() => setShowSizeSelect(false)}
-        sizes={product.availableSizes}
+        sizes={[product.details[0].size]}
       />
     </Container>
   );

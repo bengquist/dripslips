@@ -21,7 +21,7 @@ const ProductPage = () => {
         <BackButtonContainer>
           <BackButton />
         </BackButtonContainer>
-        <ProductImages images={data?.product.images} />
+        <ProductImages images={data?.product.details[0].productImages} />
         <ProductInfo product={data?.product} />
       </Container>
     </Loader>
