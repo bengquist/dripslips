@@ -227,7 +227,7 @@ export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename
 
 export type ProductImagesFragment = { __typename?: 'Product', details: Array<{ __typename?: 'ProductDetail', productImages: Array<{ __typename?: 'ProductImage', url: string }> }> };
 
-export type ProductInfoFragment = { __typename?: 'Product', id: string, modelId: string, title: string, description: string, price: number, details: Array<{ __typename?: 'ProductDetail', size: number, color: string }> };
+export type ProductInfoFragment = { __typename?: 'Product', id: string, modelId: string, title: string, description: string, price: number, gender: Gender, details: Array<{ __typename?: 'ProductDetail', size: number, color: string }> };
 
 export const ProductImagesFragmentDoc = gql`
     fragment ProductImages on Product {
@@ -245,6 +245,7 @@ export const ProductInfoFragmentDoc = gql`
   title
   description
   price
+  gender
   details {
     size
     color

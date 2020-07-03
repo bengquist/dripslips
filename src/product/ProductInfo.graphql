@@ -4,6 +4,7 @@ fragment ProductInfo on Product {
   title
   description
   price
+  gender
   details {
     size
     color

@@ -5,13 +5,13 @@ import styled from "styled-components";
 import { useCart } from "../cart/CartContext";
 import { ADD_PRODUCT } from "../cart/reducer";
 import formatCurrency from "../common/formatCurrency";
-import { Product } from "../generated/graphql";
+import { ProductInfoFragment } from "../generated/graphql";
 import { gap } from "../style/helpers";
 import SquareButton from "../ui/SquareButton";
 import ProductSizeModal from "./ProductSizeModal";
 
 type Props = {
-  product: Product;
+  product: ProductInfoFragment;
 };
 
 const ProductInfo: React.FC<Props> = ({ product }) => {

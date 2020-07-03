@@ -1,15 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { ProductImage } from "../generated/graphql";
 import { lightGrayOutline } from "../style/helpers";
 
 type Props = {
-  images: ProductImage[];
+  images: string[];
 };
 
 const ProductImages: React.FC<Props> = ({ images }) => {
   const productImages = images.map((image) => (
-    <Image key={image.url} src={image.url} />
+    <Image key={image} src={image} />
   ));
 
   return <Container>{productImages}</Container>;
