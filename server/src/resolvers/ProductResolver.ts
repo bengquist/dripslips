@@ -39,7 +39,7 @@ export default class ProductResolver {
       return productImage;
     });
 
-    product.productDetails = [details];
+    product.details = [details];
     details.productImages = productImages;
     details.product = product;
 
@@ -51,7 +51,7 @@ export default class ProductResolver {
   }
 
   @FieldResolver()
-  async productDetails(@Root() product: Product): Promise<ProductDetail[]> {
+  async details(@Root() product: Product): Promise<ProductDetail[]> {
     return ProductDetail.find({ where: { productId: product.id } });
   }
 }

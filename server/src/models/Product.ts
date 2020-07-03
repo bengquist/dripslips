@@ -46,5 +46,5 @@ export default class Product extends BaseEntity {
 
   @Field(() => [ProductDetail])
   @OneToMany(() => ProductDetail, (productDetail) => productDetail.product)
-  productDetails: ProductDetail[];
+  details: ProductDetail[];
 }

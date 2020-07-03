@@ -36,7 +36,7 @@ export type User = {
   isAdmin: Scalars['Boolean'];
   tokenVersion: Scalars['Float'];
   address: Array<Address>;
-  cartItems: Array<CartItem>;
+  cart: Array<CartItem>;
   orders: Array<Order>;
 };
 
@@ -76,7 +76,7 @@ export type Product = {
   description: Scalars['String'];
   price: Scalars['Float'];
   gender: Gender;
-  productDetails: Array<ProductDetail>;
+  details: Array<ProductDetail>;
 };
 
 export enum Gender {
@@ -119,6 +119,7 @@ export type Mutation = {
   signup: Scalars['Boolean'];
   logout: Scalars['Boolean'];
   addCartItem: CartItem;
+  createOrder: Order;
   addProduct: Product;
 };
 
@@ -141,6 +142,11 @@ export type MutationSignupArgs = {
 
 export type MutationAddCartItemArgs = {
   data: AddCartItemInput;
+};
+
+
+export type MutationCreateOrderArgs = {
+  data: CreateOrderInput;
 };
 
 
@@ -180,6 +186,11 @@ export type AddCartItemInput = {
   productDetailsId: Scalars['String'];
 };
 
+export type CreateOrderInput = {
+  addressId: Scalars['String'];
+  status: OrderStatus;
+};
+
 export type AddProductInput = {
   modelId: Scalars['String'];
   title: Scalars['String'];
@@ -201,7 +212,7 @@ export type FilteredProductsQuery = (
   & { products: Array<(
     { __typename?: 'Product' }
     & Pick<Product, 'modelId' | 'title' | 'description' | 'price' | 'gender'>
-    & { productDetails: Array<(
+    & { details: Array<(
       { __typename?: 'ProductDetail' }
       & Pick<ProductDetail, 'size' | 'color'>
       & { productImages: Array<(
@@ -222,7 +233,7 @@ export type ProductQuery = (
   & { product: (
     { __typename?: 'Product' }
     & Pick<Product, 'modelId' | 'title' | 'description' | 'price' | 'gender'>
-    & { productDetails: Array<(
+    & { details: Array<(
       { __typename?: 'ProductDetail' }
       & Pick<ProductDetail, 'size' | 'color'>
       & { productImages: Array<(
@@ -241,7 +252,7 @@ export type ProductsQuery = (
   & { products: Array<(
     { __typename?: 'Product' }
     & Pick<Product, 'modelId' | 'title' | 'description' | 'price' | 'gender'>
-    & { productDetails: Array<(
+    & { details: Array<(
       { __typename?: 'ProductDetail' }
       & Pick<ProductDetail, 'size' | 'color'>
       & { productImages: Array<(
@@ -261,7 +272,7 @@ export const FilteredProductsDocument = gql`
     description
     price
     gender
-    productDetails {
+    details {
       size
       color
       productImages {
@@ -305,7 +316,7 @@ export const ProductDocument = gql`
     description
     price
     gender
-    productDetails {
+    details {
       size
       color
       productImages {
@@ -349,7 +360,7 @@ export const ProductsDocument = gql`
     description
     price
     gender
-    productDetails {
+    details {
       size
       color
       productImages {

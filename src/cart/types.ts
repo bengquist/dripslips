@@ -1,4 +1,6 @@
-import { Product } from "../product/types";
+// import { Product } from "../product/types";
+
+import { Product } from "../generated/graphql";
 
 export type CartProduct = {
   product: Product;

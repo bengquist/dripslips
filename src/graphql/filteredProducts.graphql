@@ -5,7 +5,7 @@ query FilteredProducts($gender: String) {
     description
     price
     gender
-    productDetails {
+    details {
       size
       color
       productImages {

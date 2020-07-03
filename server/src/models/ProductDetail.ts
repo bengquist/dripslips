@@ -26,7 +26,7 @@ export default class ProductDetail extends BaseEntity {
   color: string;
 
   @Field(() => Product)
-  @ManyToOne(() => Product, (product) => product.productDetails)
+  @ManyToOne(() => Product, (product) => product.details)
   product: Product;
   @Column({ nullable: true })
   productId: string;
