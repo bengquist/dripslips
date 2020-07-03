@@ -14,6 +14,10 @@ const ProductPage = () => {
 
   const { loading, error, data } = useProductQuery({ variables: { id } });
 
+  if (!data?.product) {
+    return <div>No product with that id</div>;
+  }
+
   return (
     <Loader isLoading={loading} error={error}>
       <Container>

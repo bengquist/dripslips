@@ -207,61 +207,19 @@ export type FilteredProductsQueryVariables = Exact<{
 }>;
 
 
-export type FilteredProductsQuery = (
-  { __typename?: 'Query' }
-  & { products: Array<(
-    { __typename?: 'Product' }
-    & Pick<Product, 'id' | 'modelId' | 'title' | 'description' | 'price' | 'gender'>
-    & { details: Array<(
-      { __typename?: 'ProductDetail' }
-      & Pick<ProductDetail, 'size' | 'color'>
-      & { productImages: Array<(
-        { __typename?: 'ProductImage' }
-        & Pick<ProductImage, 'url'>
-      )> }
-    )> }
-  )> }
-);
+export type FilteredProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, modelId: string, title: string, description: string, price: number, gender: Gender, details: Array<{ __typename?: 'ProductDetail', size: number, color: string, productImages: Array<{ __typename?: 'ProductImage', id: string, url: string }> }> }> };
 
 export type ProductQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type ProductQuery = (
-  { __typename?: 'Query' }
-  & { product: (
-    { __typename?: 'Product' }
-    & Pick<Product, 'id' | 'modelId' | 'title' | 'description' | 'price' | 'gender'>
-    & { details: Array<(
-      { __typename?: 'ProductDetail' }
-      & Pick<ProductDetail, 'size' | 'color'>
-      & { productImages: Array<(
-        { __typename?: 'ProductImage' }
-        & Pick<ProductImage, 'url'>
-      )> }
-    )> }
-  ) }
-);
+export type ProductQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, modelId: string, title: string, description: string, price: number, gender: Gender, details: Array<{ __typename?: 'ProductDetail', size: number, color: string, productImages: Array<{ __typename?: 'ProductImage', id: string, url: string }> }> } };
 
 export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProductsQuery = (
-  { __typename?: 'Query' }
-  & { products: Array<(
-    { __typename?: 'Product' }
-    & Pick<Product, 'id' | 'modelId' | 'title' | 'description' | 'price' | 'gender'>
-    & { details: Array<(
-      { __typename?: 'ProductDetail' }
-      & Pick<ProductDetail, 'size' | 'color'>
-      & { productImages: Array<(
-        { __typename?: 'ProductImage' }
-        & Pick<ProductImage, 'url'>
-      )> }
-    )> }
-  )> }
-);
+export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, modelId: string, title: string, description: string, price: number, gender: Gender, details: Array<{ __typename?: 'ProductDetail', size: number, color: string, productImages: Array<{ __typename?: 'ProductImage', id: string, url: string }> }> }> };
 
 
 export const FilteredProductsDocument = gql`
@@ -277,6 +235,7 @@ export const FilteredProductsDocument = gql`
       size
       color
       productImages {
+        id
         url
       }
     }
@@ -322,6 +281,7 @@ export const ProductDocument = gql`
       size
       color
       productImages {
+        id
         url
       }
     }
@@ -367,6 +327,7 @@ export const ProductsDocument = gql`
       size
       color
       productImages {
+        id
         url
       }
     }

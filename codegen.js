@@ -10,7 +10,7 @@ module.exports = {
         "typescript-react-apollo",
       ],
       config: {
-        skipTypename: false,
+        preResolveTypes: true,
         withHooks: true,
         withHOC: false,
         withComponent: false,

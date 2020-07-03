@@ -1,4 +1,4 @@
-import { Product } from "../product/types";
+import { Product } from "../generated/graphql";
 import { CartProduct } from "./types";
 
 export const ADD_PRODUCT = "ADD_PRODUCT";

@@ -10,6 +10,7 @@ query FilteredProducts($gender: String) {
       size
       color
       productImages {
+        id
         url
       }
     }

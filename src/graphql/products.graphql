@@ -10,6 +10,7 @@ query Products {
       size
       color
       productImages {
+        id
         url
       }
     }
