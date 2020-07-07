@@ -15,6 +15,8 @@ export default async (req: Request, res: Response) => {
     return res.send({ ok: false, accessToken: "" });
   }
 
+  console.log(token);
+
   try {
     payload = verify(token, process.env.JWT_REFRESH_TOKEN_SECRET!);
   } catch (err) {
