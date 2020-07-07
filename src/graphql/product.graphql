@@ -1,6 +1,10 @@
+fragment ProductFields on Product {
+  ...ProductInfo
+  ...ProductImages
+}
+
 query Product($id: String!) {
   product(id: $id) {
-    ...ProductInfo
-    ...ProductImages
+    ...ProductFields
   }
 }

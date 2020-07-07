@@ -11,8 +11,6 @@ import Radio from "../../ui/Radio";
 const CheckoutPaymentPage = () => {
   const [paymentMethod, setPaymentMethod] = useState("card");
 
-  console.log(paymentMethod);
-
   return (
     <Loader>
       <SEO title="Identification" />

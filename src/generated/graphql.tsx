@@ -217,6 +217,12 @@ export type LoginMutationVariables = Exact<{
 
 export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginResponse', accessToken: string } };
 
+export type ProductFieldsFragment = (
+  { __typename?: 'Product' }
+  & ProductInfoFragment
+  & ProductImagesFragment
+);
+
 export type ProductQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -224,8 +230,7 @@ export type ProductQueryVariables = Exact<{
 
 export type ProductQuery = { __typename?: 'Query', product: (
     { __typename?: 'Product' }
-    & ProductInfoFragment
-    & ProductImagesFragment
+    & ProductFieldsFragment
   ) };
 
 export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
@@ -237,15 +242,6 @@ export type ProductImagesFragment = { __typename?: 'Product', details: Array<{ _
 
 export type ProductInfoFragment = { __typename?: 'Product', id: string, modelId: string, title: string, description: string, price: number, gender: Gender, details: Array<{ __typename?: 'ProductDetail', size: number, color: string }> };
 
-export const ProductImagesFragmentDoc = gql`
-    fragment ProductImages on Product {
-  details {
-    productImages {
-      url
-    }
-  }
-}
-    `;
 export const ProductInfoFragmentDoc = gql`
     fragment ProductInfo on Product {
   id
@@ -260,6 +256,22 @@ export const ProductInfoFragmentDoc = gql`
   }
 }
     `;
+export const ProductImagesFragmentDoc = gql`
+    fragment ProductImages on Product {
+  details {
+    productImages {
+      url
+    }
+  }
+}
+    `;
+export const ProductFieldsFragmentDoc = gql`
+    fragment ProductFields on Product {
+  ...ProductInfo
+  ...ProductImages
+}
+    ${ProductInfoFragmentDoc}
+${ProductImagesFragmentDoc}`;
 export const FilteredProductsDocument = gql`
     query FilteredProducts($gender: String) {
   products {
@@ -342,12 +354,10 @@ export type LoginMutationOptions = ApolloReactCommon.BaseMutationOptions<LoginMu
 export const ProductDocument = gql`
     query Product($id: String!) {
   product(id: $id) {
-    ...ProductInfo
-    ...ProductImages
+    ...ProductFields
   }
 }
-    ${ProductInfoFragmentDoc}
-${ProductImagesFragmentDoc}`;
+    ${ProductFieldsFragmentDoc}`;
 
 /**
  * __useProductQuery__
