@@ -1,8 +1,11 @@
-import React from "react";
+import React, { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
 
-const LinkButton: React.FC = ({ children }) => {
-  return <Button>{children}</Button>;
+const LinkButton: React.FC<ComponentPropsWithoutRef<"button">> = ({
+  children,
+  ...props
+}) => {
+  return <Button {...props}>{children}</Button>;
 };
 
 export default LinkButton;

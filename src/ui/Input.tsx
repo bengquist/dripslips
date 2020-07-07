@@ -1,24 +1,27 @@
-import React, { ComponentPropsWithoutRef } from "react";
+import React, { ComponentPropsWithRef, forwardRef, Ref } from "react";
 import styled from "styled-components";
 import { gap } from "../style/helpers";
 import ErrorMessage from "./ErrorMessage";
 
-type Props = ComponentPropsWithoutRef<"input"> & {
+type Props = ComponentPropsWithRef<"input"> & {
   label?: string;
   error?: string | false;
 };
 
-const Input: React.FC<Props> = ({ label, error, ...props }) => {
+const Input = (
+  { label, error, ...props }: Props,
+  ref: Ref<HTMLInputElement>
+) => {
   return (
     <Container error={error}>
       {label && <p>{label}</p>}
-      <InputCustom type="text" error={error} {...props} />
+      <InputCustom ref={ref} type="text" error={error} {...props} />
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </Container>
   );
 };
 
-export default Input;
+export default forwardRef(Input);
 
 const Container = styled.label<{ error?: string | false }>`
   color: ${({ theme, error }) =>

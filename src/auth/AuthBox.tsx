@@ -1,4 +1,5 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { flexAlignCenter, gap } from "../style/helpers";
 import Input from "../ui/Input";
@@ -10,23 +11,50 @@ type Props = {
 };
 
 const AuthBox: React.FC<Props> = ({ title }) => {
+  const { handleSubmit, register, errors } = useForm();
+  const onSubmit = (values) => console.log(values);
+
   return (
-    <Container>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       {title && <h2>{title}</h2>}
-      <AuthInput label="Login *" />
-      <AuthInput label="Password *" />
-      <LinkButton>Forgot your password?</LinkButton>
+      <Input
+        name="email"
+        label="Login *"
+        ref={register({
+          required: "Required",
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: "Invalid email address",
+          },
+        })}
+        error={errors.email?.message}
+      />
+
+      <Input
+        name="password"
+        type="password"
+        label="Password *"
+        ref={register({
+          required: "Required",
+        })}
+        error={errors.password?.message}
+      />
+
+      <LinkButton type="button">Forgot your password?</LinkButton>
+
       <div style={{ width: "100%" }} css={[flexAlignCenter, gap({ right: 1 })]}>
-        <SquareButton variant="secondary">Register</SquareButton>
-        <SquareButton>Sign In</SquareButton>
+        <SquareButton variant="secondary" type="button">
+          Register
+        </SquareButton>
+        <SquareButton type="submit">Sign In</SquareButton>
       </div>
-    </Container>
+    </Form>
   );
 };
 
 export default AuthBox;
 
-const Container = styled.div`
+const Form = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -38,8 +66,4 @@ const Container = styled.div`
   > h2 {
     margin-bottom: 1rem;
   }
-`;
-
-const AuthInput = styled(Input)`
-  width: 100%;
 `;
