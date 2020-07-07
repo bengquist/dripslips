@@ -1,15 +1,26 @@
 import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import Router from "next/router";
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useAuth } from "../auth/AuthContext";
 import AuthSideModal from "../auth/AuthSideModal";
 import CartIcon from "../cart/CartIcon";
 import CartSideModal from "../cart/CartSideModal";
 
 const HeaderActions = () => {
+  const { user } = useAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showCartModal, setShowCartModal] = useState(false);
+
+  const handleProfileRedirect = () => {
+    if (!user) {
+      setShowAuthModal(true);
+    } else {
+      Router.push("/me");
+    }
+  };
 
   return (
     <Container>
@@ -18,7 +29,7 @@ const HeaderActions = () => {
           <FontAwesomeIcon icon={faHeart} size="lg" />
         </Action>
       </Link>
-      <Action onClick={() => setShowAuthModal(true)}>
+      <Action onClick={handleProfileRedirect}>
         <FontAwesomeIcon icon={faUser} size="lg" />
       </Action>
       <Action onClick={() => setShowCartModal(true)}>

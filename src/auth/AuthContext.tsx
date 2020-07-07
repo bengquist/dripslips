@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 type ContextProps = {
   user: any;
   setUser: (user: any) => void;
+  clearUser: () => void;
 };
 
 const AuthContext = createContext({} as ContextProps);
@@ -19,7 +20,8 @@ export const AuthProvider: React.FC = ({ children }) => {
       });
       const data = await res.json();
 
-      console.log(data);
+      await localStorage.setItem("token", data.accessToken);
+      setCurrentUser(data.accessToken);
     })();
   }, []);
 
@@ -29,8 +31,13 @@ export const AuthProvider: React.FC = ({ children }) => {
     setCurrentUser(userId);
   };
 
+  const clearUser = async () => {
+    await localStorage.removeItem("token");
+    setCurrentUser(undefined);
+  };
+
   return (
-    <AuthContext.Provider value={{ user: currentUser, setUser }}>
+    <AuthContext.Provider value={{ user: currentUser, setUser, clearUser }}>
       {children}
     </AuthContext.Provider>
   );

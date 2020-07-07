@@ -19,6 +19,7 @@ export default createGlobalStyle`
   html {
     font-weight: bold;
     color: "#19110B";
+    overflow-y: scroll;
 
     * > * {
       font-family: "Karla", sans-serif;
