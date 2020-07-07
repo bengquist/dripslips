@@ -1,33 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import parseGqlError from "../apollo/parseGqlError";
+import { useLoginMutation } from "../generated/graphql";
 import { flexAlignCenter, gap } from "../style/helpers";
+import ErrorMessage from "../ui/ErrorMessage";
 import Input from "../ui/Input";
 import LinkButton from "../ui/LinkButton";
 import SquareButton from "../ui/SquareButton";
+import { useAuth } from "./AuthContext";
 
 type Props = {
   title?: string;
 };
 
+type LoginValues = {
+  user: string;
+  password: string;
+};
+
 const AuthBox: React.FC<Props> = ({ title }) => {
-  const { handleSubmit, register, errors } = useForm();
-  const onSubmit = (values) => console.log(values);
+  const [error, setError] = useState("");
+  const { setUser } = useAuth();
+  const [login] = useLoginMutation();
+  const { handleSubmit, register, errors, reset } = useForm<LoginValues>();
+
+  const onSubmit = async ({ user, password }: LoginValues) => {
+    setError("");
+
+    try {
+      const { data } = await login({ variables: { user, password } });
+
+      setUser(data?.login.accessToken);
+      console.log(data?.login.accessToken);
+
+      reset();
+    } catch (e) {
+      setError(parseGqlError(e.message));
+    }
+  };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       {title && <h2>{title}</h2>}
+
       <Input
-        name="email"
-        label="Login *"
+        name="user"
+        label="Email or username *"
         ref={register({
           required: "Required",
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: "Invalid email address",
-          },
         })}
-        error={errors.email?.message}
+        error={errors.user?.message}
       />
 
       <Input
@@ -41,6 +64,8 @@ const AuthBox: React.FC<Props> = ({ title }) => {
       />
 
       <LinkButton type="button">Forgot your password?</LinkButton>
+
+      {error && <ErrorMessage>{error}</ErrorMessage>}
 
       <div style={{ width: "100%" }} css={[flexAlignCenter, gap({ right: 1 })]}>
         <SquareButton variant="secondary" type="button">

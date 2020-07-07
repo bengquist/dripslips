@@ -15,7 +15,13 @@ const Input = (
   return (
     <Container error={error}>
       {label && <p>{label}</p>}
-      <InputCustom ref={ref} type="text" error={error} {...props} />
+      <InputCustom
+        ref={ref}
+        type="text"
+        id={props.name}
+        error={error}
+        {...props}
+      />
       {error && <ErrorMessage>{error}</ErrorMessage>}
     </Container>
   );

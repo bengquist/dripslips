@@ -1,6 +1,5 @@
 import { ApolloServer } from "apollo-server-express";
 import cookieParser from "cookie-parser";
-import cors from "cors";
 import "dotenv/config";
 import express from "express";
 import { verify } from "jsonwebtoken";
@@ -9,7 +8,6 @@ import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
 import User from "./models/User";
 import resolvers from "./resolvers";
-import refreshToken from "./utils/refreshToken";
 
 const port = process.env.PORT || 4000;
 const path = "/graphql";
@@ -18,9 +16,9 @@ const path = "/graphql";
   await createConnection();
 
   const app = express();
+  app.use(cookieParser());
 
-  app.use("/refresh_token", cookieParser()).use(cors());
-  app.post("/refresh_token", refreshToken);
+  // app.post("/refresh_token", refreshToken);
 
   const schema = await buildSchema({
     resolvers,
@@ -34,7 +32,6 @@ const path = "/graphql";
 
       const authorization = req.headers.authorization || "";
       const token = authorization?.split(" ")[1];
-      console.log(token);
 
       if (token) {
         const { userId = "" } = verify(

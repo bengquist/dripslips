@@ -1,4 +1,4 @@
-import { AuthenticationError } from "apollo-server-express";
+import { UserInputError } from "apollo-server-express";
 import bcrypt from "bcrypt";
 import {
   Arg,
@@ -40,7 +40,7 @@ export default class AuthResolver {
     });
 
     if (!userData) {
-      throw new AuthenticationError(
+      throw new UserInputError(
         "Could not find a user with that username or email"
       );
     }
@@ -48,7 +48,7 @@ export default class AuthResolver {
     const isValidPassword = await bcrypt.compare(password, userData.password);
 
     if (!isValidPassword) {
-      throw new AuthenticationError("Incorrect password");
+      throw new UserInputError("Incorrect password");
     }
 
     attachRefreshToken(res, createRefreshToken(userData));
@@ -64,10 +64,10 @@ export default class AuthResolver {
     const userWithEmail = await User.findOne({ email: userData.email });
 
     if (userWithUsername) {
-      throw new AuthenticationError("Username is already taken");
+      throw new UserInputError("Username is already taken");
     }
     if (userWithEmail) {
-      throw new AuthenticationError("Email is already taken");
+      throw new UserInputError("Email is already taken");
     }
 
     const hashedPassword = await bcrypt.hash(userData.password, 12);

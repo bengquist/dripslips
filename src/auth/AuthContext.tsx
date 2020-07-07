@@ -1,21 +1,24 @@
+import jwtDecode from "jwt-decode";
 import { createContext, useContext, useState } from "react";
 
 type ContextProps = {
   user: any;
-  login: (user: any) => void;
+  setUser: (user: any) => void;
 };
 
 const AuthContext = createContext({} as ContextProps);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState();
+  const [currentUser, setCurrentUser] = useState();
 
-  const login = (user: any) => {
-    setUser(user);
+  const setUser = (token: string) => {
+    const { userId } = jwtDecode(token);
+
+    setCurrentUser(userId);
   };
 
   return (
-    <AuthContext.Provider value={{ user, login }}>
+    <AuthContext.Provider value={{ user: currentUser, setUser }}>
       {children}
     </AuthContext.Provider>
   );
