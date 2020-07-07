@@ -9,9 +9,13 @@ export const createAccessToken = (userId: string) => {
 };
 
 export const createRefreshToken = (user: User) => {
-  return sign({ userId: user.id }, JWT_REFRESH_TOKEN_SECRET!, {
-    expiresIn: "365d",
-  });
+  return sign(
+    { userId: user.id, tokenVersion: user.tokenVersion },
+    JWT_REFRESH_TOKEN_SECRET!,
+    {
+      expiresIn: "365d",
+    }
+  );
 };
 
 export const attachRefreshToken = (res: Response, token: string) => {
