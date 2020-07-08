@@ -48,7 +48,7 @@ const port = process.env.PORT || 4000;
           ) as any;
           user = await User.findOne(userId);
         } catch (e) {
-          throw new AuthenticationError("UNAUTHENTICATED");
+          throw new AuthenticationError("access token is expired or malformed");
         }
       }
 

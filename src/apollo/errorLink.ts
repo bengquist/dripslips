@@ -36,7 +36,8 @@ const errorLink = onError(({ graphQLErrors, operation, forward }) => {
                 })
                 .catch((error) => {
                   pendingRequests = [];
-                  // Handle token refresh errors e.g clear stored tokens, redirect to login, ...
+                  localStorage.removeItem("token");
+
                   return;
                 })
                 .finally(() => {
