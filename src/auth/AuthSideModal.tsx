@@ -8,7 +8,7 @@ const AuthSideModal: React.FC<SideModalProps> = (props) => {
       <SideModal.Header onClose={props.onClose}>
         IDENTIFICATION
       </SideModal.Header>
-      <AuthBox title="MEMBERS PLEASE SIGN IN" />
+      <AuthBox title="MEMBERS PLEASE SIGN IN" onSubmit={props.onClose} />
     </SideModal>
   );
 };

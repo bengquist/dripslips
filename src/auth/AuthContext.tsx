@@ -24,14 +24,14 @@ export const AuthProvider: React.FC = ({ children }) => {
       const data = await res.json();
 
       if (data.accessToken) {
-        await localStorage.setItem("token", data.accessToken);
         setUser(data.accessToken);
       }
     })();
   }, []);
 
-  const setUser = (token: string) => {
+  const setUser = async (token: string) => {
     const { userId } = jwtDecode(token);
+    await localStorage.setItem("token", token);
     setCurrentUser(userId);
   };
 

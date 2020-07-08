@@ -12,6 +12,7 @@ import { useAuth } from "./AuthContext";
 
 type Props = {
   title?: string;
+  onSubmit?: () => void;
 };
 
 type LoginValues = {
@@ -19,29 +20,30 @@ type LoginValues = {
   password: string;
 };
 
-const AuthBox: React.FC<Props> = ({ title }) => {
+const AuthBox: React.FC<Props> = ({ title, onSubmit }) => {
   const [error, setError] = useState("");
   const { setUser } = useAuth();
   const [login] = useLoginMutation();
   const { handleSubmit, register, errors, reset } = useForm<LoginValues>();
 
-  const onSubmit = async ({ user, password }: LoginValues) => {
+  const submitHandler = async ({ user, password }: LoginValues) => {
     setError("");
 
     try {
       const { data } = await login({ variables: { user, password } });
 
-      setUser(data?.login.accessToken);
-      console.log(data?.login.accessToken);
-
-      reset();
+      if (data?.login) {
+        setUser(data?.login.accessToken);
+        reset();
+        if (onSubmit) onSubmit();
+      }
     } catch (e) {
       setError(parseGqlError(e.message));
     }
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(submitHandler)}>
       {title && <h2>{title}</h2>}
 
       <Input
