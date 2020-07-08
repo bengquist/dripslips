@@ -1,5 +1,5 @@
 import jwtDecode from "jwt-decode";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useLogoutMutation } from "../generated/graphql";
 
 type ContextProps = {
@@ -14,6 +14,19 @@ const AuthContext = createContext({} as ContextProps);
 export const AuthProvider: React.FC = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
   const [logout, { client }] = useLogoutMutation();
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  const getUser = async () => {
+    const token = await localStorage.getItem("token");
+
+    if (token) {
+      const { userId } = jwtDecode(token);
+      setCurrentUser(userId);
+    }
+  };
 
   const setUser = async (token: string) => {
     const { userId } = jwtDecode(token);

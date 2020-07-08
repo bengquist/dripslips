@@ -29,7 +29,7 @@ const errorLink = onError(({ graphQLErrors, operation, forward }) => {
             isRefreshing = true;
             forward$ = fromPromise(
               getNewToken()
-                .then(({ accessToken, refreshToken }) => {
+                .then(({ accessToken }) => {
                   localStorage.setItem("token", accessToken);
                   resolvePendingRequests();
                   return accessToken;
