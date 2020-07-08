@@ -2,11 +2,11 @@ import Link from "next/link";
 import React, { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
 import formatCurrency from "../common/formatCurrency";
-import { Product } from "../product/types";
+import { ProductFieldsFragment } from "../generated/graphql";
 import { flexSpaceBetweenAlignCenter, gap } from "../style/helpers";
 
 type Props = ComponentPropsWithoutRef<"button"> & {
-  product: Product;
+  product: ProductFieldsFragment;
   quantity: number;
 };
 
@@ -19,7 +19,7 @@ const CartProductModalCard: React.FC<Props> = ({
     <Link href="/product/[id]" as={`/product/${product.id}`}>
       <Container {...props}>
         <Info>
-          <Image src={product.images[0]} />
+          <Image src={product.details[0].productImages[0].url} />
           <div css={gap({ bottom: 1 })}>
             <p>{product.title}</p>
             <p>Quantity: {quantity}</p>

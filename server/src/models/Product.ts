@@ -25,7 +25,7 @@ export default class Product extends BaseEntity {
   id: string;
 
   @Field()
-  @Column({ unique: true })
+  @Column()
   modelId: string;
 
   @Field()

@@ -18,7 +18,7 @@ export default class ProductDetail extends BaseEntity {
   id: string;
 
   @Field()
-  @Column()
+  @Column("float")
   size: number;
 
   @Field()

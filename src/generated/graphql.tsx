@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
-import * as ApolloReactCommon from '@apollo/react-common';
-import * as ApolloReactHooks from '@apollo/react-hooks';
+import * as ApolloReactCommon from "@apollo/react-common";
+import * as ApolloReactHooks from "@apollo/react-hooks";
+import gql from "graphql-tag";
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
@@ -13,87 +13,86 @@ export type Scalars = {
 };
 
 export type Query = {
-  __typename?: 'Query';
+  __typename?: "Query";
   me?: Maybe<User>;
   product: Product;
   products: Array<Product>;
 };
 
-
 export type QueryProductArgs = {
-  id: Scalars['String'];
+  id: Scalars["String"];
 };
 
 export type User = {
-  __typename?: 'User';
-  id: Scalars['ID'];
-  username: Scalars['String'];
-  email: Scalars['String'];
-  title: Scalars['String'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  phoneNumber: Scalars['String'];
-  isAdmin: Scalars['Boolean'];
-  tokenVersion: Scalars['Float'];
+  __typename?: "User";
+  id: Scalars["ID"];
+  username: Scalars["String"];
+  email: Scalars["String"];
+  title: Scalars["String"];
+  firstName: Scalars["String"];
+  lastName: Scalars["String"];
+  phoneNumber: Scalars["String"];
+  isAdmin: Scalars["Boolean"];
+  tokenVersion: Scalars["Float"];
   address: Array<Address>;
   cart: Array<CartItem>;
   orders: Array<Order>;
 };
 
 export type Address = {
-  __typename?: 'Address';
-  id: Scalars['ID'];
-  companyName?: Maybe<Scalars['String']>;
-  addressPrimary: Scalars['String'];
-  addressSecondary?: Maybe<Scalars['String']>;
-  postalCode: Scalars['Float'];
-  city: Scalars['String'];
-  state: Scalars['String'];
-  country: Scalars['String'];
+  __typename?: "Address";
+  id: Scalars["ID"];
+  companyName?: Maybe<Scalars["String"]>;
+  addressPrimary: Scalars["String"];
+  addressSecondary?: Maybe<Scalars["String"]>;
+  postalCode: Scalars["Float"];
+  city: Scalars["String"];
+  state: Scalars["String"];
+  country: Scalars["String"];
 };
 
 export type CartItem = {
-  __typename?: 'CartItem';
-  id: Scalars['ID'];
-  quantity: Scalars['Float'];
+  __typename?: "CartItem";
+  id: Scalars["ID"];
+  quantity: Scalars["Float"];
   productDetails: ProductDetail;
 };
 
 export type ProductDetail = {
-  __typename?: 'ProductDetail';
-  id: Scalars['ID'];
-  size: Scalars['Float'];
-  color: Scalars['String'];
+  __typename?: "ProductDetail";
+  id: Scalars["ID"];
+  size: Scalars["Float"];
+  color: Scalars["String"];
   product: Product;
   productImages: Array<ProductImage>;
 };
 
 export type Product = {
-  __typename?: 'Product';
-  id: Scalars['ID'];
-  modelId: Scalars['String'];
-  title: Scalars['String'];
-  description: Scalars['String'];
-  price: Scalars['Float'];
+  __typename?: "Product";
+  id: Scalars["ID"];
+  modelId: Scalars["String"];
+  title: Scalars["String"];
+  description: Scalars["String"];
+  price: Scalars["Float"];
   gender: Gender;
   details: Array<ProductDetail>;
 };
 
 export enum Gender {
-  Male = 'Male',
-  Female = 'Female'
+  Male = "Male",
+  Female = "Female",
 }
 
 export type ProductImage = {
-  __typename?: 'ProductImage';
-  id: Scalars['ID'];
-  url: Scalars['String'];
+  __typename?: "ProductImage";
+  id: Scalars["ID"];
+  url: Scalars["String"];
 };
 
 export type Order = {
-  __typename?: 'Order';
-  id: Scalars['ID'];
-  amount: Scalars['Float'];
+  __typename?: "Order";
+  id: Scalars["ID"];
+  amount: Scalars["Float"];
   status: OrderStatus;
   user: User;
   address: Address;
@@ -101,180 +100,198 @@ export type Order = {
 };
 
 export enum OrderStatus {
-  Pending = 'Pending',
-  Completed = 'Completed'
+  Pending = "Pending",
+  Completed = "Completed",
 }
 
 export type OrderItem = {
-  __typename?: 'OrderItem';
-  id: Scalars['ID'];
-  quantity: Scalars['Float'];
+  __typename?: "OrderItem";
+  id: Scalars["ID"];
+  quantity: Scalars["Float"];
   productDetails: ProductDetail;
 };
 
 export type Mutation = {
-  __typename?: 'Mutation';
+  __typename?: "Mutation";
   addAddress: Address;
   login: LoginResponse;
-  signup: Scalars['Boolean'];
-  logout: Scalars['Boolean'];
+  signup: Scalars["Boolean"];
+  logout: Scalars["Boolean"];
   addCartItem: CartItem;
   createOrder: Order;
   addProduct: Product;
 };
 
-
 export type MutationAddAddressArgs = {
   data: AddAddressInput;
 };
 
-
 export type MutationLoginArgs = {
-  password: Scalars['String'];
-  user: Scalars['String'];
+  password: Scalars["String"];
+  user: Scalars["String"];
 };
-
 
 export type MutationSignupArgs = {
   data: SignupInput;
 };
 
-
 export type MutationAddCartItemArgs = {
   data: AddCartItemInput;
 };
 
-
 export type MutationCreateOrderArgs = {
   data: CreateOrderInput;
 };
-
 
 export type MutationAddProductArgs = {
   data: AddProductInput;
 };
 
 export type AddAddressInput = {
-  userId: Scalars['String'];
-  companyName?: Maybe<Scalars['String']>;
-  addressPrimary: Scalars['String'];
-  addressSecondary?: Maybe<Scalars['String']>;
-  postalCode: Scalars['Float'];
-  city: Scalars['String'];
-  state: Scalars['String'];
-  country: Scalars['String'];
+  userId: Scalars["String"];
+  companyName?: Maybe<Scalars["String"]>;
+  addressPrimary: Scalars["String"];
+  addressSecondary?: Maybe<Scalars["String"]>;
+  postalCode: Scalars["Float"];
+  city: Scalars["String"];
+  state: Scalars["String"];
+  country: Scalars["String"];
 };
 
 export type LoginResponse = {
-  __typename?: 'LoginResponse';
-  accessToken: Scalars['String'];
+  __typename?: "LoginResponse";
+  accessToken: Scalars["String"];
 };
 
 export type SignupInput = {
-  username: Scalars['String'];
-  email: Scalars['String'];
-  password: Scalars['String'];
-  title: Scalars['String'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  phoneNumber: Scalars['String'];
-  isAdmin?: Maybe<Scalars['Boolean']>;
+  username: Scalars["String"];
+  email: Scalars["String"];
+  password: Scalars["String"];
+  title: Scalars["String"];
+  firstName: Scalars["String"];
+  lastName: Scalars["String"];
+  phoneNumber: Scalars["String"];
+  isAdmin?: Maybe<Scalars["Boolean"]>;
 };
 
 export type AddCartItemInput = {
-  quantity: Scalars['Float'];
-  productDetailsId: Scalars['String'];
+  quantity: Scalars["Float"];
+  productDetailsId: Scalars["String"];
 };
 
 export type CreateOrderInput = {
-  addressId: Scalars['String'];
+  addressId: Scalars["String"];
   status: OrderStatus;
 };
 
 export type AddProductInput = {
-  modelId: Scalars['String'];
-  title: Scalars['String'];
-  description: Scalars['String'];
-  price: Scalars['Float'];
+  modelId: Scalars["String"];
+  title: Scalars["String"];
+  description: Scalars["String"];
+  price: Scalars["Float"];
   gender: Gender;
-  color: Scalars['String'];
-  size: Scalars['Float'];
-  images: Array<Scalars['String']>;
+  color: Scalars["String"];
+  size: Scalars["Float"];
+  images: Array<Scalars["String"]>;
 };
 
 export type FilteredProductsQueryVariables = Exact<{
-  gender?: Maybe<Scalars['String']>;
+  gender?: Maybe<Scalars["String"]>;
 }>;
 
-
-export type FilteredProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, modelId: string, title: string, description: string, price: number, gender: Gender, details: Array<{ __typename?: 'ProductDetail', size: number, color: string, productImages: Array<{ __typename?: 'ProductImage', id: string, url: string }> }> }> };
+export type FilteredProductsQuery = {
+  __typename?: "Query";
+  products: Array<{
+    __typename?: "Product";
+    id: string;
+    modelId: string;
+    title: string;
+    description: string;
+    price: number;
+    gender: Gender;
+    details: Array<{
+      __typename?: "ProductDetail";
+      size: number;
+      color: string;
+      productImages: Array<{
+        __typename?: "ProductImage";
+        id: string;
+        url: string;
+      }>;
+    }>;
+  }>;
+};
 
 export type LoginMutationVariables = Exact<{
-  user: Scalars['String'];
-  password: Scalars['String'];
+  user: Scalars["String"];
+  password: Scalars["String"];
 }>;
 
+export type LoginMutation = {
+  __typename?: "Mutation";
+  login: { __typename?: "LoginResponse"; accessToken: string };
+};
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginResponse', accessToken: string } };
-
-export type ProductFieldsFragment = (
-  { __typename?: 'Product' }
-  & ProductInfoFragment
-  & ProductImagesFragment
-);
+export type ProductFieldsFragment = {
+  __typename?: "Product";
+} & ProductInfoFragment &
+  ProductImagesFragment;
 
 export type ProductQueryVariables = Exact<{
-  id: Scalars['String'];
+  id: Scalars["String"];
 }>;
 
+export type ProductQuery = {
+  __typename?: "Query";
+  product: { __typename?: "Product" } & ProductFieldsFragment;
+};
 
-export type ProductQuery = { __typename?: 'Query', product: (
-    { __typename?: 'Product' }
-    & ProductFieldsFragment
-  ) };
+export type ProductsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
+export type ProductsQuery = {
+  __typename?: "Query";
+  products: Array<{
+    __typename?: "Product";
+    id: string;
+    modelId: string;
+    title: string;
+    description: string;
+    price: number;
+    gender: Gender;
+    details: Array<{
+      __typename?: "ProductDetail";
+      size: number;
+      color: string;
+      productImages: Array<{
+        __typename?: "ProductImage";
+        id: string;
+        url: string;
+      }>;
+    }>;
+  }>;
+};
 
+export type ProductImagesFragment = {
+  __typename?: "Product";
+  details: Array<{
+    __typename?: "ProductDetail";
+    productImages: Array<{ __typename?: "ProductImage"; url: string }>;
+  }>;
+};
 
-export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, modelId: string, title: string, description: string, price: number, gender: Gender, details: Array<{ __typename?: 'ProductDetail', size: number, color: string, productImages: Array<{ __typename?: 'ProductImage', id: string, url: string }> }> }> };
-
-export type ProductImagesFragment = { __typename?: 'Product', details: Array<{ __typename?: 'ProductDetail', productImages: Array<{ __typename?: 'ProductImage', url: string }> }> };
-
-export type ProductInfoFragment = { __typename?: 'Product', id: string, modelId: string, title: string, description: string, price: number, gender: Gender, details: Array<{ __typename?: 'ProductDetail', size: number, color: string }> };
+export type ProductInfoFragment = {
+  __typename?: "Product";
+  id: string;
+  modelId: string;
+  title: string;
+  description: string;
+  price: number;
+  gender: Gender;
+  details: Array<{ __typename?: "ProductDetail"; size: number; color: string }>;
+};
 
 export const ProductInfoFragmentDoc = gql`
-    fragment ProductInfo on Product {
-  id
-  modelId
-  title
-  description
-  price
-  gender
-  details {
-    size
-    color
-  }
-}
-    `;
-export const ProductImagesFragmentDoc = gql`
-    fragment ProductImages on Product {
-  details {
-    productImages {
-      url
-    }
-  }
-}
-    `;
-export const ProductFieldsFragmentDoc = gql`
-    fragment ProductFields on Product {
-  ...ProductInfo
-  ...ProductImages
-}
-    ${ProductInfoFragmentDoc}
-${ProductImagesFragmentDoc}`;
-export const FilteredProductsDocument = gql`
-    query FilteredProducts($gender: String) {
-  products {
+  fragment ProductInfo on Product {
     id
     modelId
     title
@@ -284,14 +301,46 @@ export const FilteredProductsDocument = gql`
     details {
       size
       color
+    }
+  }
+`;
+export const ProductImagesFragmentDoc = gql`
+  fragment ProductImages on Product {
+    details {
       productImages {
-        id
         url
       }
     }
   }
-}
-    `;
+`;
+export const ProductFieldsFragmentDoc = gql`
+  fragment ProductFields on Product {
+    ...ProductInfo
+    ...ProductImages
+  }
+  ${ProductInfoFragmentDoc}
+  ${ProductImagesFragmentDoc}
+`;
+export const FilteredProductsDocument = gql`
+  query FilteredProducts($gender: String) {
+    products {
+      id
+      modelId
+      title
+      description
+      price
+      gender
+      details {
+        size
+        color
+        productImages {
+          id
+          url
+        }
+      }
+    }
+  }
+`;
 
 /**
  * __useFilteredProductsQuery__
@@ -309,23 +358,49 @@ export const FilteredProductsDocument = gql`
  *   },
  * });
  */
-export function useFilteredProductsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<FilteredProductsQuery, FilteredProductsQueryVariables>) {
-        return ApolloReactHooks.useQuery<FilteredProductsQuery, FilteredProductsQueryVariables>(FilteredProductsDocument, baseOptions);
-      }
-export function useFilteredProductsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<FilteredProductsQuery, FilteredProductsQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<FilteredProductsQuery, FilteredProductsQueryVariables>(FilteredProductsDocument, baseOptions);
-        }
-export type FilteredProductsQueryHookResult = ReturnType<typeof useFilteredProductsQuery>;
-export type FilteredProductsLazyQueryHookResult = ReturnType<typeof useFilteredProductsLazyQuery>;
-export type FilteredProductsQueryResult = ApolloReactCommon.QueryResult<FilteredProductsQuery, FilteredProductsQueryVariables>;
-export const LoginDocument = gql`
-    mutation Login($user: String!, $password: String!) {
-  login(user: $user, password: $password) {
-    accessToken
-  }
+export function useFilteredProductsQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    FilteredProductsQuery,
+    FilteredProductsQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    FilteredProductsQuery,
+    FilteredProductsQueryVariables
+  >(FilteredProductsDocument, baseOptions);
 }
-    `;
-export type LoginMutationFn = ApolloReactCommon.MutationFunction<LoginMutation, LoginMutationVariables>;
+export function useFilteredProductsLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    FilteredProductsQuery,
+    FilteredProductsQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    FilteredProductsQuery,
+    FilteredProductsQueryVariables
+  >(FilteredProductsDocument, baseOptions);
+}
+export type FilteredProductsQueryHookResult = ReturnType<
+  typeof useFilteredProductsQuery
+>;
+export type FilteredProductsLazyQueryHookResult = ReturnType<
+  typeof useFilteredProductsLazyQuery
+>;
+export type FilteredProductsQueryResult = ApolloReactCommon.QueryResult<
+  FilteredProductsQuery,
+  FilteredProductsQueryVariables
+>;
+export const LoginDocument = gql`
+  mutation Login($user: String!, $password: String!) {
+    login(user: $user, password: $password) {
+      accessToken
+    }
+  }
+`;
+export type LoginMutationFn = ApolloReactCommon.MutationFunction<
+  LoginMutation,
+  LoginMutationVariables
+>;
 
 /**
  * __useLoginMutation__
@@ -345,19 +420,33 @@ export type LoginMutationFn = ApolloReactCommon.MutationFunction<LoginMutation, 
  *   },
  * });
  */
-export function useLoginMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
-        return ApolloReactHooks.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, baseOptions);
-      }
-export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
-export type LoginMutationResult = ApolloReactCommon.MutationResult<LoginMutation>;
-export type LoginMutationOptions = ApolloReactCommon.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
-export const ProductDocument = gql`
-    query Product($id: String!) {
-  product(id: $id) {
-    ...ProductFields
-  }
+export function useLoginMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    LoginMutation,
+    LoginMutationVariables
+  >
+) {
+  return ApolloReactHooks.useMutation<LoginMutation, LoginMutationVariables>(
+    LoginDocument,
+    baseOptions
+  );
 }
-    ${ProductFieldsFragmentDoc}`;
+export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
+export type LoginMutationResult = ApolloReactCommon.MutationResult<
+  LoginMutation
+>;
+export type LoginMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  LoginMutation,
+  LoginMutationVariables
+>;
+export const ProductDocument = gql`
+  query Product($id: String!) {
+    product(id: $id) {
+      ...ProductFields
+    }
+  }
+  ${ProductFieldsFragmentDoc}
+`;
 
 /**
  * __useProductQuery__
@@ -375,35 +464,54 @@ export const ProductDocument = gql`
  *   },
  * });
  */
-export function useProductQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ProductQuery, ProductQueryVariables>) {
-        return ApolloReactHooks.useQuery<ProductQuery, ProductQueryVariables>(ProductDocument, baseOptions);
-      }
-export function useProductLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ProductQuery, ProductQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<ProductQuery, ProductQueryVariables>(ProductDocument, baseOptions);
-        }
+export function useProductQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    ProductQuery,
+    ProductQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<ProductQuery, ProductQueryVariables>(
+    ProductDocument,
+    baseOptions
+  );
+}
+export function useProductLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    ProductQuery,
+    ProductQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<ProductQuery, ProductQueryVariables>(
+    ProductDocument,
+    baseOptions
+  );
+}
 export type ProductQueryHookResult = ReturnType<typeof useProductQuery>;
 export type ProductLazyQueryHookResult = ReturnType<typeof useProductLazyQuery>;
-export type ProductQueryResult = ApolloReactCommon.QueryResult<ProductQuery, ProductQueryVariables>;
+export type ProductQueryResult = ApolloReactCommon.QueryResult<
+  ProductQuery,
+  ProductQueryVariables
+>;
 export const ProductsDocument = gql`
-    query Products {
-  products {
-    id
-    modelId
-    title
-    description
-    price
-    gender
-    details {
-      size
-      color
-      productImages {
-        id
-        url
+  query Products {
+    products {
+      id
+      modelId
+      title
+      description
+      price
+      gender
+      details {
+        size
+        color
+        productImages {
+          id
+          url
+        }
       }
     }
   }
-}
-    `;
+`;
 
 /**
  * __useProductsQuery__
@@ -420,12 +528,33 @@ export const ProductsDocument = gql`
  *   },
  * });
  */
-export function useProductsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ProductsQuery, ProductsQueryVariables>) {
-        return ApolloReactHooks.useQuery<ProductsQuery, ProductsQueryVariables>(ProductsDocument, baseOptions);
-      }
-export function useProductsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ProductsQuery, ProductsQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<ProductsQuery, ProductsQueryVariables>(ProductsDocument, baseOptions);
-        }
+export function useProductsQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    ProductsQuery,
+    ProductsQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<ProductsQuery, ProductsQueryVariables>(
+    ProductsDocument,
+    baseOptions
+  );
+}
+export function useProductsLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    ProductsQuery,
+    ProductsQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<ProductsQuery, ProductsQueryVariables>(
+    ProductsDocument,
+    baseOptions
+  );
+}
 export type ProductsQueryHookResult = ReturnType<typeof useProductsQuery>;
-export type ProductsLazyQueryHookResult = ReturnType<typeof useProductsLazyQuery>;
-export type ProductsQueryResult = ApolloReactCommon.QueryResult<ProductsQuery, ProductsQueryVariables>;
+export type ProductsLazyQueryHookResult = ReturnType<
+  typeof useProductsLazyQuery
+>;
+export type ProductsQueryResult = ApolloReactCommon.QueryResult<
+  ProductsQuery,
+  ProductsQueryVariables
+>;

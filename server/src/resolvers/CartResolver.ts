@@ -17,8 +17,7 @@ export default class CartResolver {
   async addCartItem(
     @Arg("data") { quantity, productDetailsId }: AddCartItemInput,
     @Ctx() { user }: AppContext
-  ) {
-    console.log(user);
+  ): Promise<CartItem[]> {
     const productDetails = await ProductDetail.findOne(productDetailsId);
 
     const cartItem = CartItem.create({
@@ -29,7 +28,7 @@ export default class CartResolver {
 
     await cartItem.save();
 
-    return cartItem;
+    return CartItem.find({ where: { user } });
   }
 
   @FieldResolver()
