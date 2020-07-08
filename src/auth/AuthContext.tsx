@@ -13,7 +13,7 @@ const AuthContext = createContext({} as ContextProps);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
-  const [logout] = useLogoutMutation();
+  const [logout, { client }] = useLogoutMutation();
 
   useEffect(() => {
     (async () => {
@@ -32,12 +32,14 @@ export const AuthProvider: React.FC = ({ children }) => {
   const setUser = async (token: string) => {
     const { userId } = jwtDecode(token);
     await localStorage.setItem("token", token);
+    await client?.resetStore();
     setCurrentUser(userId);
   };
 
   const clearUser = async () => {
     await logout();
     await localStorage.removeItem("token");
+    await client?.resetStore();
     setCurrentUser(undefined);
   };
 
