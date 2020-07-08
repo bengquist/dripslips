@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { stopPropagation } from "../common/eventHelpers";
 import { ProductDetailsFragment } from "../generated/graphql";
 import { gap } from "../style/helpers";
 
@@ -17,7 +18,7 @@ const ProductCardOptions: React.FC<Props> = ({
   const colorOptions = productDetails.map((details) => {
     return (
       <Block
-        onClick={() => onSelect(details.id)}
+        onClick={stopPropagation(() => onSelect(details.id))}
         isSelected={selected === details.id}
         color={details.color}
       />
@@ -37,6 +38,10 @@ const Container = styled.div`
 const Block = styled.button<{ color: string; isSelected: boolean }>`
   background-color: ${({ color }) => color};
   padding: 1rem;
+  transition: 0.3;
+
+  border: 0.2rem solid white;
+  outline: 2px solid transparent;
 
   outline: ${({ isSelected, theme }) =>
     isSelected && `2px solid ${theme.colors.black}`};
