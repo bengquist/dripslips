@@ -1,24 +1,35 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import formatCurrency from "../common/formatCurrency";
-import { Product } from "../generated/graphql";
-import { lightGrayOutline } from "../style/helpers";
+import { ProductFieldsFragment } from "../generated/graphql";
+import { flexSpaceBetweenAlignStart, lightGrayOutline } from "../style/helpers";
+import ProductCardOptions from "./ProductCardOptions";
 
 type Props = {
-  product: Product;
+  product: ProductFieldsFragment;
 };
 
 const ItemCard: React.FC<Props> = ({ product }) => {
+  const [detailSelected, setDetailSelected] = useState(product.details[0].id);
+
   return (
     <Link href="product/[id]" as={`/product/${product.id}`}>
       <Container>
         <Image src={product.details[0].productImages[0].url} alt="" />
 
-        <div>
-          <h3>{product.title}</h3>
-          <Price>{formatCurrency(product.price)}</Price>
-        </div>
+        <Info>
+          <div>
+            <h3>{product.title}</h3>
+            <Price>{formatCurrency(product.price)}</Price>
+          </div>
+
+          <ProductCardOptions
+            productDetails={product.details}
+            selected={detailSelected}
+            onSelect={(id) => setDetailSelected(id)}
+          />
+        </Info>
       </Container>
     </Link>
   );
@@ -52,4 +63,9 @@ const Image = styled.img`
 const Price = styled.p`
   font-weight: normal;
   margin-top: 0.25rem;
+`;
+
+const Info = styled.div`
+  width: 100%;
+  ${flexSpaceBetweenAlignStart}
 `;

@@ -15,7 +15,7 @@ const ProductListHeader: React.FC<Props> = ({ title, numberOfProducts }) => {
       <p>
         <strong>{title}</strong>{" "}
         <ItemCount>
-          ({numberOfProducts} look{numberOfProducts > 1 ? "s" : ""})
+          ({numberOfProducts} look{numberOfProducts !== 1 ? "s" : ""})
         </ItemCount>
       </p>
 

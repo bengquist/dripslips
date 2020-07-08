@@ -1,18 +1,5 @@
 query Products {
   products {
-    id
-    modelId
-    title
-    description
-    price
-    gender
-    details {
-      size
-      color
-      productImages {
-        id
-        url
-      }
-    }
+    ...ProductFields
   }
 }

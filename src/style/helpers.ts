@@ -15,6 +15,12 @@ export const flexAlignEnd = css`
   align-items: flex-end;
 `;
 
+export const flexSpaceBetweenAlignStart = css`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
+
 export const flexSpaceBetweenAlignCenter = css`
   display: flex;
   justify-content: space-between;

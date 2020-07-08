@@ -1,9 +1,8 @@
 import React from "react";
 import SEO from "../app/SEO";
-import { useProductsQuery } from "../generated/graphql";
+import { ProductFieldsFragment, useProductsQuery } from "../generated/graphql";
 import ProductCard from "../product/ProductCard";
 import ProductListHeader from "../product/ProductListNav";
-import { Product } from "../product/types";
 import { fluidGrid } from "../style/helpers";
 import Loader from "../ui/Loader";
 
@@ -15,11 +14,11 @@ const HomePage = () => {
       <SEO title="Home" />
       <ProductListHeader
         title="The Essentials"
-        numberOfProducts={data?.products.length}
+        numberOfProducts={data?.products.length ?? 0}
       />
 
       <div css={fluidGrid({ maxWidth: 500 })}>
-        {data?.products.map((product: Product) => (
+        {data?.products.map((product: ProductFieldsFragment) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>

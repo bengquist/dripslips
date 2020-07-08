@@ -243,12 +243,30 @@ export type ProductQuery = { __typename?: 'Query', product: (
 export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, modelId: string, title: string, description: string, price: number, gender: Gender, details: Array<{ __typename?: 'ProductDetail', size: number, color: string, productImages: Array<{ __typename?: 'ProductImage', id: string, url: string }> }> }> };
+export type ProductsQuery = { __typename?: 'Query', products: Array<(
+    { __typename?: 'Product' }
+    & ProductFieldsFragment
+  )> };
 
 export type ProductImagesFragment = { __typename?: 'Product', details: Array<{ __typename?: 'ProductDetail', productImages: Array<{ __typename?: 'ProductImage', url: string }> }> };
 
-export type ProductInfoFragment = { __typename?: 'Product', id: string, modelId: string, title: string, description: string, price: number, gender: Gender, details: Array<{ __typename?: 'ProductDetail', size: number, color: string }> };
+export type ProductDetailsFragment = { __typename?: 'ProductDetail', id: string, size: number, color: string, productImages: Array<{ __typename?: 'ProductImage', url: string }> };
 
+export type ProductInfoFragment = { __typename?: 'Product', id: string, modelId: string, title: string, description: string, price: number, gender: Gender, details: Array<(
+    { __typename?: 'ProductDetail' }
+    & ProductDetailsFragment
+  )> };
+
+export const ProductDetailsFragmentDoc = gql`
+    fragment ProductDetails on ProductDetail {
+  id
+  size
+  color
+  productImages {
+    url
+  }
+}
+    `;
 export const ProductInfoFragmentDoc = gql`
     fragment ProductInfo on Product {
   id
@@ -258,11 +276,10 @@ export const ProductInfoFragmentDoc = gql`
   price
   gender
   details {
-    size
-    color
+    ...ProductDetails
   }
 }
-    `;
+    ${ProductDetailsFragmentDoc}`;
 export const ProductImagesFragmentDoc = gql`
     fragment ProductImages on Product {
   details {
@@ -468,23 +485,10 @@ export type ProductQueryResult = ApolloReactCommon.QueryResult<ProductQuery, Pro
 export const ProductsDocument = gql`
     query Products {
   products {
-    id
-    modelId
-    title
-    description
-    price
-    gender
-    details {
-      size
-      color
-      productImages {
-        id
-        url
-      }
-    }
+    ...ProductFields
   }
 }
-    `;
+    ${ProductFieldsFragmentDoc}`;
 
 /**
  * __useProductsQuery__
