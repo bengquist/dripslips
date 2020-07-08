@@ -1,31 +1,19 @@
+import { concat } from "apollo-boost";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloClient } from "apollo-client";
-import { setContext } from "apollo-link-context";
-import { HttpLink } from "apollo-link-http";
 import { useMemo } from "react";
+import authLink from "./authLink";
+import errorLink from "./errorlink";
+import httpLink from "./httplink";
 
 let apolloClient: ApolloClient<any>;
 
-const httpLink = new HttpLink({
-  uri: "http://localhost:4000/graphql",
-  credentials: "include",
-});
-
-const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem("token");
-
-  return {
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : "",
-    },
-  };
-});
+const apolloLink = concat(errorLink, concat(authLink, httpLink));
 
 function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
-    link: authLink.concat(httpLink),
+    link: apolloLink,
     cache: new InMemoryCache(),
   });
 }
