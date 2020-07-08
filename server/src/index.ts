@@ -1,4 +1,4 @@
-import { ApolloServer } from "apollo-server-express";
+import { ApolloServer, AuthenticationError } from "apollo-server-express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import "dotenv/config";
@@ -40,16 +40,16 @@ const port = process.env.PORT || 4000;
       const authorization = req.headers.authorization || "";
       const token = authorization?.split(" ")[1];
 
-      try {
-        if (token) {
+      if (token) {
+        try {
           const { userId = "" } = verify(
             token,
             process.env.JWT_ACCESS_TOKEN_SECRET!
           ) as any;
           user = await User.findOne(userId);
+        } catch (e) {
+          throw new AuthenticationError("UNAUTHENTICATED");
         }
-      } catch (e) {
-        console.error(e.message);
       }
 
       return { req, res, user };
