@@ -5,7 +5,7 @@ import User from "../models/User";
 const { JWT_ACCESS_TOKEN_SECRET, JWT_REFRESH_TOKEN_SECRET } = process.env;
 
 export const createAccessToken = (userId: string) => {
-  return sign({ userId }, JWT_ACCESS_TOKEN_SECRET!, { expiresIn: "15m" });
+  return sign({ userId }, JWT_ACCESS_TOKEN_SECRET!, { expiresIn: "15s" });
 };
 
 export const createRefreshToken = (user: User) => {
@@ -19,5 +19,5 @@ export const createRefreshToken = (user: User) => {
 };
 
 export const attachRefreshToken = (res: Response, token: string) => {
-  res.cookie("token", token, { httpOnly: true });
+  res.cookie("token", token, { httpOnly: true, path: "/refresh_token" });
 };

@@ -16,18 +16,17 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [logout, { client }] = useLogoutMutation();
 
   useEffect(() => {
-    (async () => {
-      const res = await fetch("http://localhost:4000/refresh_token", {
-        method: "POST",
-        credentials: "include",
-      });
-      const data = await res.json();
-
-      if (data.accessToken) {
-        setUser(data.accessToken);
-      }
-    })();
+    getUser();
   }, []);
+
+  const getUser = async () => {
+    const token = await localStorage.getItem("token");
+
+    if (token) {
+      const { userId } = jwtDecode(token);
+      setCurrentUser(userId);
+    }
+  };
 
   const setUser = async (token: string) => {
     const { userId } = jwtDecode(token);

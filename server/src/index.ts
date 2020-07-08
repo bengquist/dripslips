@@ -23,7 +23,8 @@ const port = process.env.PORT || 4000;
     credentials: true,
   };
 
-  app.use(cors(corsOptions)).use(cookieParser());
+  app.use(cors(corsOptions));
+  app.use("/refresh_token", cookieParser());
   app.post("/refresh_token", refreshToken);
 
   const schema = await buildSchema({
@@ -39,12 +40,16 @@ const port = process.env.PORT || 4000;
       const authorization = req.headers.authorization || "";
       const token = authorization?.split(" ")[1];
 
-      if (token) {
-        const { userId = "" } = verify(
-          token,
-          process.env.JWT_ACCESS_TOKEN_SECRET!
-        ) as any;
-        user = await User.findOne(userId);
+      try {
+        if (token) {
+          const { userId = "" } = verify(
+            token,
+            process.env.JWT_ACCESS_TOKEN_SECRET!
+          ) as any;
+          user = await User.findOne(userId);
+        }
+      } catch (e) {
+        console.error(e.message);
       }
 
       return { req, res, user };
