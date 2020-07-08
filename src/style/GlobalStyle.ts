@@ -47,8 +47,8 @@ export default createGlobalStyle`
   }
 
   h1 {
-    font-size: 2rem;
-    line-height: 1.75rem;
+    font-size: 3rem;
+    line-height: 3rem;
   }
 
   h1, h2, h3, h4, h5, h6, p {
