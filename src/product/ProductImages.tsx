@@ -28,6 +28,6 @@ const Container = styled.div`
 `;
 
 const Image = styled.img`
-  max-height: 30rem;
+  max-height: 50rem;
   ${lightGrayOutline};
 `;

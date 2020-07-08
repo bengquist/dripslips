@@ -1,12 +1,9 @@
 import { Request, Response } from "express";
-
-interface IUserRequest extends Request {
-  user?: any;
-}
+import User from "./models/User";
 
 export interface AppContext {
-  req: IUserRequest;
+  req: Request;
   res: Response;
-  user?: any;
+  user?: User;
   payload?: { userId: string };
 }
