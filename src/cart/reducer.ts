@@ -83,7 +83,11 @@ const removeProductFromCart = (productId: string, state: CartState) => {
 
 const restoreCart = () => {};
 
-export const cartReducer = (state: CartState, action: CartActionTypes) => {
+export const cartReducer = (
+  state: CartState,
+  action: CartActionTypes,
+  isLoggedIn?: boolean
+) => {
   switch (action.type) {
     case ADD_PRODUCT:
       return addProductToCart(action.payload, state);

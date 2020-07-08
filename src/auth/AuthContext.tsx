@@ -1,9 +1,11 @@
 import jwtDecode from "jwt-decode";
 import { createContext, useContext, useEffect, useState } from "react";
+import { useLogoutMutation } from "../generated/graphql";
 
 type ContextProps = {
-  user: any;
-  setUser: (user: any) => void;
+  isLoggedIn?: boolean;
+  user?: string;
+  setUser: (user: string) => void;
   clearUser: () => void;
 };
 
@@ -11,6 +13,7 @@ const AuthContext = createContext({} as ContextProps);
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
+  const [logout] = useLogoutMutation();
 
   useEffect(() => {
     (async () => {
@@ -20,24 +23,33 @@ export const AuthProvider: React.FC = ({ children }) => {
       });
       const data = await res.json();
 
-      await localStorage.setItem("token", data.accessToken);
-      setCurrentUser(data.accessToken);
+      if (data.accessToken) {
+        await localStorage.setItem("token", data.accessToken);
+        setUser(data.accessToken);
+      }
     })();
   }, []);
 
   const setUser = (token: string) => {
     const { userId } = jwtDecode(token);
-
     setCurrentUser(userId);
   };
 
   const clearUser = async () => {
+    await logout();
     await localStorage.removeItem("token");
     setCurrentUser(undefined);
   };
 
   return (
-    <AuthContext.Provider value={{ user: currentUser, setUser, clearUser }}>
+    <AuthContext.Provider
+      value={{
+        user: currentUser,
+        setUser,
+        clearUser,
+        isLoggedIn: Boolean(currentUser),
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

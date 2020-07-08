@@ -1,0 +1,18 @@
+mutation AddCartItem($productDetailsId: String!) {
+  addCartItem(productDetailsId: $productDetailsId) {
+    id
+    quantity
+    productDetails {
+      size
+      color
+      product {
+        modelId
+        title
+        price
+      }
+      productImages {
+        url
+      }
+    }
+  }
+}

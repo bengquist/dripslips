@@ -47,6 +47,8 @@ const port = process.env.PORT || 4000;
         user = await User.findOne(userId);
       }
 
+      console.log(user);
+
       return { req, res, user };
     },
   });

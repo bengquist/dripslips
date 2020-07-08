@@ -9,19 +9,18 @@ import {
 import { CartItem } from "../models/CartItem";
 import ProductDetail from "../models/ProductDetail";
 import { AppContext } from "../types";
-import AddCartItemInput from "./inputs/AddCartItemInput";
 
 @Resolver(() => CartItem)
 export default class CartResolver {
   @Mutation(() => CartItem)
   async addCartItem(
-    @Arg("data") { quantity, productDetailsId }: AddCartItemInput,
+    @Arg("productDetailsId") productDetailsId: string,
     @Ctx() { user }: AppContext
   ): Promise<CartItem[]> {
     const productDetails = await ProductDetail.findOne(productDetailsId);
 
     const cartItem = CartItem.create({
-      quantity,
+      quantity: 1,
       user,
       productDetails,
     });
