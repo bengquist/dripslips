@@ -1,4 +1,9 @@
-import { Product } from "../generated/graphql";
+import { useAuth } from "../auth/AuthContext";
+import {
+  Product,
+  useAddCartItemMutation,
+  useGetCartQuery,
+} from "../generated/graphql";
 import { CartProduct } from "./types";
 
 export const ADD_PRODUCT = "ADD_PRODUCT";
@@ -31,7 +36,11 @@ export type CartActionTypes =
   | RemoveProductAction
   | RestoreCartAction;
 
-const addProductToCart = (product: Product, state: CartState) => {
+const addProductToCart = (
+  product: Product,
+  state: CartState,
+  userId?: string
+) => {
   const cartCopy = [...state.cart];
 
   const productInCart = cartCopy.find(
@@ -56,7 +65,11 @@ const addProductToCart = (product: Product, state: CartState) => {
   };
 };
 
-const removeProductFromCart = (productId: string, state: CartState) => {
+const removeProductFromCart = (
+  productId: string,
+  state: CartState,
+  userId?: string
+) => {
   const cartCopy = [...state.cart];
 
   const updatedProductIndex = cartCopy.findIndex(
@@ -81,19 +94,23 @@ const removeProductFromCart = (productId: string, state: CartState) => {
   };
 };
 
-const restoreCart = () => {};
+const useCartReducer = () => {
+  const { user } = useAuth();
+  const { data } = useGetCartQuery();
+  const [addCartItem] = useAddCartItemMutation();
 
-export const cartReducer = (
-  state: CartState,
-  action: CartActionTypes,
-  isLoggedIn?: boolean
-) => {
-  switch (action.type) {
-    case ADD_PRODUCT:
-      return addProductToCart(action.payload, state);
-    case REMOVE_PRODUCT:
-      return removeProductFromCart(action.payload, state);
-    default:
-      throw new Error(`Unknown action: ${action}`);
-  }
+  console.log(user, data?.me?.cart);
+
+  return (state: CartState, action: CartActionTypes) => {
+    switch (action.type) {
+      case ADD_PRODUCT:
+        return addProductToCart(action.payload, state, user);
+      case REMOVE_PRODUCT:
+        return removeProductFromCart(action.payload, state, user);
+      default:
+        throw new Error(`Unknown action: ${action}`);
+    }
+  };
 };
+
+export default useCartReducer;

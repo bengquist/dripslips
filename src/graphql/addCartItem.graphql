@@ -3,6 +3,7 @@ mutation AddCartItem($productDetailsId: String!) {
     id
     quantity
     productDetails {
+      id
       size
       color
       product {

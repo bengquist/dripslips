@@ -211,6 +211,11 @@ export type FilteredProductsQueryVariables = Exact<{
 
 export type FilteredProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, modelId: string, title: string, description: string, price: number, gender: Gender, details: Array<{ __typename?: 'ProductDetail', size: number, color: string, productImages: Array<{ __typename?: 'ProductImage', id: string, url: string }> }> }> };
 
+export type GetCartQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCartQuery = { __typename?: 'Query', me?: Maybe<{ __typename?: 'User', cart: Array<{ __typename?: 'CartItem', id: string, quantity: number, productDetails: { __typename?: 'ProductDetail', size: number, color: string, product: { __typename?: 'Product', modelId: string, title: string, price: number }, productImages: Array<{ __typename?: 'ProductImage', url: string }> } }> }> };
+
 export type LoginMutationVariables = Exact<{
   user: Scalars['String'];
   password: Scalars['String'];
@@ -387,6 +392,53 @@ export function useFilteredProductsLazyQuery(baseOptions?: ApolloReactHooks.Lazy
 export type FilteredProductsQueryHookResult = ReturnType<typeof useFilteredProductsQuery>;
 export type FilteredProductsLazyQueryHookResult = ReturnType<typeof useFilteredProductsLazyQuery>;
 export type FilteredProductsQueryResult = ApolloReactCommon.QueryResult<FilteredProductsQuery, FilteredProductsQueryVariables>;
+export const GetCartDocument = gql`
+    query GetCart {
+  me {
+    cart {
+      id
+      quantity
+      productDetails {
+        size
+        color
+        product {
+          modelId
+          title
+          price
+        }
+        productImages {
+          url
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetCartQuery__
+ *
+ * To run a query within a React component, call `useGetCartQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetCartQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetCartQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetCartQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetCartQuery, GetCartQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetCartQuery, GetCartQueryVariables>(GetCartDocument, baseOptions);
+      }
+export function useGetCartLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetCartQuery, GetCartQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetCartQuery, GetCartQueryVariables>(GetCartDocument, baseOptions);
+        }
+export type GetCartQueryHookResult = ReturnType<typeof useGetCartQuery>;
+export type GetCartLazyQueryHookResult = ReturnType<typeof useGetCartLazyQuery>;
+export type GetCartQueryResult = ApolloReactCommon.QueryResult<GetCartQuery, GetCartQueryVariables>;
 export const LoginDocument = gql`
     mutation Login($user: String!, $password: String!) {
   login(user: $user, password: $password) {

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer } from "react";
-import { useAuth } from "../auth/AuthContext";
-import { CartActionTypes, cartReducer, CartState } from "./reducer";
+import { CartActionTypes, CartState } from "./reducer";
+import useCartReducer from "./useCartReducer";
 
 type ContextProps = {
   state: CartState;
@@ -10,17 +10,17 @@ type ContextProps = {
 const CartContext = createContext({} as ContextProps);
 
 export const CartProvider: React.FC = ({ children }) => {
-  const { isLoggedIn } = useAuth();
+  const cartReducer = useCartReducer();
 
-  const [state, dispatch] = useReducer(
-    (state: CartState, action: CartActionTypes) =>
-      cartReducer(state, action, isLoggedIn),
-    {
-      cart: [],
-      productCount: 0,
-      totalPrice: 0,
-    }
-  );
+  const reducer = (state: CartState, action: CartActionTypes) => {
+    return cartReducer(state, action);
+  };
+
+  const [state, dispatch] = useReducer(reducer, {
+    cart: [],
+    productCount: 0,
+    totalPrice: 0,
+  });
 
   const value = { state, dispatch };
 

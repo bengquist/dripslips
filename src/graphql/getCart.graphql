@@ -1,0 +1,21 @@
+query GetCart {
+  me {
+    cart {
+      id
+      quantity
+      productDetails {
+        id
+        size
+        color
+        product {
+          modelId
+          title
+          price
+        }
+        productImages {
+          url
+        }
+      }
+    }
+  }
+}
