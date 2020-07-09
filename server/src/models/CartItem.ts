@@ -8,8 +8,8 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { Cart } from "./Cart";
 import ProductDetail from "./ProductDetail";
-import User from "./User";
 
 @Entity()
 @ObjectType()
@@ -22,8 +22,10 @@ export class CartItem extends BaseEntity {
   @Column()
   quantity: number;
 
-  @ManyToOne(() => User, (user) => user.cart)
-  user: User;
+  @ManyToOne(() => Cart, (cart) => cart.items)
+  cart: Cart;
+  @Column({ nullable: true })
+  cartId: string;
 
   @Field(() => ProductDetail)
   @OneToOne(() => ProductDetail)

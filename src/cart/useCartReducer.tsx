@@ -18,7 +18,7 @@ export type CartState = {
 
 export type AddProductAction = {
   type: typeof ADD_PRODUCT;
-  payload: Product;
+  payload: string;
 };
 
 export type RemoveProductAction = {
@@ -26,70 +26,20 @@ export type RemoveProductAction = {
   payload: string;
 };
 
-export type RestoreCartAction = {
-  type: typeof RESTORE_CART;
-  payload: CartProduct[];
-};
+export type CartActionTypes = AddProductAction | RemoveProductAction;
 
-export type CartActionTypes =
-  | AddProductAction
-  | RemoveProductAction
-  | RestoreCartAction;
-
-const addProductToCart = (
-  product: Product,
-  state: CartState,
-  userId?: string
-) => {
-  const cartCopy = [...state.cart];
-
-  const productInCart = cartCopy.find(
-    (cartProduct) => cartProduct.product.id === product.id
-  );
-
-  if (productInCart) {
-    productInCart.quantity++;
-  } else {
-    cartCopy.push({
-      product: product,
-      quantity: 1,
-      size: 0,
-      color: "black",
-    });
-  }
-
+const addProductToCart = (product: Product, state: CartState) => {
   return {
-    cart: cartCopy,
-    productCount: ++state.productCount,
-    totalPrice: state.totalPrice + product.price,
+    cart: [],
+    productCount: 0,
+    totalPrice: 0,
   };
 };
 
-const removeProductFromCart = (
-  productId: string,
-  state: CartState,
-  userId?: string
-) => {
-  const cartCopy = [...state.cart];
-
-  const updatedProductIndex = cartCopy.findIndex(
-    ({ product }) => product.id === productId
-  );
-  const updatedProduct = {
-    ...cartCopy[updatedProductIndex],
-  };
-
-  updatedProduct.quantity--;
-
-  if (updatedProduct.quantity <= 0) {
-    cartCopy.splice(updatedProductIndex, 1);
-  } else {
-    cartCopy[updatedProductIndex] = updatedProduct;
-  }
-
+const removeProductFromCart = (productId: string, state: CartState) => {
   return {
-    cart: cartCopy,
-    productCount: --state.productCount,
+    cart: [],
+    productCount: 0,
     totalPrice: 0,
   };
 };

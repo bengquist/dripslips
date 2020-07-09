@@ -1,5 +1,6 @@
 import AddressResolver from "./AddressResolver";
 import AuthResolver from "./AuthResolver";
+import CartItemResolver from "./CartItemResolver";
 import CartResolver from "./CartResolver";
 import OrderItemResolver from "./OrderItemResolver";
 import OrderResolver from "./OrderResolver";
@@ -10,8 +11,9 @@ export default [
   ProductResolver,
   AuthResolver,
   AddressResolver,
-  CartResolver,
+  CartItemResolver,
   ProductDetailResolver,
   OrderResolver,
   OrderItemResolver,
+  CartResolver,
 ];

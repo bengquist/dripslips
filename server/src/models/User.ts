@@ -5,10 +5,11 @@ import {
   CreateDateColumn,
   Entity,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import Address from "./Address";
-import { CartItem } from "./CartItem";
+import { Cart } from "./Cart";
 import Order from "./Order";
 
 @Entity()
@@ -60,9 +61,9 @@ export default class User extends BaseEntity {
   @OneToMany(() => Address, (address) => address.user)
   address: Address[];
 
-  @Field(() => [CartItem])
-  @OneToMany(() => CartItem, (cartItem) => cartItem.user)
-  cart: CartItem[];
+  @Field(() => Cart, { nullable: true })
+  @OneToOne(() => Cart, { nullable: true })
+  cart?: Cart;
 
   @Field(() => [Order])
   @OneToMany(() => Order, (order) => order.user)
