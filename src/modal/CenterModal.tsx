@@ -22,7 +22,7 @@ const CenterModal = ({ children, isVisible, onClose }: CenterModalProps) => {
     <Portal>
       <Overlay onClick={onClose} visible={isVisible}>
         <ModalContainer>
-          <Modal onClick={stopPropagation} visible={isVisible}>
+          <Modal onClick={stopPropagation()} visible={isVisible}>
             {children}
           </Modal>
         </ModalContainer>

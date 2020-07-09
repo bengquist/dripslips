@@ -46,7 +46,7 @@ type FilterListProps = {
 const FilterList: React.FC<FilterListProps> = ({ isVisible, onClose }) => {
   return (
     <Overlay onClick={onClose} visible={isVisible}>
-      <FiltersContainer onClick={stopPropagation} visible={isVisible}>
+      <FiltersContainer onClick={stopPropagation()} visible={isVisible}>
         <SectionContainer>
           <ProductListFilterSection title="Type" listItems={typeFilters} />
           <ProductListFilterSection title="Size" boxItems={sizeFilters} />

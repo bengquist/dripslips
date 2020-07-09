@@ -17,7 +17,7 @@ const SideModal = ({ children, isVisible, onClose }: SideModalProps) => {
     <Portal>
       <Overlay onClick={onClose} visible={isVisible}>
         <ModalContainer>
-          <Modal onClick={stopPropagation} visible={isVisible}>
+          <Modal onClick={stopPropagation()} visible={isVisible}>
             {children}
           </Modal>
         </ModalContainer>
