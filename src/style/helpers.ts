@@ -57,3 +57,20 @@ export const gap = ({ bottom = 0, right = 0 }) => css`
 export const lightGrayOutline = css`
   outline: 1px solid ${({ theme }) => theme.colors.lightGray};
 `;
+
+/**
+ * Use this to apply an accessible click handler to something other than a link or button.
+ * makes some things easier sometimes
+ */
+export function accessibleClickProps(
+  onClick?: (event: React.KeyboardEvent | React.MouseEvent) => void
+) {
+  return {
+    onClick,
+    onKeyPress: (event: React.KeyboardEvent) => {
+      if (event.key === "Enter" && onClick) onClick(event);
+    },
+    tabIndex: 0,
+    style: { cursor: "pointer" },
+  };
+}

@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import formatCurrency from "../common/formatCurrency";
 import { ProductFieldsFragment } from "../generated/graphql";
-import { flexSpaceBetweenAlignStart, lightGrayOutline } from "../style/helpers";
+import {
+  accessibleClickProps,
+  flexSpaceBetweenAlignStart,
+  lightGrayOutline,
+} from "../style/helpers";
 import ProductCardOptions from "./ProductCardOptions";
 
 type Props = {
@@ -11,12 +15,18 @@ type Props = {
 };
 
 const ItemCard: React.FC<Props> = ({ product }) => {
-  const [detailSelected, setDetailSelected] = useState(product.details[0].id);
+  const [selectedDetailId, setSelectedDetailId] = useState(
+    product.details[0].id
+  );
+
+  const detail =
+    product.details.find((details) => details.id === selectedDetailId) ||
+    product.details[0];
 
   return (
     <Link href="product/[id]" as={`/product/${product.id}`}>
-      <Container>
-        <Image src={product.details[0].productImages[0].url} alt="" />
+      <Container {...accessibleClickProps()}>
+        <Image src={detail.productImages[0].url} alt="" />
 
         <Info>
           <div>
@@ -26,8 +36,8 @@ const ItemCard: React.FC<Props> = ({ product }) => {
 
           <ProductCardOptions
             productDetails={product.details}
-            selected={detailSelected}
-            onSelect={(id) => setDetailSelected(id)}
+            selected={selectedDetailId}
+            onSelect={(id) => setSelectedDetailId(id)}
           />
         </Info>
       </Container>
@@ -37,7 +47,7 @@ const ItemCard: React.FC<Props> = ({ product }) => {
 
 export default ItemCard;
 
-const Container = styled.button`
+const Container = styled.div`
   ${lightGrayOutline};
   display: flex;
   flex-direction: column;
