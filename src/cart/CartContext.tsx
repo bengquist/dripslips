@@ -15,7 +15,7 @@ export const CartProvider: React.FC = ({ children }) => {
   const reducer = (state: CartState, action: CartActionTypes) => {
     return cartReducer(state, action);
   };
-
+ 
   const [state, dispatch] = useReducer(reducer, {
     cart: [],
     productCount: 0,

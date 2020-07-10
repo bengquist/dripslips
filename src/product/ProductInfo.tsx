@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useCart } from "../cart/CartContext";
-import { ADD_PRODUCT } from "../cart/reducer";
+import { ADD_PRODUCT } from "../cart/useCartReducer";
 import exists from "../common/exists";
 import formatCurrency from "../common/formatCurrency";
 import { ProductInfoFragment } from "../generated/graphql";

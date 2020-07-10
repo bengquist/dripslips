@@ -1,19 +1,20 @@
 query GetCart {
   me {
     cart {
-      id
-      quantity
-      productDetails {
+      items {
         id
-        size
-        color
-        product {
-          modelId
-          title
-          price
-        }
-        productImages {
-          url
+        quantity
+        productDetails {
+          size
+          color
+          product {
+            modelId
+            title
+            price
+          }
+          productImages {
+            url
+          }
         }
       }
     }

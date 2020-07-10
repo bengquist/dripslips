@@ -61,9 +61,9 @@ export default class User extends BaseEntity {
   @OneToMany(() => Address, (address) => address.user)
   address: Address[];
 
-  @Field(() => Cart, { nullable: true })
-  @OneToOne(() => Cart, { nullable: true })
-  cart?: Cart;
+  @Field(() => Cart)
+  @OneToOne(() => Cart)
+  cart: Cart;
 
   @Field(() => [Order])
   @OneToMany(() => Order, (order) => order.user)

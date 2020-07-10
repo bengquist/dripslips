@@ -73,10 +73,14 @@ export default class AuthResolver {
     const hashedPassword = await bcrypt.hash(userData.password, 12);
 
     try {
-      await User.insert({
+      const user = await User.create({
         ...userData,
         password: hashedPassword,
       });
+
+      await user.save();
+      const cart = await Cart.create({ user });
+      await cart.save();
     } catch (err) {
       console.error(err);
       return false;

@@ -1,5 +1,5 @@
-mutation AddCartItem($productDetailsId: String!) {
-  addCartItem(productDetailsId: $productDetailsId) {
+mutation RemoveCartItem($cartItemId: String!) {
+  removeCartItem(cartItemId: $cartItemId) {
     items {
       id
       quantity
