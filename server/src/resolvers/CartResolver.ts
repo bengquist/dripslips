@@ -1,5 +1,12 @@
 import { AuthenticationError } from "apollo-server-express";
-import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
+import {
+  Arg,
+  Ctx,
+  FieldResolver,
+  Mutation,
+  Resolver,
+  Root,
+} from "type-graphql";
 import { Cart } from "../models/Cart";
 import { CartItem } from "../models/CartItem";
 import ProductDetail from "../models/ProductDetail";
@@ -42,5 +49,10 @@ export default class CartResolver {
     await cartItem.save();
 
     return cart;
+  }
+
+  @FieldResolver()
+  async items(@Root() cart: Cart): Promise<CartItem[]> {
+    return CartItem.find({ where: { cart } });
   }
 }

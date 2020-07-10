@@ -10,7 +10,7 @@ import {
   Root,
 } from "type-graphql";
 import Address from "../models/Address";
-import { CartItem } from "../models/CartItem";
+import { Cart } from "../models/Cart";
 import Order from "../models/Order";
 import User from "../models/User";
 import { AppContext } from "../types";
@@ -103,7 +103,13 @@ export default class AuthResolver {
   }
 
   @FieldResolver()
-  async cart(@Root() user: User): Promise<CartItem[]> {
-    return CartItem.find({ where: { user } });
+  async cart(@Root() user: User): Promise<Cart> {
+    const cart = await Cart.findOne({ where: { user } });
+
+    if (!cart) {
+      throw new Error("No cart found");
+    }
+
+    return cart;
   }
 }
