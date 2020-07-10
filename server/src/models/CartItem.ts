@@ -19,7 +19,7 @@ export class CartItem extends BaseEntity {
   id: string;
 
   @Field()
-  @Column()
+  @Column({ default: 1 })
   quantity: number;
 
   @ManyToOne(() => Cart, (cart) => cart.items)

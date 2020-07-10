@@ -20,22 +20,27 @@ export default class CartResolver {
 
     const productDetails = await ProductDetail.findOne(productDetailsId);
 
-    let cart = await Cart.findOne({ where: { user } });
+    let cart = await Cart.findOne({ where: { user }, relations: ["items"] });
+    let cartItem = await CartItem.findOne({ where: { productDetails } });
 
     if (!cart) {
       cart = Cart.create({ user });
     }
 
-    const cartItem = CartItem.create({
-      quantity: 1,
-      productDetails,
-    });
+    if (cartItem) {
+      cartItem.quantity++;
+      await cartItem.save();
 
-    const items = await CartItem.find({ where: { cart } });
-    items.push(cartItem);
-    cart.items = items;
+      const cartItems = cart.items.filter((item) => item.id !== cartItem?.id);
+      cart.items = [...cartItems, cartItem];
 
-    console.log(cart);
-    return cart.save();
+      return cart;
+    }
+
+    cartItem = CartItem.create({ cart, productDetails });
+    cart.items.push(cartItem);
+    await cartItem.save();
+
+    return cart;
   }
 }
