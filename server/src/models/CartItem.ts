@@ -2,6 +2,7 @@ import { Field, ID, ObjectType } from "type-graphql";
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -21,6 +22,9 @@ export class CartItem extends BaseEntity {
   @Field()
   @Column({ default: 1 })
   quantity: number;
+
+  @CreateDateColumn({ type: "timestamp" })
+  createdAt: Date;
 
   @ManyToOne(() => Cart, (cart) => cart.items)
   cart: Cart;

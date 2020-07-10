@@ -51,6 +51,33 @@ export default class CartResolver {
     return cart;
   }
 
+  @Mutation(() => Cart)
+  async removeCartItem(
+    @Arg("cartItemId") cartItemId: string,
+    @Ctx() { user }: AppContext
+  ): Promise<Cart> {
+    const item = await CartItem.findOne(cartItemId);
+
+    if (!item) {
+      throw new Error("No cart item found");
+    }
+
+    if (item.quantity > 1) {
+      item.quantity--;
+      await item.save();
+    } else {
+      await CartItem.delete(cartItemId);
+    }
+
+    const cart = await Cart.findOne({ where: { user } });
+
+    if (!cart) {
+      throw new Error("User has no cart");
+    }
+
+    return cart;
+  }
+
   @FieldResolver()
   async items(@Root() cart: Cart): Promise<CartItem[]> {
     return CartItem.find({ where: { cart } });

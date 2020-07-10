@@ -55,7 +55,7 @@ export default class User extends BaseEntity {
   tokenVersion: number;
 
   @CreateDateColumn({ type: "timestamp" })
-  created: Date;
+  createdAt: Date;
 
   @Field(() => [Address])
   @OneToMany(() => Address, (address) => address.user)

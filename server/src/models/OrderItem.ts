@@ -2,6 +2,7 @@ import { Field, ID, ObjectType } from "type-graphql";
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -21,6 +22,9 @@ export default class OrderItem extends BaseEntity {
   @Field()
   @Column()
   quantity: number;
+
+  @CreateDateColumn({ type: "timestamp" })
+  createdAt: Date;
 
   @ManyToOne(() => Order, (order) => order.items)
   order: Order;
