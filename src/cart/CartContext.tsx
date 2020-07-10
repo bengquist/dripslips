@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useReducer } from "react";
-import { CartActionTypes, CartState } from "./reducer";
-import useCartReducer from "./useCartReducer";
+import useCartReducer, { CartActionTypes, CartState } from "./useCartReducer";
 
 type ContextProps = {
   state: CartState;
@@ -18,9 +17,11 @@ export const CartProvider: React.FC = ({ children }) => {
 
   const [state, dispatch] = useReducer(reducer, {
     cart: [],
-    productCount: 0,
-    totalPrice: 0,
+    count: 0,
+    total: 0,
   });
+
+  console.log(state);
 
   const value = { state, dispatch };
 

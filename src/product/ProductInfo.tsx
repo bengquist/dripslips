@@ -22,11 +22,18 @@ const ProductInfo: React.FC<Props> = ({ product }) => {
   const [showColorSelect, setShowColorSelect] = useState(false);
   const { dispatch } = useCart();
 
-  const addProduct = () => {
-    dispatch({
-      type: ADD_PRODUCT,
-      payload: product,
-    });
+  const addProduct = (productDetailsId: string) => {
+    const productDetail = product.details.find(
+      (details) =>
+        details.size === selectedSize && details.color === selectedColor
+    );
+
+    if (productDetail) {
+      dispatch({
+        type: ADD_PRODUCT,
+        payload: productDetail.id,
+      });
+    }
   };
 
   const colors = product.details

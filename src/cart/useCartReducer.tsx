@@ -1,13 +1,16 @@
 import { useAuth } from "../auth/AuthContext";
-import { useGetCartQuery } from "../generated/graphql";
-import { CartProduct } from "./types";
+import {
+  useAddCartItemMutation,
+  useGetCartQuery,
+  useRemoveCartItemMutation,
+} from "../generated/graphql";
 
 export const ADD_PRODUCT = "ADD_PRODUCT";
 export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 export const RESTORE_CART = "RESTORE_CART";
 
 export type CartState = {
-  cart: CartProduct[];
+  cart: any[];
   productCount: number;
   totalPrice: number;
 };
@@ -24,29 +27,47 @@ export type RemoveProductAction = {
 
 export type CartActionTypes = AddProductAction | RemoveProductAction;
 
-const addProductToCart = (productId: string, state: CartState) => {
-  return {
-    cart: [],
-    productCount: 0,
-    totalPrice: 0,
-  };
-};
-
-const removeProductFromCart = (productId: string, state: CartState) => {
-  return {
-    cart: [],
-    productCount: 0,
-    totalPrice: 0,
-  };
-};
-
 const useCartReducer = () => {
-  const { user } = useAuth();
+  const { user, isLoggedIn } = useAuth();
   const { data } = useGetCartQuery();
+  const [addCartItem] = useAddCartItemMutation();
+  const [removeCartItem] = useRemoveCartItemMutation();
 
-  console.log(user, data?.me?.cart);
+  const addProductToCart = async (
+    productDetailsId: string,
+    state: CartState
+  ) => {
+    if (isLoggedIn) {
+      const cart = await addCartItem({ variables: { productDetailsId } });
 
-  return (state: CartState, action: CartActionTypes) => {
+      console.log(cart);
+    }
+
+    return {
+      cart: [],
+      productCount: 0,
+      totalPrice: 0,
+    };
+  };
+
+  const removeProductFromCart = async (
+    cartItemId: string,
+    state: CartState
+  ) => {
+    if (isLoggedIn) {
+      const cart = await removeCartItem({ variables: { cartItemId } });
+
+      console.log(cart);
+    }
+
+    return {
+      cart: [],
+      productCount: 0,
+      totalPrice: 0,
+    };
+  };
+
+  return async (state: CartState, action: CartActionTypes) => {
     switch (action.type) {
       case ADD_PRODUCT:
         return addProductToCart(action.payload, state);
