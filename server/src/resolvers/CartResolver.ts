@@ -82,4 +82,27 @@ export default class CartResolver {
   async items(@Root() cart: Cart): Promise<CartItem[]> {
     return CartItem.find({ where: { cart } });
   }
+
+  @FieldResolver()
+  async count(@Root() cart: Cart): Promise<number> {
+    let count = 0;
+
+    const cartItems = await CartItem.find({ where: { cart } });
+    cartItems.forEach((item) => (count += item.quantity));
+
+    return count;
+  }
+
+  @FieldResolver()
+  async total(@Root() cart: Cart): Promise<number> {
+    let total = 0;
+
+    const cartItems = await CartItem.find({
+      where: { cart },
+      relations: ["productDetails", "productDetails.product"],
+    });
+    cartItems.forEach((item) => (total += item.productDetails.product.price));
+
+    return total;
+  }
 }

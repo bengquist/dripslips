@@ -1,20 +1,5 @@
 mutation RemoveCartItem($cartItemId: String!) {
   removeCartItem(cartItemId: $cartItemId) {
-    items {
-      id
-      quantity
-      productDetails {
-        size
-        color
-        product {
-          modelId
-          title
-          price
-        }
-        productImages {
-          url
-        }
-      }
-    }
+    ...CartItems
   }
 }

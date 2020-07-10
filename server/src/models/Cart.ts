@@ -18,6 +18,12 @@ export class Cart extends BaseEntity {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
+  @Field()
+  count: number;
+
+  @Field()
+  total: number;
+
   @Field(() => User)
   @OneToOne(() => User)
   @JoinColumn()

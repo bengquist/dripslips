@@ -1,22 +1,28 @@
+fragment CartItems on Cart {
+  count
+  total
+  items {
+    id
+    quantity
+    productDetails {
+      size
+      color
+      product {
+        modelId
+        title
+        price
+      }
+      productImages {
+        url
+      }
+    }
+  }
+}
+
 query GetCart {
   me {
     cart {
-      items {
-        id
-        quantity
-        productDetails {
-          size
-          color
-          product {
-            modelId
-            title
-            price
-          }
-          productImages {
-            url
-          }
-        }
-      }
+      ...CartItems
     }
   }
 }

@@ -55,6 +55,8 @@ export type Address = {
 export type Cart = {
   __typename?: 'Cart';
   id: Scalars['ID'];
+  count: Scalars['Float'];
+  total: Scalars['Float'];
   user: User;
   items: Array<CartItem>;
 };
@@ -215,7 +217,10 @@ export type AddCartItemMutationVariables = Exact<{
 }>;
 
 
-export type AddCartItemMutation = { __typename?: 'Mutation', addCartItem: { __typename?: 'Cart', items: Array<{ __typename?: 'CartItem', id: string, quantity: number, productDetails: { __typename?: 'ProductDetail', size: number, color: string, product: { __typename?: 'Product', modelId: string, title: string, price: number }, productImages: Array<{ __typename?: 'ProductImage', url: string }> } }> } };
+export type AddCartItemMutation = { __typename?: 'Mutation', addCartItem: (
+    { __typename?: 'Cart' }
+    & CartItemsFragment
+  ) };
 
 export type FilteredProductsQueryVariables = Exact<{
   gender?: Maybe<Scalars['String']>;
@@ -224,10 +229,15 @@ export type FilteredProductsQueryVariables = Exact<{
 
 export type FilteredProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, modelId: string, title: string, description: string, price: number, gender: Gender, details: Array<{ __typename?: 'ProductDetail', size: number, color: string, productImages: Array<{ __typename?: 'ProductImage', id: string, url: string }> }> }> };
 
+export type CartItemsFragment = { __typename?: 'Cart', count: number, total: number, items: Array<{ __typename?: 'CartItem', id: string, quantity: number, productDetails: { __typename?: 'ProductDetail', size: number, color: string, product: { __typename?: 'Product', modelId: string, title: string, price: number }, productImages: Array<{ __typename?: 'ProductImage', url: string }> } }> };
+
 export type GetCartQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCartQuery = { __typename?: 'Query', me?: Maybe<{ __typename?: 'User', cart: { __typename?: 'Cart', items: Array<{ __typename?: 'CartItem', id: string, quantity: number, productDetails: { __typename?: 'ProductDetail', size: number, color: string, product: { __typename?: 'Product', modelId: string, title: string, price: number }, productImages: Array<{ __typename?: 'ProductImage', url: string }> } }> } }> };
+export type GetCartQuery = { __typename?: 'Query', me?: Maybe<{ __typename?: 'User', cart: (
+      { __typename?: 'Cart' }
+      & CartItemsFragment
+    ) }> };
 
 export type LoginMutationVariables = Exact<{
   user: Scalars['String'];
@@ -271,7 +281,10 @@ export type RemoveCartItemMutationVariables = Exact<{
 }>;
 
 
-export type RemoveCartItemMutation = { __typename?: 'Mutation', removeCartItem: { __typename?: 'Cart', items: Array<{ __typename?: 'CartItem', id: string, quantity: number, productDetails: { __typename?: 'ProductDetail', size: number, color: string, product: { __typename?: 'Product', modelId: string, title: string, price: number }, productImages: Array<{ __typename?: 'ProductImage', url: string }> } }> } };
+export type RemoveCartItemMutation = { __typename?: 'Mutation', removeCartItem: (
+    { __typename?: 'Cart' }
+    & CartItemsFragment
+  ) };
 
 export type ProductImagesFragment = { __typename?: 'Product', details: Array<{ __typename?: 'ProductDetail', productImages: Array<{ __typename?: 'ProductImage', url: string }> }> };
 
@@ -282,6 +295,28 @@ export type ProductInfoFragment = { __typename?: 'Product', id: string, modelId:
     & ProductDetailsFragment
   )> };
 
+export const CartItemsFragmentDoc = gql`
+    fragment CartItems on Cart {
+  count
+  total
+  items {
+    id
+    quantity
+    productDetails {
+      size
+      color
+      product {
+        modelId
+        title
+        price
+      }
+      productImages {
+        url
+      }
+    }
+  }
+}
+    `;
 export const ProductDetailsFragmentDoc = gql`
     fragment ProductDetails on ProductDetail {
   id
@@ -324,25 +359,10 @@ ${ProductImagesFragmentDoc}`;
 export const AddCartItemDocument = gql`
     mutation AddCartItem($productDetailsId: String!) {
   addCartItem(productDetailsId: $productDetailsId) {
-    items {
-      id
-      quantity
-      productDetails {
-        size
-        color
-        product {
-          modelId
-          title
-          price
-        }
-        productImages {
-          url
-        }
-      }
-    }
+    ...CartItems
   }
 }
-    `;
+    ${CartItemsFragmentDoc}`;
 export type AddCartItemMutationFn = ApolloReactCommon.MutationFunction<AddCartItemMutation, AddCartItemMutationVariables>;
 
 /**
@@ -418,26 +438,11 @@ export const GetCartDocument = gql`
     query GetCart {
   me {
     cart {
-      items {
-        id
-        quantity
-        productDetails {
-          size
-          color
-          product {
-            modelId
-            title
-            price
-          }
-          productImages {
-            url
-          }
-        }
-      }
+      ...CartItems
     }
   }
 }
-    `;
+    ${CartItemsFragmentDoc}`;
 
 /**
  * __useGetCartQuery__
@@ -593,25 +598,10 @@ export type ProductsQueryResult = ApolloReactCommon.QueryResult<ProductsQuery, P
 export const RemoveCartItemDocument = gql`
     mutation RemoveCartItem($cartItemId: String!) {
   removeCartItem(cartItemId: $cartItemId) {
-    items {
-      id
-      quantity
-      productDetails {
-        size
-        color
-        product {
-          modelId
-          title
-          price
-        }
-        productImages {
-          url
-        }
-      }
-    }
+    ...CartItems
   }
 }
-    `;
+    ${CartItemsFragmentDoc}`;
 export type RemoveCartItemMutationFn = ApolloReactCommon.MutationFunction<RemoveCartItemMutation, RemoveCartItemMutationVariables>;
 
 /**
