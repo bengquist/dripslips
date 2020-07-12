@@ -54,7 +54,7 @@ const useCartReducer = () => {
     return state;
   };
 
-  const setCart = (newState: CartState, state: CartState) => {
+  const restoreCart = (newState: CartState, state: CartState) => {
     return newState;
   };
 
@@ -65,17 +65,27 @@ const useCartReducer = () => {
       case REMOVE_CART_ITEM:
         return removeItemFromCart(action.payload, state);
       case RESTORE_CART:
-        return setCart(action.payload, state);
+        return restoreCart(action.payload, state);
       default:
         throw new Error(`Unknown action: ${action}`);
     }
   };
 
-  return useReducer(reducer, {
+  const [state, dispatch] = useReducer(reducer, {
     items: [],
     count: 0,
     total: 0,
   });
+
+  const thunkDispatch = (action) => {
+    if (typeof action === "function") {
+      return action(dispatch, state);
+    }
+
+    return dispatch(action);
+  };
+
+  return [state, thunkDispatch];
 };
 
 export default useCartReducer;

@@ -14,11 +14,11 @@ import { AppContext } from "../types";
 
 @Resolver(() => Cart)
 export default class CartResolver {
-  @Mutation(() => Cart)
+  @Mutation(() => CartItem)
   async addCartItem(
     @Arg("productDetailsId") productDetailsId: string,
     @Ctx() { user }: AppContext
-  ): Promise<Cart> {
+  ): Promise<CartItem> {
     if (!user) {
       throw new AuthenticationError(
         "Must be authenticated before adding item to cart"
@@ -36,30 +36,21 @@ export default class CartResolver {
 
     if (cartItem) {
       cartItem.quantity++;
-      await cartItem.save();
-
-      const cartItems = cart.items.filter((item) => item.id !== cartItem?.id);
-      cart.items = [...cartItems, cartItem];
-
-      return cart;
+      return cartItem.save();
     }
 
     cartItem = CartItem.create({ cart, productDetails });
-    cart.items.push(cartItem);
-    await cartItem.save();
-
-    return cart;
+    return cartItem.save();
   }
 
-  @Mutation(() => Cart)
+  @Mutation(() => Boolean)
   async removeCartItem(
-    @Arg("cartItemId") cartItemId: string,
-    @Ctx() { user }: AppContext
-  ): Promise<Cart> {
+    @Arg("cartItemId") cartItemId: string
+  ): Promise<boolean> {
     const item = await CartItem.findOne(cartItemId);
 
     if (!item) {
-      throw new Error("No cart item found");
+      return false;
     }
 
     if (item.quantity > 1) {
@@ -69,13 +60,7 @@ export default class CartResolver {
       await CartItem.delete(cartItemId);
     }
 
-    const cart = await Cart.findOne({ where: { user } });
-
-    if (!cart) {
-      throw new Error("User has no cart");
-    }
-
-    return cart;
+    return true;
   }
 
   @FieldResolver()
