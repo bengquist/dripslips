@@ -127,8 +127,8 @@ export type Mutation = {
   login: LoginResponse;
   signup: Scalars['Boolean'];
   logout: Scalars['Boolean'];
-  addCartItem: Cart;
-  removeCartItem: Cart;
+  addCartItem: CartItem;
+  removeCartItem: Scalars['Boolean'];
   createOrder: Order;
   addProduct: Product;
 };
@@ -217,10 +217,7 @@ export type AddCartItemMutationVariables = Exact<{
 }>;
 
 
-export type AddCartItemMutation = { __typename?: 'Mutation', addCartItem: (
-    { __typename?: 'Cart' }
-    & CartItemsFragment
-  ) };
+export type AddCartItemMutation = { __typename?: 'Mutation', addCartItem: { __typename?: 'CartItem', id: string, quantity: number, productDetails: { __typename?: 'ProductDetail', id: string, size: number, color: string, product: { __typename?: 'Product', id: string, modelId: string, title: string, price: number }, productImages: Array<{ __typename?: 'ProductImage', url: string }> } } };
 
 export type FilteredProductsQueryVariables = Exact<{
   gender?: Maybe<Scalars['String']>;
@@ -286,10 +283,7 @@ export type RemoveCartItemMutationVariables = Exact<{
 }>;
 
 
-export type RemoveCartItemMutation = { __typename?: 'Mutation', removeCartItem: (
-    { __typename?: 'Cart' }
-    & CartItemsFragment
-  ) };
+export type RemoveCartItemMutation = { __typename?: 'Mutation', removeCartItem: boolean };
 
 export type ProductImagesFragment = { __typename?: 'Product', details: Array<{ __typename?: 'ProductDetail', productImages: Array<{ __typename?: 'ProductImage', url: string }> }> };
 
@@ -371,10 +365,25 @@ ${ProductImagesFragmentDoc}`;
 export const AddCartItemDocument = gql`
     mutation AddCartItem($productDetailsId: String!) {
   addCartItem(productDetailsId: $productDetailsId) {
-    ...CartItems
+    id
+    quantity
+    productDetails {
+      id
+      size
+      color
+      product {
+        id
+        modelId
+        title
+        price
+      }
+      productImages {
+        url
+      }
+    }
   }
 }
-    ${CartItemsFragmentDoc}`;
+    `;
 export type AddCartItemMutationFn = ApolloReactCommon.MutationFunction<AddCartItemMutation, AddCartItemMutationVariables>;
 
 /**
@@ -609,11 +618,9 @@ export type ProductsLazyQueryHookResult = ReturnType<typeof useProductsLazyQuery
 export type ProductsQueryResult = ApolloReactCommon.QueryResult<ProductsQuery, ProductsQueryVariables>;
 export const RemoveCartItemDocument = gql`
     mutation RemoveCartItem($cartItemId: String!) {
-  removeCartItem(cartItemId: $cartItemId) {
-    ...CartItems
-  }
+  removeCartItem(cartItemId: $cartItemId)
 }
-    ${CartItemsFragmentDoc}`;
+    `;
 export type RemoveCartItemMutationFn = ApolloReactCommon.MutationFunction<RemoveCartItemMutation, RemoveCartItemMutationVariables>;
 
 /**

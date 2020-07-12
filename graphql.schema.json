@@ -1280,7 +1280,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Cart",
+                "name": "CartItem",
                 "ofType": null
               }
             },
@@ -1310,8 +1310,8 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "OBJECT",
-                "name": "Cart",
+                "kind": "SCALAR",
+                "name": "Boolean",
                 "ofType": null
               }
             },

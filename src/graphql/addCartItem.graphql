@@ -1,5 +1,20 @@
 mutation AddCartItem($productDetailsId: String!) {
   addCartItem(productDetailsId: $productDetailsId) {
-    ...CartItems
+    id
+    quantity
+    productDetails {
+      id
+      size
+      color
+      product {
+        id
+        modelId
+        title
+        price
+      }
+      productImages {
+        url
+      }
+    }
   }
 }
