@@ -11,8 +11,8 @@ export const RESTORE_CART = "RESTORE_CART";
 
 export type CartState = {
   cart: any[];
-  productCount: number;
-  totalPrice: number;
+  count: number;
+  total: number;
 };
 
 export type AddProductAction = {
@@ -33,41 +33,23 @@ const useCartReducer = () => {
   const [addCartItem] = useAddCartItemMutation();
   const [removeCartItem] = useRemoveCartItemMutation();
 
-  const addProductToCart = async (
-    productDetailsId: string,
-    state: CartState
-  ) => {
-    if (isLoggedIn) {
-      const cart = await addCartItem({ variables: { productDetailsId } });
-
-      console.log(cart);
-    }
-
+  const addProductToCart = (productDetailsId: string, state: CartState) => {
     return {
       cart: [],
-      productCount: 0,
-      totalPrice: 0,
+      count: 0,
+      total: 0,
     };
   };
 
-  const removeProductFromCart = async (
-    cartItemId: string,
-    state: CartState
-  ) => {
-    if (isLoggedIn) {
-      const cart = await removeCartItem({ variables: { cartItemId } });
-
-      console.log(cart);
-    }
-
+  const removeProductFromCart = (cartItemId: string, state: CartState) => {
     return {
       cart: [],
-      productCount: 0,
-      totalPrice: 0,
+      count: 0,
+      total: 0,
     };
   };
 
-  return async (state: CartState, action: CartActionTypes) => {
+  return (state: CartState, action: CartActionTypes) => {
     switch (action.type) {
       case ADD_PRODUCT:
         return addProductToCart(action.payload, state);
