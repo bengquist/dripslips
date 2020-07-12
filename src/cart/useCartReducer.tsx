@@ -1,3 +1,4 @@
+import { useReducer } from "react";
 import { useAuth } from "../auth/AuthContext";
 import {
   useAddCartItemMutation,
@@ -5,27 +6,35 @@ import {
   useRemoveCartItemMutation,
 } from "../generated/graphql";
 
-export const ADD_PRODUCT = "ADD_PRODUCT";
-export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
+export const ADD_CART_ITEM = "ADD_CART_ITEM";
+export const REMOVE_CART_ITEM = "REMOVE_CART_ITEM";
 export const RESTORE_CART = "RESTORE_CART";
 
 export type CartState = {
-  cart: any[];
+  items: any[];
   count: number;
   total: number;
 };
 
-export type AddProductAction = {
-  type: typeof ADD_PRODUCT;
+export type AddCartItemAction = {
+  type: typeof ADD_CART_ITEM;
   payload: string;
 };
 
-export type RemoveProductAction = {
-  type: typeof REMOVE_PRODUCT;
+export type RemoveCartItemAction = {
+  type: typeof REMOVE_CART_ITEM;
   payload: string;
 };
 
-export type CartActionTypes = AddProductAction | RemoveProductAction;
+export type RestoreCartAction = {
+  type: typeof RESTORE_CART;
+  payload: CartState;
+};
+
+export type CartActionTypes =
+  | AddCartItemAction
+  | RemoveCartItemAction
+  | RestoreCartAction;
 
 const useCartReducer = () => {
   const { user, isLoggedIn } = useAuth();
@@ -33,32 +42,40 @@ const useCartReducer = () => {
   const [addCartItem] = useAddCartItemMutation();
   const [removeCartItem] = useRemoveCartItemMutation();
 
-  const addProductToCart = (productDetailsId: string, state: CartState) => {
-    return {
-      cart: [],
-      count: 0,
-      total: 0,
-    };
+  const addItemToCart = (productDetailsId: string, state: CartState) => {
+    addCartItem({ variables: { productDetailsId } }).then((data) =>
+      console.log(data)
+    );
+
+    return state;
   };
 
-  const removeProductFromCart = (cartItemId: string, state: CartState) => {
-    return {
-      cart: [],
-      count: 0,
-      total: 0,
-    };
+  const removeItemFromCart = (cartItemId: string, state: CartState) => {
+    return state;
   };
 
-  return (state: CartState, action: CartActionTypes) => {
+  const setCart = (newState: CartState, state: CartState) => {
+    return newState;
+  };
+
+  const reducer = (state: CartState, action: CartActionTypes) => {
     switch (action.type) {
-      case ADD_PRODUCT:
-        return addProductToCart(action.payload, state);
-      case REMOVE_PRODUCT:
-        return removeProductFromCart(action.payload, state);
+      case ADD_CART_ITEM:
+        return addItemToCart(action.payload, state);
+      case REMOVE_CART_ITEM:
+        return removeItemFromCart(action.payload, state);
+      case RESTORE_CART:
+        return setCart(action.payload, state);
       default:
         throw new Error(`Unknown action: ${action}`);
     }
   };
+
+  return useReducer(reducer, {
+    items: [],
+    count: 0,
+    total: 0,
+  });
 };
 
 export default useCartReducer;

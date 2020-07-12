@@ -4,24 +4,24 @@ import formatCurrency from "../common/formatCurrency";
 import { headerHeight } from "../header/Header";
 import { flexSpaceBetweenAlignCenter, gap } from "../style/helpers";
 import { useCart } from "./CartContext";
-import CartProductModalCard from "./CartProductModalCard";
+import CartItemModalCard from "./CartItemModalCard";
 
 const CartSideBar = () => {
   const { state } = useCart();
 
   return (
     <Container>
-      <HeaderTitle>MY SHOPPING BAG ({state.productCount})</HeaderTitle>
+      <HeaderTitle>MY SHOPPING BAG ({state.count})</HeaderTitle>
       <div>
-        {state.cart.map((cartProduct) => (
-          <CartProductModalCard {...cartProduct} />
+        {state.items.map((cartProduct) => (
+          <CartItemModalCard {...cartProduct} />
         ))}
       </div>
 
       <PriceInfo>
         <Row>
           <p>Subtotal:</p>
-          <p>{formatCurrency(state.totalPrice)}</p>
+          <p>{formatCurrency(state.total)}</p>
         </Row>
         <Row>
           <p>Shipping:</p>
@@ -35,7 +35,7 @@ const CartSideBar = () => {
 
       <Row>
         <h2>Total:</h2>
-        <h2>{formatCurrency(state.totalPrice)}</h2>
+        <h2>{formatCurrency(state.total)}</h2>
       </Row>
     </Container>
   );

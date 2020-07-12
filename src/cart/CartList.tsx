@@ -4,18 +4,18 @@ import styled from "styled-components";
 import { flexAlignCenter, gap } from "../style/helpers";
 import SquareButton from "../ui/SquareButton";
 import { useCart } from "./CartContext";
-import CartProductCard from "./CartProductCard";
+import CartItemCard from "./CartItemCard";
 import CartTotal from "./CartTotal";
 
 const CartList = () => {
   const { state } = useCart();
 
-  const cartHasProducts = state.productCount > 0;
+  const cartHasProducts = state.count > 0;
 
   const cart = (
     <div css={gap({ bottom: 1 })}>
-      {state.cart.map((product) => (
-        <CartProductCard product={product} />
+      {state.items.map((product) => (
+        <CartItemCard product={product} />
       ))}
     </div>
   );
@@ -59,7 +59,7 @@ const CartList = () => {
 
       <Header>
         <h1>MY SHOPPING BAG</h1>
-        <p>({state.productCount} products)</p>
+        <p>({state.count} products)</p>
       </Header>
 
       {cart}

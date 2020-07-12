@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useCart } from "../cart/CartContext";
-import { ADD_PRODUCT } from "../cart/useCartReducer";
+import { ADD_CART_ITEM } from "../cart/useCartReducer";
 import exists from "../common/exists";
 import formatCurrency from "../common/formatCurrency";
 import { ProductInfoFragment } from "../generated/graphql";
@@ -30,7 +30,7 @@ const ProductInfo: React.FC<Props> = ({ product }) => {
 
     if (productDetail) {
       dispatch({
-        type: ADD_PRODUCT,
+        type: ADD_CART_ITEM,
         payload: productDetail.id,
       });
     }

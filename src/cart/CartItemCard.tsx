@@ -14,20 +14,19 @@ import {
 import IconButton from "../ui/IconButton";
 import SquareButton from "../ui/SquareButton";
 import { useCart } from "./CartContext";
-import { REMOVE_PRODUCT } from "./reducer";
-import { CartProduct } from "./types";
+import { REMOVE_CART_ITEM } from "./useCartReducer";
 
 type Props = {
-  product: CartProduct;
+  product: any;
 };
 
-const CartProductCard: React.FC<Props> = (props) => {
+const CartItemCard: React.FC<Props> = (props) => {
   const [showModal, setShowModal] = useState(false);
   const { dispatch } = useCart();
   const { product, color, size, quantity } = props.product;
 
-  const removeProduct = () => {
-    dispatch({ type: REMOVE_PRODUCT, payload: product.id });
+  const removeCartItem = () => {
+    dispatch({ type: REMOVE_CART_ITEM, payload: product.id });
     setShowModal(false);
   };
 
@@ -42,7 +41,7 @@ const CartProductCard: React.FC<Props> = (props) => {
           <SquareButton variant="secondary" onClick={() => setShowModal(false)}>
             Cancel
           </SquareButton>
-          <SquareButton onClick={removeProduct}>Delete</SquareButton>
+          <SquareButton onClick={removeCartItem}>Delete</SquareButton>
         </div>
       </CenterModal.Body>
     </CenterModal>
@@ -76,7 +75,7 @@ const CartProductCard: React.FC<Props> = (props) => {
   );
 };
 
-export default CartProductCard;
+export default CartItemCard;
 
 const Container = styled.div`
   display: flex;

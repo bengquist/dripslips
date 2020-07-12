@@ -6,21 +6,21 @@ import SideModal, { SideModalProps } from "../modal/SideModal";
 import { flexSpaceBetweenAlignCenter } from "../style/helpers";
 import SquareButton from "../ui/SquareButton";
 import { useCart } from "./CartContext";
-import CartProductModalCard from "./CartProductModalCard";
+import CartItemModalCard from "./CartItemModalCard";
 
 const CartSideModal: React.FC<SideModalProps> = (props) => {
   const { state } = useCart();
 
-  const cartProducts = state.cart.map(({ product, quantity }) => (
-    <CartProductModalCard
+  const cartProducts = state.items.map(({ productDetails, quantity }) => (
+    <CartItemModalCard
       onClick={props.onClose}
-      product={product}
+      productDetails={productDetails}
       quantity={quantity}
     />
   ));
 
   const renderBody = () => {
-    if (state.productCount > 0) {
+    if (state.count > 0) {
       return (
         <>
           {cartProducts}
@@ -28,7 +28,7 @@ const CartSideModal: React.FC<SideModalProps> = (props) => {
           <TotalPrice>
             <h3>TOTAL</h3>
             <h2 style={{ fontWeight: "normal" }}>
-              {formatCurrency(state.totalPrice)}
+              {formatCurrency(state.total)}
             </h2>
           </TotalPrice>
           <Link href="/cart">
@@ -46,7 +46,7 @@ const CartSideModal: React.FC<SideModalProps> = (props) => {
   return (
     <SideModal {...props}>
       <SideModal.Header onClose={props.onClose}>
-        YOUR SHOPPING BAG {state.productCount ? `(${state.productCount})` : ""}
+        YOUR SHOPPING BAG {state.count ? `(${state.count})` : ""}
       </SideModal.Header>
       <SideModal.Body>{renderBody()}</SideModal.Body>
     </SideModal>

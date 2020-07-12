@@ -11,7 +11,7 @@ const CartIcon = () => {
   return (
     <Container>
       <FontAwesomeIcon icon={faShoppingBasket} size="lg" />
-      {state.productCount > 0 && <Count>{state.productCount}</Count>}
+      {state.count > 0 && <Count>{state.count}</Count>}
     </Container>
   );
 };

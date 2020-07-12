@@ -1,3 +1,18 @@
+fragment CartItemProductDetail on ProductDetail {
+  id
+  size
+  color
+  product {
+    id
+    modelId
+    title
+    price
+  }
+  productImages {
+    url
+  }
+}
+
 fragment CartItems on Cart {
   count
   total
@@ -5,16 +20,7 @@ fragment CartItems on Cart {
     id
     quantity
     productDetails {
-      size
-      color
-      product {
-        modelId
-        title
-        price
-      }
-      productImages {
-        url
-      }
+      ...CartItemProductDetail
     }
   }
 }

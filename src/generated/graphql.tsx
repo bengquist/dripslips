@@ -229,7 +229,12 @@ export type FilteredProductsQueryVariables = Exact<{
 
 export type FilteredProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, modelId: string, title: string, description: string, price: number, gender: Gender, details: Array<{ __typename?: 'ProductDetail', size: number, color: string, productImages: Array<{ __typename?: 'ProductImage', id: string, url: string }> }> }> };
 
-export type CartItemsFragment = { __typename?: 'Cart', count: number, total: number, items: Array<{ __typename?: 'CartItem', id: string, quantity: number, productDetails: { __typename?: 'ProductDetail', size: number, color: string, product: { __typename?: 'Product', modelId: string, title: string, price: number }, productImages: Array<{ __typename?: 'ProductImage', url: string }> } }> };
+export type CartItemProductDetailFragment = { __typename?: 'ProductDetail', id: string, size: number, color: string, product: { __typename?: 'Product', id: string, modelId: string, title: string, price: number }, productImages: Array<{ __typename?: 'ProductImage', url: string }> };
+
+export type CartItemsFragment = { __typename?: 'Cart', count: number, total: number, items: Array<{ __typename?: 'CartItem', id: string, quantity: number, productDetails: (
+      { __typename?: 'ProductDetail' }
+      & CartItemProductDetailFragment
+    ) }> };
 
 export type GetCartQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -295,6 +300,22 @@ export type ProductInfoFragment = { __typename?: 'Product', id: string, modelId:
     & ProductDetailsFragment
   )> };
 
+export const CartItemProductDetailFragmentDoc = gql`
+    fragment CartItemProductDetail on ProductDetail {
+  id
+  size
+  color
+  product {
+    id
+    modelId
+    title
+    price
+  }
+  productImages {
+    url
+  }
+}
+    `;
 export const CartItemsFragmentDoc = gql`
     fragment CartItems on Cart {
   count
@@ -303,20 +324,11 @@ export const CartItemsFragmentDoc = gql`
     id
     quantity
     productDetails {
-      size
-      color
-      product {
-        modelId
-        title
-        price
-      }
-      productImages {
-        url
-      }
+      ...CartItemProductDetail
     }
   }
 }
-    `;
+    ${CartItemProductDetailFragmentDoc}`;
 export const ProductDetailsFragmentDoc = gql`
     fragment ProductDetails on ProductDetail {
   id
