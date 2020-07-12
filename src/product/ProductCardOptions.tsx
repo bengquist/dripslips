@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { stopPropagation } from "../common/eventHelpers";
 import { ProductDetailsFragment } from "../generated/graphql";
-import { gap } from "../style/helpers";
 
 type Props = {
   productDetails: ProductDetailsFragment[];
@@ -31,8 +30,10 @@ const ProductCardOptions: React.FC<Props> = ({
 export default ProductCardOptions;
 
 const Container = styled.div`
-  ${gap({ right: 0.5 })};
-  display: flex;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(2rem, 1fr));
+  grid-gap: 1rem;
 `;
 
 const Block = styled.button<{ color: string; isSelected: boolean }>`

@@ -6,6 +6,7 @@ import { ProductFieldsFragment } from "../generated/graphql";
 import {
   accessibleClickProps,
   flexSpaceBetweenAlignStart,
+  gap,
   lightGrayOutline,
 } from "../style/helpers";
 import ProductCardOptions from "./ProductCardOptions";
@@ -77,5 +78,6 @@ const Price = styled.p`
 
 const Info = styled.div`
   width: 100%;
-  ${flexSpaceBetweenAlignStart}
+  ${flexSpaceBetweenAlignStart};
+  ${gap({ right: 5 })};
 `;
