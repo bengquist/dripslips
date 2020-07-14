@@ -16,18 +16,18 @@ const CartTotal = () => {
     <Container css={gap({ bottom: 2 })}>
       <Row>
         <p>Subtotal:</p>
-        <p>{formatCurrency(state.price)}</p>
+        <p>{formatCurrency(state.total)}</p>
       </Row>
       <Row>
         <div css={[flexAlignCenter, gap({ right: 1 })]}>
           <p>Estimated Tax by Zip Code</p>
           <Input type="number" />
         </div>
-        <p>{formatCurrency(state.price)}</p>
+        <p>{formatCurrency(state.total)}</p>
       </Row>
       <Row>
         <h2>Total:</h2>
-        <h2>{formatCurrency(state.price)}</h2>
+        <h2>{formatCurrency(state.total)}</h2>
       </Row>
     </Container>
   );

@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import styled from "styled-components";
 import formatCurrency from "../common/formatCurrency";
+import { CartItemsFragment } from "../generated/graphql";
 import CenterModal from "../modal/CenterModal";
 import {
   flexAlignCenter,
@@ -17,16 +18,15 @@ import { useCart } from "./CartContext";
 import { REMOVE_CART_ITEM } from "./useCartReducer";
 
 type Props = {
-  product: any;
+  cartItem: CartItemsFragment;
 };
 
-const CartItemCard: React.FC<Props> = (props) => {
+const CartItemCard: React.FC<Props> = ({ cartItem }) => {
   const [showModal, setShowModal] = useState(false);
   const { dispatch } = useCart();
-  const { product, color, size, quantity } = props.product;
 
   const removeCartItem = () => {
-    dispatch({ type: REMOVE_CART_ITEM, payload: product.id });
+    dispatch({ type: REMOVE_CART_ITEM, payload: cartItem.id });
     setShowModal(false);
   };
 
@@ -50,23 +50,26 @@ const CartItemCard: React.FC<Props> = (props) => {
   return (
     <>
       <Container>
-        <Image src={product.details[0].productImages[0].url} alt="" />
+        <Image src={cartItem.productDetails.productImages[0].url} alt="" />
         <Info css={gap({ bottom: 1 })}>
-          <Link href="/product/[id]" as={`/product/${product.id}`}>
+          <Link
+            href="/product/[id]"
+            as={`/product/${cartItem.productDetails.product.id}`}
+          >
             <button>
-              <h2>{product.title}</h2>
+              <h2>{cartItem.productDetails.product.title}</h2>
             </button>
           </Link>
-          <p>Reference: {product.modelId}</p>
-          <p>{color}</p>
-          <p>Size: {size}</p>
+          <p>Reference: {cartItem.productDetails.product.modelId}</p>
+          <p>{cartItem.productDetails.color}</p>
+          <p>Size: {cartItem.productDetails.size}</p>
           <IconButton onClick={() => setShowModal(true)}>
             <FontAwesomeIcon icon={faTrashAlt} />
           </IconButton>
         </Info>
         <Right>
-          <Quantity>{quantity}</Quantity>
-          <p>{formatCurrency(product.price)}</p>
+          <Quantity>{cartItem.quantity}</Quantity>
+          <p>{formatCurrency(cartItem.productDetails.product.price)}</p>
         </Right>
       </Container>
 

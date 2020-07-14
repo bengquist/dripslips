@@ -228,17 +228,22 @@ export type FilteredProductsQuery = { __typename?: 'Query', products: Array<{ __
 
 export type CartItemProductDetailFragment = { __typename?: 'ProductDetail', id: string, size: number, color: string, product: { __typename?: 'Product', id: string, modelId: string, title: string, price: number }, productImages: Array<{ __typename?: 'ProductImage', url: string }> };
 
-export type CartItemsFragment = { __typename?: 'Cart', count: number, total: number, items: Array<{ __typename?: 'CartItem', id: string, quantity: number, productDetails: (
-      { __typename?: 'ProductDetail' }
-      & CartItemProductDetailFragment
-    ) }> };
+export type CartItemsFragment = { __typename?: 'CartItem', id: string, quantity: number, productDetails: (
+    { __typename?: 'ProductDetail' }
+    & CartItemProductDetailFragment
+  ) };
+
+export type CartFragment = { __typename?: 'Cart', count: number, total: number, items: Array<(
+    { __typename?: 'CartItem' }
+    & CartItemsFragment
+  )> };
 
 export type GetCartQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetCartQuery = { __typename?: 'Query', me?: Maybe<{ __typename?: 'User', cart: (
       { __typename?: 'Cart' }
-      & CartItemsFragment
+      & CartFragment
     ) }> };
 
 export type LoginMutationVariables = Exact<{
@@ -311,18 +316,23 @@ export const CartItemProductDetailFragmentDoc = gql`
 }
     `;
 export const CartItemsFragmentDoc = gql`
-    fragment CartItems on Cart {
-  count
-  total
-  items {
-    id
-    quantity
-    productDetails {
-      ...CartItemProductDetail
-    }
+    fragment CartItems on CartItem {
+  id
+  quantity
+  productDetails {
+    ...CartItemProductDetail
   }
 }
     ${CartItemProductDetailFragmentDoc}`;
+export const CartFragmentDoc = gql`
+    fragment Cart on Cart {
+  count
+  total
+  items {
+    ...CartItems
+  }
+}
+    ${CartItemsFragmentDoc}`;
 export const ProductDetailsFragmentDoc = gql`
     fragment ProductDetails on ProductDetail {
   id
@@ -459,11 +469,11 @@ export const GetCartDocument = gql`
     query GetCart {
   me {
     cart {
-      ...CartItems
+      ...Cart
     }
   }
 }
-    ${CartItemsFragmentDoc}`;
+    ${CartFragmentDoc}`;
 
 /**
  * __useGetCartQuery__

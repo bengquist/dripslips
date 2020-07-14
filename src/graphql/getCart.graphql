@@ -13,22 +13,26 @@ fragment CartItemProductDetail on ProductDetail {
   }
 }
 
-fragment CartItems on Cart {
+fragment CartItems on CartItem {
+  id
+  quantity
+  productDetails {
+    ...CartItemProductDetail
+  }
+}
+
+fragment Cart on Cart {
   count
   total
   items {
-    id
-    quantity
-    productDetails {
-      ...CartItemProductDetail
-    }
+    ...CartItems
   }
 }
 
 query GetCart {
   me {
     cart {
-      ...CartItems
+      ...Cart
     }
   }
 }

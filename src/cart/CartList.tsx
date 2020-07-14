@@ -14,8 +14,8 @@ const CartList = () => {
 
   const cart = (
     <div css={gap({ bottom: 1 })}>
-      {state.items.map((product) => (
-        <CartItemCard product={product} />
+      {state.items.map((cartItem) => (
+        <CartItemCard cartItem={cartItem} />
       ))}
     </div>
   );

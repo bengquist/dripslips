@@ -2,28 +2,26 @@ import Link from "next/link";
 import React, { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
 import formatCurrency from "../common/formatCurrency";
-import { CartItemProductDetailFragment } from "../generated/graphql";
+import { CartItemsFragment } from "../generated/graphql";
 import { flexSpaceBetweenAlignCenter, gap } from "../style/helpers";
 
 type Props = ComponentPropsWithoutRef<"button"> & {
-  productDetails: CartItemProductDetailFragment;
-  quantity: number;
+  cartItem: CartItemsFragment;
 };
 
-const CartItemModalCard: React.FC<Props> = ({
-  productDetails,
-  quantity,
-  ...props
-}) => {
+const CartItemModalCard: React.FC<Props> = ({ cartItem, ...props }) => {
   return (
-    <Link href="/product/[id]" as={`/product/${productDetails.product.id}`}>
+    <Link
+      href="/product/[id]"
+      as={`/product/${cartItem.productDetails.product.id}`}
+    >
       <Container {...props}>
         <Info>
-          <Image src={productDetails.productImages[0].url} />
+          <Image src={cartItem.productDetails.productImages[0].url} />
           <div css={gap({ bottom: 1 })}>
-            <p>{productDetails.product.title}</p>
-            <p>Quantity: {quantity}</p>
-            <p>{formatCurrency(productDetails.product.price)}</p>
+            <p>{cartItem.productDetails.product.title}</p>
+            <p>Quantity: {cartItem.quantity}</p>
+            <p>{formatCurrency(cartItem.productDetails.product.price)}</p>
           </div>
         </Info>
       </Container>
