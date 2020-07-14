@@ -87,14 +87,14 @@ const PaymentForm: React.FC = () => {
                 onBlur={handleBlur}
                 value={values.expirationMonth}
                 label="Expiration Date *"
-                options={months}
+                options={months.map((month) => ({ value: month, text: month }))}
               />
               <Select
                 name="expirationYear"
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.expirationYear}
-                options={years}
+                options={years.map((year) => ({ text: year, value: year }))}
               />
             </div>
             <div style={{ maxWidth: "8rem" }}>

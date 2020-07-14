@@ -94,7 +94,11 @@ const ShippingForm: React.FC = () => {
               onBlur={handleBlur}
               value={values.title}
               label="Title *"
-              options={["Mr", "Mrs", "Ms"]}
+              options={[
+                { text: "Mr", value: "Mr" },
+                { text: "Mrs", value: "Mrs" },
+                { text: "Ms", value: "Ms" },
+              ]}
               error={errors.title && touched.title && errors.title}
             />
             <Input
@@ -163,7 +167,7 @@ const ShippingForm: React.FC = () => {
               onBlur={handleBlur}
               value={values.state}
               label="State *"
-              options={states}
+              options={states.map((state) => ({ text: state, value: state }))}
               error={errors.state && touched.state && errors.state}
             />
             <Input
@@ -177,7 +181,10 @@ const ShippingForm: React.FC = () => {
             <div css={[gap({ right: 1 }), flexAlignEnd]}>
               <Select
                 name="phoneCountry"
-                options={phoneCodes}
+                options={phoneCodes.map((phoneCode) => ({
+                  text: phoneCode,
+                  value: phoneCode,
+                }))}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.phoneCountry}

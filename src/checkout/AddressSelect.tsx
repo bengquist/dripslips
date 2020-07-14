@@ -13,7 +13,12 @@ const AddressSelect: React.FC<Props> = ({ addresses }) => {
       <div>
         <h3>Select an Address</h3>
         <div style={{ display: "inline-block" }}>
-          <Select options={addresses.map((address) => address.name)} />
+          <Select
+            options={addresses.map((address) => ({
+              text: address.name,
+              value: address.id,
+            }))}
+          />
         </div>
       </div>
     </Container>

@@ -8,7 +8,7 @@ import ErrorMessage from "./ErrorMessage";
 type Props = ComponentPropsWithoutRef<"select"> & {
   error?: string | false;
   label?: string;
-  options: string[];
+  options: { value: string; text: string }[];
 };
 
 const Select: React.FC<Props> = ({ options, label, error, ...props }) => {
@@ -18,8 +18,8 @@ const Select: React.FC<Props> = ({ options, label, error, ...props }) => {
         {label && <p>{label}</p>}
         <SelectCustom error={error} {...props}>
           {options.map((option) => (
-            <option key={option} value={option}>
-              {option}
+            <option key={option.value} value={option.value}>
+              {option.text}
             </option>
           ))}
         </SelectCustom>
