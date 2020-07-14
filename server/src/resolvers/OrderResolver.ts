@@ -7,11 +7,12 @@ import {
   Root,
 } from "type-graphql";
 import Address from "../models/Address";
-import { CartItem } from "../models/CartItem";
+import { Cart } from "../models/Cart";
 import Order from "../models/Order";
 import OrderItem from "../models/OrderItem";
 import { AppContext } from "../types";
 import CreateOrderInput from "./inputs/CreateOrderInput";
+const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 @Resolver(() => Order)
 export default class OrderResolver {
@@ -22,27 +23,44 @@ export default class OrderResolver {
   ) {
     let amount = 0;
 
-    const cart = await CartItem.find({
+    const cart = await Cart.findOne({
       where: { user },
-      relations: ["productDetails", "productDetails.product"],
+      relations: [
+        "items",
+        "items.productDetails",
+        "items.productDetails.product",
+      ],
     });
+
     const address = await Address.findOne(data.addressId);
     const order = Order.create({ status: data.status, address, user });
-    const items = cart.map(({ productDetails, quantity }) => {
+
+    const items = cart?.items.map(({ productDetails, quantity }) => {
       amount += productDetails.product.price * quantity;
       return OrderItem.create({ productDetails, quantity });
     });
 
     order.amount = amount;
-    order.items = items;
+    order.items = items || [];
+
+    if (!cart) {
+      throw new Error("No items in cart");
+    }
+
+    await Cart.delete(cart.id);
 
     return order.save();
   }
 
   @FieldResolver()
   async address(@Root() order: Order): Promise<Address> {
-    //@ts-ignore
-    return Address.findOne(order.addressId);
+    const address = await Address.findOne(order.addressId);
+
+    if (!address) {
+      throw new Error("No address found connected to this order");
+    }
+
+    return address;
   }
 
   @FieldResolver()

@@ -6,7 +6,14 @@ import ProductDetail from "../models/ProductDetail";
 export default class OrderItemResolver {
   @FieldResolver()
   async productDetails(@Root() orderItem: OrderItem): Promise<ProductDetail> {
-    //@ts-ignore
-    return ProductDetail.findOne(orderItem.productDetailsId);
+    const productDetail = await ProductDetail.findOne(
+      orderItem.productDetailsId
+    );
+
+    if (!productDetail) {
+      throw new Error("No product details found on order item");
+    }
+
+    return productDetail;
   }
 }

@@ -32,6 +32,8 @@ export class Cart extends BaseEntity {
   userId: string;
 
   @Field(() => [CartItem])
-  @OneToMany(() => CartItem, (items) => items.cart, { cascade: true })
+  @OneToMany(() => CartItem, (items) => items.cart, {
+    cascade: true,
+  })
   items: CartItem[];
 }

@@ -30,16 +30,19 @@ export default class CartResolver {
     let cart = await Cart.findOne({ where: { user }, relations: ["items"] });
     let cartItem = await CartItem.findOne({ where: { productDetails } });
 
-    if (!cart) {
-      cart = Cart.create({ user });
-    }
-
     if (cartItem) {
       cartItem.quantity++;
       return cartItem.save();
     }
 
+    if (!cart) {
+      cart = Cart.create({ user });
+    }
+
+    await cart.save();
+
     cartItem = CartItem.create({ cart, productDetails });
+
     return cartItem.save();
   }
 

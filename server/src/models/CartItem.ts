@@ -26,7 +26,7 @@ export class CartItem extends BaseEntity {
   @CreateDateColumn({ type: "timestamp" })
   createdAt: Date;
 
-  @ManyToOne(() => Cart, (cart) => cart.items)
+  @ManyToOne(() => Cart, (cart) => cart.items, { onDelete: "CASCADE" })
   cart: Cart;
   @Column({ nullable: true })
   cartId: string;
