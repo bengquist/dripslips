@@ -29,7 +29,7 @@ fragment Cart on Cart {
   }
 }
 
-query GetCart {
+query GetUserCart {
   me {
     cart {
       ...Cart

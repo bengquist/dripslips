@@ -50,6 +50,7 @@ export type Address = {
   city: Scalars['String'];
   state: Scalars['String'];
   country: Scalars['String'];
+  name: Scalars['String'];
 };
 
 export type Cart = {
@@ -178,6 +179,7 @@ export type AddAddressInput = {
   city: Scalars['String'];
   state: Scalars['String'];
   country: Scalars['String'];
+  name: Scalars['String'];
 };
 
 export type LoginResponse = {
@@ -198,6 +200,8 @@ export type SignupInput = {
 
 export type CreateOrderInput = {
   addressId: Scalars['String'];
+  stripeSource: Scalars['String'];
+  email: Scalars['String'];
   status: OrderStatus;
 };
 
@@ -226,6 +230,21 @@ export type FilteredProductsQueryVariables = Exact<{
 
 export type FilteredProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, modelId: string, title: string, description: string, price: number, gender: Gender, details: Array<{ __typename?: 'ProductDetail', size: number, color: string, productImages: Array<{ __typename?: 'ProductImage', id: string, url: string }> }> }> };
 
+export type AddressFieldsFragment = { __typename?: 'Address', id: string, companyName?: Maybe<string>, addressPrimary: string, addressSecondary?: Maybe<string>, postalCode: number, city: string, state: string, country: string, name: string };
+
+export type AddressFragment = { __typename?: 'User', address: Array<(
+    { __typename?: 'Address' }
+    & AddressFieldsFragment
+  )> };
+
+export type GetUserAddressQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUserAddressQuery = { __typename?: 'Query', me?: Maybe<(
+    { __typename?: 'User' }
+    & AddressFragment
+  )> };
+
 export type CartItemProductDetailFragment = { __typename?: 'ProductDetail', id: string, size: number, color: string, product: { __typename?: 'Product', id: string, modelId: string, title: string, price: number }, productImages: Array<{ __typename?: 'ProductImage', url: string }> };
 
 export type CartItemsFragment = { __typename?: 'CartItem', id: string, quantity: number, productDetails: (
@@ -238,10 +257,10 @@ export type CartFragment = { __typename?: 'Cart', count: number, total: number, 
     & CartItemsFragment
   )> };
 
-export type GetCartQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetUserCartQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCartQuery = { __typename?: 'Query', me?: Maybe<{ __typename?: 'User', cart: (
+export type GetUserCartQuery = { __typename?: 'Query', me?: Maybe<{ __typename?: 'User', cart: (
       { __typename?: 'Cart' }
       & CartFragment
     ) }> };
@@ -299,6 +318,26 @@ export type ProductInfoFragment = { __typename?: 'Product', id: string, modelId:
     & ProductDetailsFragment
   )> };
 
+export const AddressFieldsFragmentDoc = gql`
+    fragment AddressFields on Address {
+  id
+  companyName
+  addressPrimary
+  addressSecondary
+  postalCode
+  city
+  state
+  country
+  name
+}
+    `;
+export const AddressFragmentDoc = gql`
+    fragment Address on User {
+  address {
+    ...AddressFields
+  }
+}
+    ${AddressFieldsFragmentDoc}`;
 export const CartItemProductDetailFragmentDoc = gql`
     fragment CartItemProductDetail on ProductDetail {
   id
@@ -465,8 +504,40 @@ export function useFilteredProductsLazyQuery(baseOptions?: ApolloReactHooks.Lazy
 export type FilteredProductsQueryHookResult = ReturnType<typeof useFilteredProductsQuery>;
 export type FilteredProductsLazyQueryHookResult = ReturnType<typeof useFilteredProductsLazyQuery>;
 export type FilteredProductsQueryResult = ApolloReactCommon.QueryResult<FilteredProductsQuery, FilteredProductsQueryVariables>;
-export const GetCartDocument = gql`
-    query GetCart {
+export const GetUserAddressDocument = gql`
+    query GetUserAddress {
+  me {
+    ...Address
+  }
+}
+    ${AddressFragmentDoc}`;
+
+/**
+ * __useGetUserAddressQuery__
+ *
+ * To run a query within a React component, call `useGetUserAddressQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserAddressQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserAddressQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetUserAddressQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetUserAddressQuery, GetUserAddressQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetUserAddressQuery, GetUserAddressQueryVariables>(GetUserAddressDocument, baseOptions);
+      }
+export function useGetUserAddressLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetUserAddressQuery, GetUserAddressQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetUserAddressQuery, GetUserAddressQueryVariables>(GetUserAddressDocument, baseOptions);
+        }
+export type GetUserAddressQueryHookResult = ReturnType<typeof useGetUserAddressQuery>;
+export type GetUserAddressLazyQueryHookResult = ReturnType<typeof useGetUserAddressLazyQuery>;
+export type GetUserAddressQueryResult = ApolloReactCommon.QueryResult<GetUserAddressQuery, GetUserAddressQueryVariables>;
+export const GetUserCartDocument = gql`
+    query GetUserCart {
   me {
     cart {
       ...Cart
@@ -476,29 +547,29 @@ export const GetCartDocument = gql`
     ${CartFragmentDoc}`;
 
 /**
- * __useGetCartQuery__
+ * __useGetUserCartQuery__
  *
- * To run a query within a React component, call `useGetCartQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetCartQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetUserCartQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserCartQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetCartQuery({
+ * const { data, loading, error } = useGetUserCartQuery({
  *   variables: {
  *   },
  * });
  */
-export function useGetCartQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetCartQuery, GetCartQueryVariables>) {
-        return ApolloReactHooks.useQuery<GetCartQuery, GetCartQueryVariables>(GetCartDocument, baseOptions);
+export function useGetUserCartQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetUserCartQuery, GetUserCartQueryVariables>) {
+        return ApolloReactHooks.useQuery<GetUserCartQuery, GetUserCartQueryVariables>(GetUserCartDocument, baseOptions);
       }
-export function useGetCartLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetCartQuery, GetCartQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<GetCartQuery, GetCartQueryVariables>(GetCartDocument, baseOptions);
+export function useGetUserCartLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetUserCartQuery, GetUserCartQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<GetUserCartQuery, GetUserCartQueryVariables>(GetUserCartDocument, baseOptions);
         }
-export type GetCartQueryHookResult = ReturnType<typeof useGetCartQuery>;
-export type GetCartLazyQueryHookResult = ReturnType<typeof useGetCartLazyQuery>;
-export type GetCartQueryResult = ApolloReactCommon.QueryResult<GetCartQuery, GetCartQueryVariables>;
+export type GetUserCartQueryHookResult = ReturnType<typeof useGetUserCartQuery>;
+export type GetUserCartLazyQueryHookResult = ReturnType<typeof useGetUserCartLazyQuery>;
+export type GetUserCartQueryResult = ApolloReactCommon.QueryResult<GetUserCartQuery, GetUserCartQueryVariables>;
 export const LoginDocument = gql`
     mutation Login($user: String!, $password: String!) {
   login(user: $user, password: $password) {

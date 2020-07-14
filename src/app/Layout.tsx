@@ -14,7 +14,7 @@ const Layout: React.FC = ({ children }) => {
 export default Layout;
 
 const Container = styled.div`
-  min-height: 100%;
+  height: 100%;
 `;
 
 const Main = styled.main`

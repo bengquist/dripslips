@@ -1,0 +1,23 @@
+fragment AddressFields on Address {
+  id
+  companyName
+  addressPrimary
+  addressSecondary
+  postalCode
+  city
+  state
+  country
+  name
+}
+
+fragment Address on User {
+  address {
+    ...AddressFields
+  }
+}
+
+query GetUserAddress {
+  me {
+    ...Address
+  }
+}

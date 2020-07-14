@@ -45,6 +45,10 @@ export default class Address extends BaseEntity {
   @Column()
   country: string;
 
+  @Field()
+  @Column()
+  name: string;
+
   @ManyToOne(() => User, (user) => user.address)
   user: User;
 

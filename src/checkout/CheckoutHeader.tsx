@@ -20,7 +20,7 @@ const CheckoutHeader: React.FC = () => {
         </LinkButton>
       </Left>
       <Right>
-        <p>You won't be charged</p>
+        <p>Don't worry, you won't be charged</p>
       </Right>
     </Container>
   );
@@ -37,12 +37,12 @@ const Container = styled.div`
 
 const Left = styled.div`
   padding-right: 3rem;
-  width: 60%;
+  width: 65%;
   ${flexSpaceBetweenAlignCenter};
   ${lightGrayOutline};
 `;
 
 const Right = styled.div`
   ${flexCenter};
-  width: 40%;
+  width: 35%;
 `;

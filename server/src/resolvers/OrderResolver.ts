@@ -47,6 +47,19 @@ export default class OrderResolver {
       throw new Error("No items in cart");
     }
 
+    try {
+      const charge = await stripe.charges.create({
+        amount,
+        currency: "usd",
+        source: data.stripeSource,
+        receipt_email: user?.email || data.email,
+      });
+
+      console.log(charge);
+    } catch (e) {
+      throw new Error(e.message);
+    }
+
     await Cart.delete(cart.id);
 
     return order.save();

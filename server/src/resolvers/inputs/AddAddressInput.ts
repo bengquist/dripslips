@@ -26,4 +26,7 @@ export default class AddAddressInput implements Partial<Address> {
 
   @Field()
   country: string;
+
+  @Field()
+  name: string;
 }

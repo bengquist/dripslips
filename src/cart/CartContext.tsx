@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect } from "react";
-import { useGetCartQuery } from "../generated/graphql";
+import { useGetUserCartQuery } from "../generated/graphql";
 import useCartReducer, {
   CartActionTypes,
   CartState,
@@ -14,7 +14,7 @@ type ContextProps = {
 const CartContext = createContext({} as ContextProps);
 
 export const CartProvider: React.FC = ({ children }) => {
-  const { data } = useGetCartQuery();
+  const { data } = useGetUserCartQuery();
   const [state, dispatch] = useCartReducer();
 
   useEffect(() => {

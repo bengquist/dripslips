@@ -13,8 +13,8 @@ const CartSideBar = () => {
     <Container>
       <HeaderTitle>MY SHOPPING BAG ({state.count})</HeaderTitle>
       <div>
-        {state.items.map((cartProduct) => (
-          <CartItemModalCard {...cartProduct} />
+        {state.items.map((cartItem) => (
+          <CartItemModalCard cartItem={cartItem} />
         ))}
       </div>
 
@@ -46,10 +46,11 @@ export default CartSideBar;
 const Container = styled.aside`
   position: sticky;
   top: ${headerHeight};
-  width: 40%;
+  width: 35%;
   height: 100%;
   padding: 3rem;
-  ${gap({ bottom: 1 })}
+  ${gap({ bottom: 1 })};
+  border-left: 1px solid ${({ theme }) => theme.colors.lightGray};
 `;
 
 const HeaderTitle = styled.h2`

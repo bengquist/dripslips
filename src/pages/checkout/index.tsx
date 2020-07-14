@@ -7,7 +7,7 @@ const CheckoutPage = () => {
 
   useEffect(() => {
     if (user) {
-      Router.replace("/checkout/billing");
+      Router.replace("/checkout/shipping");
     } else {
       Router.replace("/checkout/auth");
     }

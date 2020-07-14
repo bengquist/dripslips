@@ -2,7 +2,7 @@ import { useReducer } from "react";
 import { useAuth } from "../auth/AuthContext";
 import {
   useAddCartItemMutation,
-  useGetCartQuery,
+  useGetUserCartQuery,
   useRemoveCartItemMutation,
 } from "../generated/graphql";
 
@@ -38,7 +38,7 @@ export type CartActionTypes =
 
 const useCartReducer = () => {
   const { user, isLoggedIn } = useAuth();
-  const { data } = useGetCartQuery();
+  const { data } = useGetUserCartQuery();
   const [addCartItem] = useAddCartItemMutation();
   const [removeCartItem] = useRemoveCartItemMutation();
 
