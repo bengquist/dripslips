@@ -9,6 +9,7 @@ import {
 export const ADD_CART_ITEM = "ADD_CART_ITEM";
 export const REMOVE_CART_ITEM = "REMOVE_CART_ITEM";
 export const RESTORE_CART = "RESTORE_CART";
+export const CLEAR_CART = "CLEAR_CART";
 
 export type CartState = {
   items: any[];
@@ -31,10 +32,21 @@ export type RestoreCartAction = {
   payload: CartState;
 };
 
+export type ClearCartAction = {
+  type: typeof CLEAR_CART;
+};
+
 export type CartActionTypes =
   | AddCartItemAction
   | RemoveCartItemAction
-  | RestoreCartAction;
+  | RestoreCartAction
+  | ClearCartAction;
+
+const defaultState = {
+  items: [],
+  count: 0,
+  total: 0,
+};
 
 const useCartReducer = () => {
   const { user, isLoggedIn } = useAuth();
@@ -43,10 +55,6 @@ const useCartReducer = () => {
   const [removeCartItem] = useRemoveCartItemMutation();
 
   const addItemToCart = (productDetailsId: string, state: CartState) => {
-    addCartItem({ variables: { productDetailsId } }).then((data) =>
-      console.log(data)
-    );
-
     return state;
   };
 
@@ -58,6 +66,10 @@ const useCartReducer = () => {
     return newState;
   };
 
+  const clearCart = () => {
+    return defaultState;
+  };
+
   const reducer = (state: CartState, action: CartActionTypes) => {
     switch (action.type) {
       case ADD_CART_ITEM:
@@ -66,26 +78,16 @@ const useCartReducer = () => {
         return removeItemFromCart(action.payload, state);
       case RESTORE_CART:
         return restoreCart(action.payload, state);
+      case CLEAR_CART:
+        return clearCart();
       default:
         throw new Error(`Unknown action: ${action}`);
     }
   };
 
-  const [state, dispatch] = useReducer(reducer, {
-    items: [],
-    count: 0,
-    total: 0,
-  });
+  const [state, dispatch] = useReducer(reducer, defaultState);
 
-  const thunkDispatch = (action) => {
-    if (typeof action === "function") {
-      return action(dispatch, state);
-    }
-
-    return dispatch(action);
-  };
-
-  return [state, thunkDispatch];
+  return [state, dispatch];
 };
 
 export default useCartReducer;

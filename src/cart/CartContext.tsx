@@ -1,8 +1,10 @@
 import React, { createContext, useContext, useEffect } from "react";
+import { useAuth } from "../auth/AuthContext";
 import { useGetUserCartQuery } from "../generated/graphql";
 import useCartReducer, {
   CartActionTypes,
   CartState,
+  CLEAR_CART,
   RESTORE_CART,
 } from "./useCartReducer";
 
@@ -16,12 +18,15 @@ const CartContext = createContext({} as ContextProps);
 export const CartProvider: React.FC = ({ children }) => {
   const { data } = useGetUserCartQuery();
   const [state, dispatch] = useCartReducer();
+  const { isLoggedIn } = useAuth();
 
   useEffect(() => {
-    if (data?.me?.cart) {
+    if (isLoggedIn && data?.me?.cart) {
       dispatch({ type: RESTORE_CART, payload: data?.me.cart });
+    } else {
+      dispatch({ type: CLEAR_CART });
     }
-  }, [data]);
+  }, [data, isLoggedIn]);
 
   const value = { state, dispatch };
 
