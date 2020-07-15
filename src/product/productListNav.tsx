@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { headerHeight } from "../header/Header";
+import { headerHeight } from "../app/Header";
 import { lightGrayOutline } from "../style/helpers";
 import ProductListFilter from "./ProductListFilter";
 

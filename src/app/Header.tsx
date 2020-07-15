@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import routes from "../routing/routes";
 import { flexAlignCenter, lightGrayOutline } from "../style/helpers";
 import HeaderActions from "./HeaderActions";
 import HeaderSearch from "./HeaderSearch";
@@ -11,14 +12,14 @@ const Header = () => {
   return (
     <Container>
       <div css={flexAlignCenter}>
-        <Link href="/">
+        <Link href={routes.HOME}>
           <Logo>dripslips</Logo>
         </Link>
         <OptionContainer>
-          <Link href="/men">
+          <Link href={routes.MEN}>
             <Option>Men</Option>
           </Link>
-          <Link href="/women">
+          <Link href={routes.WOMEN}>
             <Option>Women</Option>
           </Link>
         </OptionContainer>
@@ -34,18 +35,21 @@ const Header = () => {
 
 export default Header;
 
-const Container = styled.header`
-  z-index: 1;
-  display: flex;
-  justify-content: space-between;
+export const headerStyles = css`
+  z-index: 100;
 
   position: sticky;
   top: 0;
 
   background: white;
   height: ${headerHeight};
-  padding: 0 3rem;
   ${lightGrayOutline}
+`;
+
+const Container = styled.header`
+  ${headerStyles};
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Logo = styled.button`

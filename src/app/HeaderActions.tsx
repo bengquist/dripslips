@@ -8,6 +8,7 @@ import { useAuth } from "../auth/AuthContext";
 import AuthSideModal from "../auth/AuthSideModal";
 import CartIcon from "../cart/CartIcon";
 import CartSideModal from "../cart/CartSideModal";
+import routes from "../routing/routes";
 
 const HeaderActions = () => {
   const { user } = useAuth();
@@ -24,7 +25,7 @@ const HeaderActions = () => {
 
   return (
     <Container>
-      <Link href="/wishlist">
+      <Link href={routes.WISHLIST}>
         <Action>
           <FontAwesomeIcon icon={faHeart} size="lg" />
         </Action>

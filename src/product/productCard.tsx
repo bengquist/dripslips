@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import formatCurrency from "../common/formatCurrency";
 import { ProductFieldsFragment } from "../generated/graphql";
+import routes from "../routing/routes";
 import {
   accessibleClickProps,
   flexSpaceBetweenAlignStart,
@@ -20,14 +21,14 @@ const ItemCard: React.FC<Props> = ({ product }) => {
     product.details[0].id
   );
 
-  console.log(product);
+  const productRoute = routes.PRODUCT(product.id);
 
   const detail =
     product.details.find((details) => details.id === selectedDetailId) ||
     product.details[0];
 
   return (
-    <Link href="product/[id]" as={`/product/${product.id}`}>
+    <Link {...productRoute}>
       <Container {...accessibleClickProps()}>
         <Image src={detail.productImages[0].url} alt="" />
 

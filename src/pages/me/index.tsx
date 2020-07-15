@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { getLayout } from "../../app/ProfileLayout";
 import SEO from "../../app/SEO";
 import Loader from "../../ui/Loader";
 
@@ -11,6 +12,8 @@ const MePage = () => {
     </Loader>
   );
 };
+
+MePage.getLayout = getLayout;
 
 export default MePage;
 

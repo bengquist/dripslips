@@ -6,6 +6,7 @@ import styled from "styled-components";
 import formatCurrency from "../common/formatCurrency";
 import { CartItemsFragment } from "../generated/graphql";
 import CenterModal from "../modal/CenterModal";
+import routes from "../routing/routes";
 import {
   flexAlignCenter,
   flexSpaceBetweenAlignCenter,
@@ -24,6 +25,8 @@ type Props = {
 const CartItemCard: React.FC<Props> = ({ cartItem }) => {
   const [showModal, setShowModal] = useState(false);
   const { dispatch } = useCart();
+
+  const productRoute = routes.PRODUCT(cartItem.productDetails.product.id);
 
   const removeCartItem = () => {
     dispatch({ type: REMOVE_CART_ITEM, payload: cartItem.id });
@@ -52,10 +55,7 @@ const CartItemCard: React.FC<Props> = ({ cartItem }) => {
       <Container>
         <Image src={cartItem.productDetails.productImages[0].url} alt="" />
         <Info css={gap({ bottom: 1 })}>
-          <Link
-            href="/product/[id]"
-            as={`/product/${cartItem.productDetails.product.id}`}
-          >
+          <Link {...productRoute}>
             <button>
               <h2>{cartItem.productDetails.product.title}</h2>
             </button>

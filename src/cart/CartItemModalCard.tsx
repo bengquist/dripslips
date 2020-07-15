@@ -3,6 +3,7 @@ import React, { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
 import formatCurrency from "../common/formatCurrency";
 import { CartItemsFragment } from "../generated/graphql";
+import routes from "../routing/routes";
 import { flexSpaceBetweenAlignCenter, gap } from "../style/helpers";
 
 type Props = ComponentPropsWithoutRef<"button"> & {
@@ -10,11 +11,10 @@ type Props = ComponentPropsWithoutRef<"button"> & {
 };
 
 const CartItemModalCard: React.FC<Props> = ({ cartItem, ...props }) => {
+  const productRoute = routes.PRODUCT(cartItem.productDetails.product.id);
+
   return (
-    <Link
-      href="/product/[id]"
-      as={`/product/${cartItem.productDetails.product.id}`}
-    >
+    <Link {...productRoute}>
       <Container {...props}>
         <Info>
           <Image src={cartItem.productDetails.productImages[0].url} />

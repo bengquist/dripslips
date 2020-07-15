@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { headerHeight } from "../app/Header";
 import { stopPropagation } from "../common/eventHelpers";
-import { headerHeight } from "../header/Header";
 import Overlay from "../modal/Overlay";
 import { lightGrayOutline } from "../style/helpers";
 import { colorFilters, sizeFilters, typeFilters } from "./filterData";

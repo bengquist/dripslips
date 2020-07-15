@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { headerHeight } from "../app/Header";
 import formatCurrency from "../common/formatCurrency";
-import { headerHeight } from "../header/Header";
 import { flexSpaceBetweenAlignCenter, gap } from "../style/helpers";
 import { useCart } from "./CartContext";
 import CartItemModalCard from "./CartItemModalCard";

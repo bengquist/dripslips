@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Header, { headerHeight } from "../header/Header";
+import Header, { headerHeight } from "./Header";
 
-const Layout: React.FC = ({ children }) => {
+const SiteLayout: React.FC = ({ children }) => {
   return (
     <Container>
       <Header />
@@ -11,7 +11,9 @@ const Layout: React.FC = ({ children }) => {
   );
 };
 
-export default Layout;
+export const getSiteLayout = (page: any) => <SiteLayout>{page}</SiteLayout>;
+
+export default SiteLayout;
 
 const Container = styled.div`
   height: 100%;

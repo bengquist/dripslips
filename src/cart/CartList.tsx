@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
+import routes from "../routing/routes";
 import { flexAlignCenter, gap } from "../style/helpers";
 import SquareButton from "../ui/SquareButton";
 import { useCart } from "./CartContext";
@@ -24,7 +25,7 @@ const CartList = () => {
     <CartFooter>
       <CartTotal />
       <BottomNav>
-        <Link href="/checkout">
+        <Link href={routes.CHECKOUT}>
           <SquareButton>Proceed</SquareButton>
         </Link>
       </BottomNav>
@@ -34,7 +35,7 @@ const CartList = () => {
   const emptyCart = (
     <EmptyState>
       <p>Your shopping bag is empty</p>
-      <Link href="/">
+      <Link href={routes.HOME}>
         <SquareButton variant="secondary" style={{ maxWidth: "15rem" }}>
           Start Shopping
         </SquareButton>
@@ -47,10 +48,10 @@ const CartList = () => {
       {cartHasProducts && (
         <TopNav>
           <CartNav>
-            <Link href="/">
+            <Link href={routes.HOME}>
               <SquareButton variant="secondary">Continue Shopping</SquareButton>
             </Link>
-            <Link href="/checkout">
+            <Link href={routes.CHECKOUT}>
               <SquareButton>Proceed</SquareButton>
             </Link>
           </CartNav>

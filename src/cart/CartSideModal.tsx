@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import formatCurrency from "../common/formatCurrency";
 import SideModal, { SideModalProps } from "../modal/SideModal";
+import routes from "../routing/routes";
 import { flexSpaceBetweenAlignCenter } from "../style/helpers";
 import SquareButton from "../ui/SquareButton";
 import { useCart } from "./CartContext";
@@ -27,7 +28,7 @@ const CartSideModal: React.FC<SideModalProps> = (props) => {
               {formatCurrency(state.total)}
             </h2>
           </TotalPrice>
-          <Link href="/cart">
+          <Link href={routes.CART}>
             <SquareButton onClick={props.onClose}>
               View Your Shopping Bag
             </SquareButton>
