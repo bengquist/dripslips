@@ -10,6 +10,7 @@ import Product from "../models/Product";
 import ProductDetail from "../models/ProductDetail";
 import { ProductImage } from "../models/ProductImage";
 import AddProductInput from "./inputs/AddProductInput";
+import ProductInput from "./inputs/ProductInput";
 
 @Resolver(() => Product)
 export default class ProductResolver {
@@ -19,8 +20,8 @@ export default class ProductResolver {
   }
 
   @Query(() => [Product])
-  async products() {
-    const products = await Product.find();
+  async products(@Arg("data", { nullable: true }) data: ProductInput) {
+    const products = await Product.find(data && { where: data });
 
     return products;
   }

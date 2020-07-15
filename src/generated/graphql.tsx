@@ -24,6 +24,11 @@ export type QueryProductArgs = {
   id: Scalars['String'];
 };
 
+
+export type QueryProductsArgs = {
+  data?: Maybe<ProductInput>;
+};
+
 export type User = {
   __typename?: 'User';
   id: Scalars['ID'];
@@ -120,6 +125,10 @@ export type OrderItem = {
   id: Scalars['ID'];
   quantity: Scalars['Float'];
   productDetails: ProductDetail;
+};
+
+export type ProductInput = {
+  gender?: Maybe<Gender>;
 };
 
 export type Mutation = {
@@ -224,11 +233,14 @@ export type AddCartItemMutationVariables = Exact<{
 export type AddCartItemMutation = { __typename?: 'Mutation', addCartItem: { __typename?: 'CartItem', id: string, quantity: number, productDetails: { __typename?: 'ProductDetail', id: string, size: number, color: string, product: { __typename?: 'Product', id: string, modelId: string, title: string, price: number }, productImages: Array<{ __typename?: 'ProductImage', url: string }> } } };
 
 export type FilteredProductsQueryVariables = Exact<{
-  gender?: Maybe<Scalars['String']>;
+  gender?: Maybe<Gender>;
 }>;
 
 
-export type FilteredProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, modelId: string, title: string, description: string, price: number, gender: Gender, details: Array<{ __typename?: 'ProductDetail', size: number, color: string, productImages: Array<{ __typename?: 'ProductImage', id: string, url: string }> }> }> };
+export type FilteredProductsQuery = { __typename?: 'Query', products: Array<(
+    { __typename?: 'Product' }
+    & ProductFieldsFragment
+  )> };
 
 export type AddressFieldsFragment = { __typename?: 'Address', id: string, companyName?: Maybe<string>, addressPrimary: string, addressSecondary?: Maybe<string>, postalCode: number, city: string, state: string, country: string, name: string };
 
@@ -459,25 +471,12 @@ export type AddCartItemMutationHookResult = ReturnType<typeof useAddCartItemMuta
 export type AddCartItemMutationResult = ApolloReactCommon.MutationResult<AddCartItemMutation>;
 export type AddCartItemMutationOptions = ApolloReactCommon.BaseMutationOptions<AddCartItemMutation, AddCartItemMutationVariables>;
 export const FilteredProductsDocument = gql`
-    query FilteredProducts($gender: String) {
-  products {
-    id
-    modelId
-    title
-    description
-    price
-    gender
-    details {
-      size
-      color
-      productImages {
-        id
-        url
-      }
-    }
+    query FilteredProducts($gender: Gender) {
+  products(data: {gender: $gender}) {
+    ...ProductFields
   }
 }
-    `;
+    ${ProductFieldsFragmentDoc}`;
 
 /**
  * __useFilteredProductsQuery__

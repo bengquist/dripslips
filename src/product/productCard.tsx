@@ -20,6 +20,8 @@ const ItemCard: React.FC<Props> = ({ product }) => {
     product.details[0].id
   );
 
+  console.log(product);
+
   const detail =
     product.details.find((details) => details.id === selectedDetailId) ||
     product.details[0];

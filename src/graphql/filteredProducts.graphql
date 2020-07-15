@@ -1,18 +1,5 @@
-query FilteredProducts($gender: String) {
-  products {
-    id
-    modelId
-    title
-    description
-    price
-    gender
-    details {
-      size
-      color
-      productImages {
-        id
-        url
-      }
-    }
+query FilteredProducts($gender: Gender) {
+  products(data: { gender: $gender }) {
+    ...ProductFields
   }
 }
