@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from "type-graphql";
+import { Field, ID, ObjectType, registerEnumType } from "type-graphql";
 import {
   BaseEntity,
   Column,
@@ -11,6 +11,16 @@ import {
 import Address from "./Address";
 import { Cart } from "./Cart";
 import Order from "./Order";
+
+export enum Title {
+  Mr,
+  Mrs,
+  Ms,
+}
+
+registerEnumType(Title, {
+  name: "Title",
+});
 
 @Entity()
 @ObjectType()
@@ -30,9 +40,9 @@ export default class User extends BaseEntity {
   @Column()
   password: string;
 
-  @Field()
+  @Field(() => Title)
   @Column()
-  title: string;
+  title: Title;
 
   @Field()
   @Column()

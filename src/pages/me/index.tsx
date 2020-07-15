@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import SEO from "../../app/SEO";
+import Profile from "../../profile/Profile";
 import Loader from "../../ui/Loader";
 
 const ProfilePage = () => {
@@ -7,7 +8,9 @@ const ProfilePage = () => {
     <Loader>
       <SEO title="My Profile" />
 
-      <Container>Profile</Container>
+      <Container>
+        <Profile />
+      </Container>
     </Loader>
   );
 };

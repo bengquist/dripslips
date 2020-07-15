@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import Order from "./Order";
-import User from "./User";
+import User, { Title } from "./User";
 
 @Entity()
 @ObjectType()
@@ -16,6 +16,18 @@ export default class Address extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn("uuid")
   id: string;
+
+  @Field(() => Title)
+  @Column()
+  title: Title;
+
+  @Field()
+  @Column()
+  firstName: string;
+
+  @Field()
+  @Column()
+  lastName: string;
 
   @Field({ nullable: true })
   @Column({ nullable: true })
