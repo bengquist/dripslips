@@ -9,17 +9,17 @@ import { useGetUserAddressQuery } from "../../generated/graphql";
 import Loader from "../../ui/Loader";
 
 const CheckoutShippingPage = () => {
-  const { data } = useGetUserAddressQuery();
+  const { data, loading } = useGetUserAddressQuery();
 
   return (
-    <Loader>
+    <Loader isLoading={loading}>
       <SEO title="Identification" />
 
       <CheckoutHeader />
 
       <Container>
         <Section>
-          {data?.me?.address[0] ? (
+          {data?.me?.address.length ? (
             <AddressSelect addresses={data.me.address} />
           ) : (
             <ShippingForm />
