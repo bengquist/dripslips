@@ -5,8 +5,6 @@ import ActiveLink from "../routing/ActiveLink";
 import routes from "../routing/routes";
 
 const ProfileHeader = () => {
-  console.log("re-rendering");
-
   return (
     <Container>
       <ActiveLink href={routes.MY_PROFILE}>
