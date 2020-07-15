@@ -48,6 +48,7 @@ export const headerStyles = css`
 
 const Container = styled.header`
   ${headerStyles};
+  padding: 0 3rem;
   display: flex;
   justify-content: space-between;
 `;

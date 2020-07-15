@@ -20,4 +20,5 @@ export default MePage;
 const Container = styled.div`
   padding: 3rem;
   background: ${({ theme }) => theme.colors.shadedWhite};
+  height: 100%;
 `;
