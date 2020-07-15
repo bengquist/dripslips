@@ -19,7 +19,7 @@ const HeaderActions = () => {
     if (!user) {
       setShowAuthModal(true);
     } else {
-      Router.push("/me");
+      Router.push(routes.MY_PROFILE);
     }
   };
 

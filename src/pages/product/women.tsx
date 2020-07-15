@@ -1,14 +1,14 @@
 import React from "react";
-import SEO from "../app/SEO";
+import SEO from "../../app/SEO";
 import {
   Gender,
   ProductFieldsFragment,
   useFilteredProductsQuery,
-} from "../generated/graphql";
-import ProductCard from "../product/ProductCard";
-import ProductListHeader from "../product/ProductListNav";
-import { fluidGrid } from "../style/helpers";
-import Loader from "../ui/Loader";
+} from "../../generated/graphql";
+import ProductCard from "../../product/ProductCard";
+import ProductListHeader from "../../product/ProductListNav";
+import { fluidGrid } from "../../style/helpers";
+import Loader from "../../ui/Loader";
 
 const WomenPage = () => {
   const { loading, data } = useFilteredProductsQuery({

@@ -1,24 +1,21 @@
 import styled from "styled-components";
-import { getLayout } from "../../app/ProfileLayout";
 import SEO from "../../app/SEO";
 import Loader from "../../ui/Loader";
 
-const MePage = () => {
+const ProfilePage = () => {
   return (
     <Loader>
       <SEO title="My Profile" />
 
-      <Container>yo</Container>
+      <Container>Profile</Container>
     </Loader>
   );
 };
 
-MePage.getLayout = getLayout;
-
-export default MePage;
+export default ProfilePage;
 
 const Container = styled.div`
+  height: 100%;
   padding: 3rem;
   background: ${({ theme }) => theme.colors.shadedWhite};
-  height: 100%;
 `;

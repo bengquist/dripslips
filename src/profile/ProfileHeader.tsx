@@ -1,13 +1,23 @@
 import React from "react";
 import styled from "styled-components";
 import { headerStyles } from "../app/Header";
+import ActiveLink from "../routing/ActiveLink";
+import routes from "../routing/routes";
 
 const ProfileHeader = () => {
+  console.log("re-rendering");
+
   return (
     <Container>
-      <Button>My Profile</Button>
-      <Button>My Orders</Button>
-      <Button>My Wishlist</Button>
+      <ActiveLink href={routes.MY_PROFILE}>
+        <Button>My Profile</Button>
+      </ActiveLink>
+      <ActiveLink href={routes.MY_ORDERS}>
+        <Button>My Orders</Button>
+      </ActiveLink>
+      <ActiveLink href={routes.MY_WISHLIST}>
+        <Button>My Wishlist</Button>
+      </ActiveLink>
     </Container>
   );
 };

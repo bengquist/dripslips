@@ -36,7 +36,7 @@ const Header = () => {
 export default Header;
 
 export const headerStyles = css`
-  z-index: 100;
+  z-index: 1;
 
   position: sticky;
   top: 0;
@@ -48,6 +48,7 @@ export const headerStyles = css`
 
 const Container = styled.header`
   ${headerStyles};
+  z-index: 2;
   padding: 0 3rem;
   display: flex;
   justify-content: space-between;

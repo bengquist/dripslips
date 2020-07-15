@@ -2,7 +2,7 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import { NextPage } from "next";
 import { ThemeProvider } from "styled-components";
 import { useApollo } from "../apollo/apolloClient";
-import { getSiteLayout } from "../app/SiteLayout";
+import Layout from "../app/Layout";
 import { AuthProvider } from "../auth/AuthContext";
 import { CartProvider } from "../cart/CartContext";
 import GlobalStyle from "../style/GlobalStyle";
@@ -16,8 +16,6 @@ type AppProps = {
 export default function App({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState);
 
-  const getLayout = Component.getLayout || getSiteLayout;
-
   return (
     <>
       <GlobalStyle />
@@ -25,7 +23,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <ThemeProvider theme={theme}>
           <AuthProvider>
             <CartProvider>
-              {getLayout(<Component {...pageProps} />)}
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
             </CartProvider>
           </AuthProvider>
         </ThemeProvider>
