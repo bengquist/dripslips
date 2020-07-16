@@ -1,5 +1,9 @@
 fragment AddressFields on Address {
   id
+  title
+  firstName
+  lastName
+  phoneNumber
   companyName
   addressPrimary
   addressSecondary

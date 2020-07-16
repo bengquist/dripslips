@@ -1,12 +1,20 @@
 import React from "react";
 import styled from "styled-components";
+import { useGetUserAddressQuery } from "../generated/graphql";
 import HeaderTitle from "../ui/HeaderTitle";
+import AddressCard from "./AddressCard";
 
 const Profile = () => {
+  const { data } = useGetUserAddressQuery();
+
   return (
     <Container>
       <HeaderTitle>MY ADDRESS BOOK</HeaderTitle>
-      <div></div>
+      <div>
+        {data?.me?.address.map((address) => (
+          <AddressCard key={address.id} address={address} />
+        ))}
+      </div>
     </Container>
   );
 };

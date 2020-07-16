@@ -169,8 +169,8 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "ENUM",
+                "name": "Title",
                 "ofType": null
               }
             },
@@ -358,6 +358,35 @@
         "possibleTypes": null
       },
       {
+        "kind": "ENUM",
+        "name": "Title",
+        "description": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": [
+          {
+            "name": "Mr",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "Mrs",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "Ms",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "Address",
         "description": null,
@@ -372,6 +401,70 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "ID",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "ENUM",
+                "name": "Title",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "firstName",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "lastName",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "phoneNumber",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             },
@@ -1645,8 +1738,8 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "ENUM",
+                "name": "Title",
                 "ofType": null
               }
             },

@@ -34,7 +34,7 @@ export type User = {
   id: Scalars['ID'];
   username: Scalars['String'];
   email: Scalars['String'];
-  title: Scalars['String'];
+  title: Title;
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   phoneNumber: Scalars['String'];
@@ -45,9 +45,19 @@ export type User = {
   orders: Array<Order>;
 };
 
+export enum Title {
+  Mr = 'Mr',
+  Mrs = 'Mrs',
+  Ms = 'Ms'
+}
+
 export type Address = {
   __typename?: 'Address';
   id: Scalars['ID'];
+  title: Title;
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  phoneNumber: Scalars['String'];
   companyName?: Maybe<Scalars['String']>;
   addressPrimary: Scalars['String'];
   addressSecondary?: Maybe<Scalars['String']>;
@@ -200,7 +210,7 @@ export type SignupInput = {
   username: Scalars['String'];
   email: Scalars['String'];
   password: Scalars['String'];
-  title: Scalars['String'];
+  title: Title;
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   phoneNumber: Scalars['String'];
@@ -242,7 +252,7 @@ export type FilteredProductsQuery = { __typename?: 'Query', products: Array<(
     & ProductFieldsFragment
   )> };
 
-export type AddressFieldsFragment = { __typename?: 'Address', id: string, companyName?: Maybe<string>, addressPrimary: string, addressSecondary?: Maybe<string>, postalCode: number, city: string, state: string, country: string, name: string };
+export type AddressFieldsFragment = { __typename?: 'Address', id: string, title: Title, firstName: string, lastName: string, phoneNumber: string, companyName?: Maybe<string>, addressPrimary: string, addressSecondary?: Maybe<string>, postalCode: number, city: string, state: string, country: string, name: string };
 
 export type AddressFragment = { __typename?: 'User', address: Array<(
     { __typename?: 'Address' }
@@ -333,6 +343,10 @@ export type ProductInfoFragment = { __typename?: 'Product', id: string, modelId:
 export const AddressFieldsFragmentDoc = gql`
     fragment AddressFields on Address {
   id
+  title
+  firstName
+  lastName
+  phoneNumber
   companyName
   addressPrimary
   addressSecondary

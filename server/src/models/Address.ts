@@ -29,6 +29,10 @@ export default class Address extends BaseEntity {
   @Column()
   lastName: string;
 
+  @Field()
+  @Column()
+  phoneNumber: string;
+
   @Field({ nullable: true })
   @Column({ nullable: true })
   companyName?: string;
