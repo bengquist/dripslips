@@ -15,8 +15,10 @@ const Container = styled.button`
   background: ${({ theme }) => theme.colors.white};
   ${lightGrayOutline};
   font-size: 1.5rem;
-  padding: 1.25rem 2.5rem;
+  padding: 0 3rem;
   transition: 0.3s;
+  height: 100%;
+  min-height: 65px;
 
   :hover {
     background: ${({ theme }) => theme.colors.lightGray};

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { headerStyles } from "../app/Header";
 import ActiveLink from "../routing/ActiveLink";
 import routes from "../routing/routes";
 import {
@@ -36,8 +37,7 @@ export default CheckoutHeader;
 const Container = styled.div`
   display: flex;
 
-  ${lightGrayOutline};
-  background: ${({ theme }) => theme.colors.white};
+  ${headerStyles};
 `;
 
 const Left = styled.div`

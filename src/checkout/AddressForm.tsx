@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import Router from "next/router";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useAuth } from "../auth/AuthContext";
 import states from "../data/states";
 import { Title, useGetUserAddressQuery } from "../generated/graphql";
 import routes from "../routing/routes";
@@ -28,35 +29,39 @@ const initialValues = {
   email: "",
 };
 
-const validate = (values: AddressFormValues) => {
-  const errors: Partial<AddressFormValues> = {};
-
-  if (!values.firstName) {
-    errors.firstName = "Required";
-  }
-  if (!values.lastName) {
-    errors.lastName = "Required";
-  }
-  if (!values.addressPrimary) {
-    errors.addressPrimary = "Required";
-  }
-  if (!values.postalCode) {
-    errors.postalCode = "Required";
-  }
-  if (!values.city) {
-    errors.city = "Required";
-  }
-  if (!values.state) {
-    errors.state = "Required";
-  }
-
-  return errors;
-};
-
 const AddressForm: React.FC = () => {
+  const { isLoggedIn } = useAuth();
   const { data } = useGetUserAddressQuery();
   const [sameAsBilling, setSameAsBilling] = useState(true);
   const [selectedAddressId, setSelectedAddressId] = useState("");
+
+  const validate = (values: AddressFormValues) => {
+    const errors: Partial<AddressFormValues> = {};
+
+    if (!values.firstName) {
+      errors.firstName = "Required";
+    }
+    if (!values.lastName) {
+      errors.lastName = "Required";
+    }
+    if (!values.addressPrimary) {
+      errors.addressPrimary = "Required";
+    }
+    if (!values.postalCode) {
+      errors.postalCode = "Required";
+    }
+    if (!values.city) {
+      errors.city = "Required";
+    }
+    if (!values.state) {
+      errors.state = "Required";
+    }
+    if (!values.email && !isLoggedIn) {
+      errors.email = "Required";
+    }
+
+    return errors;
+  };
 
   const {
     values,
@@ -252,20 +257,24 @@ const AddressForm: React.FC = () => {
         />
       </FormSection>
 
-      <div css={gap({ bottom: 0.25 })}>
-        <h1>YOUR EMAIL ADDRESS</h1>
-        <p>TO TRACK YOUR SHIPMENT</p>
-      </div>
-      <FormSection>
-        <Input
-          name="email"
-          type="email"
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={values.email}
-          label="Email"
-        />
-      </FormSection>
+      {!isLoggedIn ? (
+        <>
+          <div css={gap({ bottom: 0.25 })}>
+            <h1>YOUR EMAIL ADDRESS</h1>
+            <p>TO TRACK YOUR SHIPMENT</p>
+          </div>
+          <FormSection>
+            <Input
+              name="email"
+              type="email"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.email}
+              label="Email"
+            />
+          </FormSection>
+        </>
+      ) : null}
 
       <SquareButton type="submit">Proceed to Billing</SquareButton>
     </form>
