@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import SEO from "../../app/SEO";
 import CartSideBar from "../../cart/CartSideBar";
+import AddressForm from "../../checkout/AddressForm";
 import AddressSelect from "../../checkout/AddressSelect";
 import CheckoutHeader from "../../checkout/CheckoutHeader";
-import ShippingForm from "../../checkout/ShippingForm";
 import { useGetUserAddressQuery } from "../../generated/graphql";
 import Loader from "../../ui/Loader";
 
@@ -22,7 +22,7 @@ const CheckoutShippingPage = () => {
           {data?.me?.address.length ? (
             <AddressSelect addresses={data.me.address} />
           ) : (
-            <ShippingForm />
+            <AddressForm />
           )}
         </Section>
 

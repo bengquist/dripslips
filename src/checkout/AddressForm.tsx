@@ -10,7 +10,7 @@ import Input from "../ui/Input";
 import Radio from "../ui/Radio";
 import Select from "../ui/Select";
 import SquareButton from "../ui/SquareButton";
-import { ShippingFormValues } from "./types";
+import { AddressFormValues } from "./types";
 
 const initialValues = {
   title: "Mr",
@@ -29,8 +29,8 @@ const initialValues = {
   email: "",
 };
 
-const validate = (values: ShippingFormValues) => {
-  const errors: Partial<ShippingFormValues> = {};
+const validate = (values: AddressFormValues) => {
+  const errors: Partial<AddressFormValues> = {};
 
   if (!values.firstName) {
     errors.firstName = "Required";
@@ -60,7 +60,7 @@ const validate = (values: ShippingFormValues) => {
   return errors;
 };
 
-const ShippingForm: React.FC = () => {
+const AddressForm: React.FC = () => {
   const [sameAsBilling, setSameAsBilling] = useState(true);
 
   const onSubmit = () => {
@@ -86,7 +86,6 @@ const ShippingForm: React.FC = () => {
         handleSubmit,
       }) => (
         <form css={gap({ bottom: 2 })} onSubmit={handleSubmit}>
-          <h1>DELIVERY ADDRESS</h1>
           <FormSection>
             <Select
               name="title"
@@ -263,7 +262,7 @@ const ShippingForm: React.FC = () => {
   );
 };
 
-export default ShippingForm;
+export default AddressForm;
 
 const FormSection = styled.section`
   padding: 2rem;

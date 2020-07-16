@@ -26,6 +26,7 @@ const baseStyle = css`
   text-align: center;
   font-weight: normal;
   width: 100%;
+  min-width: 10rem;
   padding: 1rem 1.5rem;
   outline: 1px solid ${({ theme }) => theme.colors.black};
   transition: 0.3s;

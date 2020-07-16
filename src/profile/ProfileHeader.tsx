@@ -7,9 +7,6 @@ import routes from "../routing/routes";
 const ProfileHeader = () => {
   return (
     <Container>
-      <ActiveLink href={routes.MY_PROFILE}>
-        <Button>My Profile</Button>
-      </ActiveLink>
       <ActiveLink href={routes.MY_ORDERS}>
         <Button>My Orders</Button>
       </ActiveLink>

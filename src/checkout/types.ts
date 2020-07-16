@@ -1,4 +1,4 @@
-export type ShippingFormValues = {
+export type AddressFormValues = {
   title: string;
   firstName: string;
   lastName: string;

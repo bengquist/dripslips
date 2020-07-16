@@ -6,6 +6,7 @@ import { flexAlignCenter, lightGrayOutline } from "../style/helpers";
 import HeaderActions from "./HeaderActions";
 import HeaderSearch from "./HeaderSearch";
 
+export const headerHeightNum = 65;
 export const headerHeight = "65px";
 
 const Header = () => {

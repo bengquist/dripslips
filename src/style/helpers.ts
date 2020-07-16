@@ -37,6 +37,11 @@ export const flexAlignSelfRight = css`
   align-self: flex-end;
 `;
 
+export const flexColumn = css`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const fluidGrid = ({ maxWidth = 200, gap = 0 }) => css`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(${maxWidth}px, 1fr));
