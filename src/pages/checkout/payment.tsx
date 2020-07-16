@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import SEO from "../../app/SEO";
 import CartSideBar from "../../cart/CartSideBar";
-import CheckoutHeader from "../../checkout/CheckoutHeader";
 import PaymentForm from "../../checkout/PaymentForm";
 import { gap } from "../../style/helpers";
 import Loader from "../../ui/Loader";
@@ -14,8 +13,6 @@ const CheckoutPaymentPage = () => {
   return (
     <Loader>
       <SEO title="Identification" />
-
-      <CheckoutHeader />
 
       <Container>
         <Section>

@@ -1,23 +1,28 @@
-import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import styled from "styled-components";
+import ActiveLink from "../routing/ActiveLink";
+import routes from "../routing/routes";
 import {
   flexCenter,
   flexSpaceBetweenAlignCenter,
   lightGrayOutline,
 } from "../style/helpers";
 import BackButton from "../ui/BackButton";
-import LinkButton from "../ui/LinkButton";
 
 const CheckoutHeader: React.FC = () => {
   return (
     <Container>
       <Left>
         <BackButton />
-        <LinkButton>
-          <FontAwesomeIcon icon={faPencilAlt} /> Auto Fill
-        </LinkButton>
+
+        <div style={{ height: "100%" }}>
+          <ActiveLink href={routes.CHECKOUT_SHIPPING}>
+            <Button>SHIPPING</Button>
+          </ActiveLink>
+          <ActiveLink href={routes.CHECKOUT_PAYMENT}>
+            <Button>PAYMENT</Button>
+          </ActiveLink>
+        </div>
       </Left>
       <Right>
         <p>Don't worry, you won't be charged</p>
@@ -36,7 +41,6 @@ const Container = styled.div`
 `;
 
 const Left = styled.div`
-  padding-right: 3rem;
   width: 65%;
   ${flexSpaceBetweenAlignCenter};
   ${lightGrayOutline};
@@ -45,4 +49,10 @@ const Left = styled.div`
 const Right = styled.div`
   ${flexCenter};
   width: 35%;
+`;
+
+const Button = styled.button`
+  height: 100%;
+  border-left: 1px solid ${({ theme }) => theme.colors.lightGray};
+  padding: 0 3rem;
 `;

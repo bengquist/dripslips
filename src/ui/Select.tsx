@@ -12,6 +12,10 @@ type Props = ComponentPropsWithoutRef<"select"> & {
 };
 
 const Select: React.FC<Props> = ({ options, label, error, ...props }) => {
+  if (!options.length) {
+    return null;
+  }
+
   return (
     <div css={gap({ bottom: 0.5 })}>
       <Container error={error}>

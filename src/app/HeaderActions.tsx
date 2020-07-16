@@ -25,7 +25,7 @@ const HeaderActions = () => {
 
   return (
     <Container>
-      <Link href={routes.WISHLIST}>
+      <Link href={routes.MY_WISHLIST}>
         <Action>
           <FontAwesomeIcon icon={faHeart} size="lg" />
         </Action>

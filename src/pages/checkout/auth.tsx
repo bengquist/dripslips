@@ -3,13 +3,14 @@ import React from "react";
 import styled, { css } from "styled-components";
 import SEO from "../../app/SEO";
 import AuthBox from "../../auth/AuthBox";
+import routes from "../../routing/routes";
 import { flexAlignSelfRight, gap } from "../../style/helpers";
 import Loader from "../../ui/Loader";
 import SquareButton from "../../ui/SquareButton";
 
 const CheckoutAuthPage = () => {
   const redirect = () => {
-    Router.replace("/checkout/shipping");
+    Router.replace(routes.CHECKOUT_SHIPPING);
   };
 
   return (
