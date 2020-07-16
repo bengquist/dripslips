@@ -2,11 +2,10 @@ import { useFormik } from "formik";
 import Router from "next/router";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import phoneCodes from "../data/phoneCodes";
 import states from "../data/states";
-import { useGetUserAddressQuery } from "../generated/graphql";
+import { Title, useGetUserAddressQuery } from "../generated/graphql";
 import routes from "../routing/routes";
-import { flexAlignEnd, gap } from "../style/helpers";
+import { gap } from "../style/helpers";
 import Checkbox from "../ui/Checkbox";
 import Input from "../ui/Input";
 import Radio from "../ui/Radio";
@@ -15,7 +14,7 @@ import SquareButton from "../ui/SquareButton";
 import { AddressFormValues } from "./types";
 
 const initialValues = {
-  title: "Mr",
+  title: Title.Mr,
   firstName: "",
   lastName: "",
   companyName: "",
@@ -25,8 +24,6 @@ const initialValues = {
   city: "",
   state: "",
   country: "United States",
-  phoneCountry: "+ 1",
-  phoneNumber: "",
   shippingMethod: "Standard",
   email: "",
 };
@@ -52,12 +49,6 @@ const validate = (values: AddressFormValues) => {
   if (!values.state) {
     errors.state = "Required";
   }
-  if (!values.phoneNumber) {
-    errors.phoneNumber = "Required";
-  }
-  if (!values.phoneNumber) {
-    errors.phoneNumber = "Required";
-  }
 
   return errors;
 };
@@ -74,6 +65,7 @@ const AddressForm: React.FC = () => {
     handleChange,
     handleBlur,
     handleSubmit,
+    setValues,
   } = useFormik({
     initialValues,
     validate,
@@ -91,27 +83,48 @@ const AddressForm: React.FC = () => {
     })) ?? [];
 
   const selectedAddress = data?.me?.address.find(
-    (address) => (address.id = selectedAddressId)
+    (address) => address.id === selectedAddressId
   );
 
   useEffect(() => {
     if (data?.me?.address[0]) {
-      console.log(data?.me?.address[0]);
       setSelectedAddressId(data?.me?.address[0].id);
     }
   }, [data?.me?.address]);
 
   useEffect(() => {
-    values.city = selectedAddress?.city ?? "";
+    setValues({
+      ...values,
+      addressPrimary: selectedAddress?.addressPrimary ?? "",
+      addressSecondary: selectedAddress?.addressSecondary ?? "",
+      companyName: selectedAddress?.companyName ?? "",
+      country: selectedAddress?.country ?? "",
+      title: selectedAddress?.title ?? Title.Mr,
+      firstName: selectedAddress?.firstName ?? "",
+      lastName: selectedAddress?.lastName ?? "",
+      city: selectedAddress?.city ?? "",
+      state: selectedAddress?.state ?? "",
+      postalCode: selectedAddress?.postalCode
+        ? String(selectedAddress?.postalCode)
+        : "",
+    });
   }, [selectedAddress]);
+
+  const addressSelect = addressOptions.length ? (
+    <div css={gap({ bottom: 1 })}>
+      <h4>Select an address</h4>
+      <Select
+        onChange={(e) => setSelectedAddressId(e.target.value)}
+        options={[...addressOptions, { text: "New Address", value: "" }]}
+      />
+    </div>
+  ) : null;
 
   return (
     <form css={gap({ bottom: 2 })} onSubmit={handleSubmit}>
       <FormSection>
-        <Select
-          // onChange=
-          options={[...addressOptions, { text: "New Address", value: "" }]}
-        />
+        {addressSelect}
+
         <Select
           name="title"
           onChange={handleChange}
@@ -119,9 +132,9 @@ const AddressForm: React.FC = () => {
           value={values.title}
           label="Title *"
           options={[
-            { text: "Mr", value: "Mr" },
-            { text: "Mrs", value: "Mrs" },
-            { text: "Ms", value: "Ms" },
+            { text: Title.Mr, value: Title.Mr },
+            { text: Title.Mrs, value: Title.Mrs },
+            { text: Title.Ms, value: Title.Ms },
           ]}
           error={errors.title && touched.title && errors.title}
         />
@@ -200,28 +213,6 @@ const AddressForm: React.FC = () => {
           label="Country"
           disabled
         />
-        <div css={[gap({ right: 1 }), flexAlignEnd]}>
-          <Select
-            name="phoneCountry"
-            options={phoneCodes.map((phoneCode) => ({
-              text: phoneCode,
-              value: phoneCode,
-            }))}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.phoneCountry}
-            label="Phone Number *"
-          />
-          <Input
-            name="phoneNumber"
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.phoneNumber}
-            error={
-              errors.phoneNumber && touched.phoneNumber && errors.phoneNumber
-            }
-          />
-        </div>
       </FormSection>
 
       <FormSection>

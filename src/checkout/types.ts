@@ -9,8 +9,6 @@ export type AddressFormValues = {
   city: string;
   state: string;
   country: string;
-  phoneCountry: string;
-  phoneNumber: string;
   shippingMethod: string;
   email: string;
 };
