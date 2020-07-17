@@ -5,6 +5,7 @@ import React, { Children } from "react";
 type Props = {
   router: SingletonRouter;
   activeClassName?: string;
+  disabled?: boolean;
 } & LinkProps;
 
 const ActiveLink: React.FC<Props> = ({

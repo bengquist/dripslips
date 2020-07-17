@@ -1,37 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import SEO from "../../app/SEO";
 import CartSideBar from "../../cart/CartSideBar";
 import PaymentForm from "../../checkout/PaymentForm";
 import { gap } from "../../style/helpers";
+import HeaderTitle from "../../ui/HeaderTitle";
 import Loader from "../../ui/Loader";
-import Radio from "../../ui/Radio";
 
 const CheckoutPaymentPage = () => {
-  const [paymentMethod, setPaymentMethod] = useState("card");
-
   return (
     <Loader>
-      <SEO title="Identification" />
+      <SEO title="Order Payment" />
 
       <Container>
         <Section>
-          <FormHeader>PAYMENT</FormHeader>
-          <div css={gap({ bottom: 1.5 })}>
-            <Radio
-              name="paymentMethod"
-              onChange={(e) => setPaymentMethod(e.target.value)}
-              value="card"
-              label="Credit Card"
-              defaultChecked
-            />
-            <Radio
-              name="paymentMethod"
-              onChange={(e) => setPaymentMethod(e.target.value)}
-              value="paypal"
-              label="PayPal"
-            />
-          </div>
+          <HeaderTitle>PAYMENT</HeaderTitle>
           <PaymentForm />
         </Section>
 
@@ -50,12 +33,7 @@ const Container = styled.div`
 const Section = styled.section`
   ${gap({ bottom: 2 })};
   height: 100%;
-  width: 60%;
+  width: 65%;
   padding: 3rem;
   background: ${({ theme }) => theme.colors.shadedWhite};
-`;
-
-const FormHeader = styled.h1`
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
 `;

@@ -20,7 +20,7 @@ export default HeaderTitle;
 const Container = styled.div`
   ${flexSpaceBetweenAlignCenter};
   padding-bottom: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
 `;
 

@@ -4,6 +4,7 @@ import { headerStyles } from "../app/Header";
 import ActiveLink from "../routing/ActiveLink";
 import routes from "../routing/routes";
 import {
+  flexAlignCenter,
   flexCenter,
   flexSpaceBetweenAlignCenter,
   lightGrayOutline,
@@ -16,14 +17,17 @@ const CheckoutHeader: React.FC = () => {
       <Left>
         <BackButton />
 
-        <div style={{ height: "100%" }}>
+        <LinkContainer>
           <ActiveLink href={routes.CHECKOUT_SHIPPING}>
             <Button>SHIPPING</Button>
           </ActiveLink>
           <ActiveLink href={routes.CHECKOUT_PAYMENT}>
             <Button>PAYMENT</Button>
           </ActiveLink>
-        </div>
+          <ActiveLink href={routes.CHECKOUT_REVIEW}>
+            <Button>REVIEW</Button>
+          </ActiveLink>
+        </LinkContainer>
       </Left>
       <Right>
         <p>Don't worry, you won't be charged</p>
@@ -55,4 +59,10 @@ const Button = styled.button`
   height: 100%;
   border-left: 1px solid ${({ theme }) => theme.colors.lightGray};
   padding: 0 3rem;
+`;
+
+const LinkContainer = styled.div`
+  ${flexAlignCenter};
+  height: 100%;
+  pointer-events: none;
 `;

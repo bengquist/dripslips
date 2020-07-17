@@ -8,26 +8,13 @@ import { Title, useGetUserAddressQuery } from "../generated/graphql";
 import routes from "../routing/routes";
 import { gap } from "../style/helpers";
 import Checkbox from "../ui/Checkbox";
+import HeaderTitle from "../ui/HeaderTitle";
 import Input from "../ui/Input";
 import Radio from "../ui/Radio";
 import Select from "../ui/Select";
 import SquareButton from "../ui/SquareButton";
+import { initialAddressValues } from "./CheckoutContext";
 import { AddressFormValues } from "./types";
-
-const initialValues = {
-  title: Title.Mr,
-  firstName: "",
-  lastName: "",
-  companyName: "",
-  addressPrimary: "",
-  addressSecondary: "",
-  postalCode: "",
-  city: "",
-  state: "",
-  country: "United States",
-  shippingMethod: "Standard",
-  email: "",
-};
 
 const AddressForm: React.FC = () => {
   const { isLoggedIn } = useAuth();
@@ -72,7 +59,7 @@ const AddressForm: React.FC = () => {
     handleSubmit,
     setValues,
   } = useFormik({
-    initialValues,
+    initialValues: initialAddressValues,
     validate,
     onSubmit,
   });
@@ -126,7 +113,8 @@ const AddressForm: React.FC = () => {
   ) : null;
 
   return (
-    <form css={gap({ bottom: 2 })} onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
+      <HeaderTitle>DELIVERY ADDRESS</HeaderTitle>
       <FormSection>
         {addressSelect}
 
@@ -228,7 +216,7 @@ const AddressForm: React.FC = () => {
         />
       </FormSection>
 
-      <h1>SHIPPING METHOD</h1>
+      <HeaderTitle>SHIPPING METHOD</HeaderTitle>
       <FormSection>
         <Radio
           defaultChecked

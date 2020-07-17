@@ -8,7 +8,7 @@ import Loader from "../../ui/Loader";
 const CheckoutShippingPage = () => {
   return (
     <Loader>
-      <SEO title="Identification" />
+      <SEO title="Order Shipping" />
 
       <Container>
         <Section>

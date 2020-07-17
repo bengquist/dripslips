@@ -5,6 +5,7 @@ import { useApollo } from "../apollo/apolloClient";
 import Layout from "../app/Layout";
 import { AuthProvider } from "../auth/AuthContext";
 import { CartProvider } from "../cart/CartContext";
+import { CheckoutProvider } from "../checkout/CheckoutContext";
 import GlobalStyle from "../style/GlobalStyle";
 import theme from "../style/theme";
 
@@ -23,9 +24,11 @@ export default function App({ Component, pageProps }: AppProps) {
         <ThemeProvider theme={theme}>
           <AuthProvider>
             <CartProvider>
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
+              <CheckoutProvider>
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </CheckoutProvider>
             </CartProvider>
           </AuthProvider>
         </ThemeProvider>
