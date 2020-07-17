@@ -21,7 +21,15 @@ export const initialAddressValues = {
 };
 
 export const CheckoutProvider: React.FC = ({ children }) => {
-  const [formValues, setFormValues] = useState(initialAddressValues);
+  const [addressValues, setAddressValues] = useState(initialAddressValues);
+  const [paymentValues, setPaymentValues] = useState({
+    cardNumber: "",
+    name: "",
+    expiration: "",
+    securityCode: "",
+  });
+
+  const addressHandler = () => {};
 
   return (
     <CheckoutContext.Provider value={{}}>{children}</CheckoutContext.Provider>
